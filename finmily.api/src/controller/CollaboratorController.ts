@@ -38,7 +38,7 @@ export class CollaboratorController extends BaseNotification {
             let userCreated = await this.userRepository.save(user)
 
             const collaborator = Object.assign(new Collaborator(), {
-                user: userCreated.uid,  
+                userUid: userCreated.uid,  
                 managerUid: userAuth.uid,
                 balance: 0
             })

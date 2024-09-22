@@ -21,8 +21,8 @@ export class Task {
     @Column({nullable: true})
     happiness: number;  
 
-    @ManyToOne(() => User)
-    user: string;
+    @Column({type: "varchar", length: 255})
+    userUid: string;
 
     @Column({type: "varchar", length: 15})
     status: string; // pending, completed, or canceled

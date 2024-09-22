@@ -15,8 +15,8 @@ export class Collaborator {
     @Column({nullable: true})
     age: number;
 
-    @ManyToOne(() => User)
-    user: string;
+    @Column({type: "varchar", length: 255})
+    userUid: string;
 
     @Column({type: "varchar", length: 255})
     managerUid: string;

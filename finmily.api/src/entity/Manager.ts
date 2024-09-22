@@ -14,8 +14,8 @@ export class Manager {
     @Column({nullable: true})
     age: number;
 
-    @ManyToOne(() => User)
-    user: User;
+    @Column({type: "varchar", length: 255})
+    userUid: string;
 
     @Column({default: 0, nullable: true})
     balance: number;

@@ -11,8 +11,6 @@ export class TaskController extends BaseNotification {
 
     private taskRepository = AppDataSource.getRepository(Task);
     private userRepository = AppDataSource.getRepository(User);
-    private collaboratorRepository = AppDataSource.getRepository(Collaborator);
-    private managerRepository = AppDataSource.getRepository(Manager);
 
     async save(request: Request) {
 
@@ -58,7 +56,7 @@ export class TaskController extends BaseNotification {
 
         const tasks = await this.taskRepository.find({
             where: {
-                user: user.uid
+                userUid: user.uid
             }
         })
 

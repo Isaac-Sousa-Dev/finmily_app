@@ -31,7 +31,7 @@ export class ManagerController extends BaseNotification {
             let userCreated = await this.userRepository.save(user)
 
             const manager = Object.assign(new Manager(), {
-                user: userCreated.uid
+                userUid: userCreated.uid
             })
     
             await this.managerRepository.save(manager);
