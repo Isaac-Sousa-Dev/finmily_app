@@ -12,8 +12,6 @@ import { sign } from "jsonwebtoken"
 export class UserController extends BaseNotification {
 
     private userRepository = AppDataSource.getRepository(User)
-    private managerController = new ManagerController()
-    private collaboratorController = new CollaboratorController()
     
     constructor() {
         super()   
@@ -74,46 +72,6 @@ export class UserController extends BaseNotification {
         }
         return user
     }
-
-    // async save(request: Request, response: Response, next: NextFunction) {
-    //     let { name, password, phoneNumber, role } = request.body;
-
-    //     this.isRequired(name, "O nome é obrigatório");
-    //     this.isRequired(password, "A senha é obrigatória");
-    //     this.isRequired(role, "O papel do usuário é obrigatório");
-    //     this.hasMinLen(password, 3, "A senha deve ter no mínimo 6 caracteres")
-    //     this.hasMaxLen(password, 12, "A senha deve ter no máximo 12 caracteres")
-    //     password = md5(password)
-
-    //     const user = Object.assign(new User(), {
-    //         name,
-    //         password,
-    //         phoneNumber,
-    //         role
-    //     })
-
-    //     if(this.valid()) {
-    //         let userCreated = await this.userRepository.save(user)
-            
-    //         if(role == "manager") {
-    //             this.managerController.save(userCreated.uid);
-    //         } else {
-    //             this.collaboratorController.save(userCreated.uid, "teste"); // TODO: Pegar o uid do manager (localStorage)
-    //         }
-
-    //         return {
-    //             status: 200,
-    //             message: "Usuário cadastrado com sucesso"
-    //         }
-
-    //     } else {
-    //         return {
-    //             status: 400,
-    //             errors: this.allNotifications
-    //         }
-    //     }
-
-    // }
 
     async remove(request: Request, response: Response, next: NextFunction) {
         const uid = request.params.id
