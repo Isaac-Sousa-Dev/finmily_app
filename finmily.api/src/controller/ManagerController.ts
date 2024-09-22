@@ -13,6 +13,9 @@ export class ManagerController extends BaseNotification {
     async save(request: Request) {
         let { nickname, password, phoneNumber, role } = request.body;
 
+        const existNickname = await this.userRepository.findOne({ where: { nickname } });
+        if(existNickname) this.AddNotification("Já existe um usuário com este apelido");
+
         this.isRequired(nickname, "O apelido é obrigatório");
         this.isRequired(password, "A senha é obrigatória");
         this.isRequired(role, "O papel do usuário é obrigatório");

@@ -13,12 +13,12 @@ export class CollaboratorController extends BaseNotification {
     async save(request: Request) {
 
         let userAuth = request.userAuth;
-
-        if(userAuth.role !== "manager") {
-            return {error: "Você não tem permissão para cadastrar colaboradores"}
-        }
-
+        if(userAuth.role !== "manager") return {error: "Você não tem permissão para cadastrar colaboradores"};
+        
         let { nickname, password, role } = request.body;
+
+        const existNickname = await this.userRepository.findOne({ where: { nickname } })
+        if(existNickname) this.AddNotification("Já existe um usuário com este apelido");
 
         this.isRequired(nickname, "O apelido é obrigatório");
         this.isRequired(password, "A senha é obrigatória");
@@ -27,7 +27,6 @@ export class CollaboratorController extends BaseNotification {
         this.hasMaxLen(password, 12, "A senha deve ter no máximo 12 caracteres")
 
         password = md5(password)
-
         const user = Object.assign(new User(), {
             nickname,
             password,
@@ -42,8 +41,6 @@ export class CollaboratorController extends BaseNotification {
                 managerUid: userAuth.uid,
                 balance: 0
             })
-
-            console.log(collaborator);
 
             await this.collaboratorRepository.save(collaborator);
             return {message: "Colaborador cadastrado com sucesso", user: userCreated};
