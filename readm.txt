@@ -1,0 +1,10 @@
+# Dependências instaladas
+- npm install -g ts-node
+- npm install -g typeorm
+- npm install -g express
+- npm install md5
+- npm install jsonwebtoken
+
+
+# Inicializando o projeto com typeORM cli
+- typeorm init --name finmily.api --express --database mysql
