@@ -16,4 +16,5 @@ export abstract class BaseEntity {
 
     @Column({default: true})
     active: boolean
+    
 }

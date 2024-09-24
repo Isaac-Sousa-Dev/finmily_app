@@ -19,7 +19,7 @@ export class ManagerController extends BaseNotification {
         this.isRequired(nickname, "O apelido é obrigatório");
         this.isRequired(password, "A senha é obrigatória");
         this.isRequired(role, "O papel do usuário é obrigatório");
-        this.hasMinLen(password, 3, "A senha deve ter no mínimo 6 caracteres")
+        this.hasMinLen(password, 6, "A senha deve ter no mínimo 6 caracteres")
         this.hasMaxLen(password, 12, "A senha deve ter no máximo 12 caracteres")
         password = md5(password)
 

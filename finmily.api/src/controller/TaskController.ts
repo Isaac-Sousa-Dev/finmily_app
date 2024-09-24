@@ -39,6 +39,34 @@ export class TaskController extends BaseNotification {
         }
     }
 
+    async update(request: Request) {
+        let userAuth = request.userAuth;
+        let { uid } = request.params;
+        if(userAuth.role !== "manager") return {error: "Você não tem permissão para atualizar tarefas"};
+
+        let { title, description, cost, happiness, status, user, everyDay, dayOfWeek } = request.body;
+        this.isRequired(uid, "Informe o uid da tarefa");
+
+        const task = Object.assign(new Task(), {
+            uid,
+            title,
+            description,
+            cost,
+            happiness,
+            status,
+            userUid: user,
+            everyDay,
+            dayOfWeek
+        })
+
+        if(this.valid()) {
+            let taskUpdated = await this.taskRepository.save(task);
+            return {message: "Tarefa atualizada com sucesso", taskUpdated};
+        } else {
+            return {error: "Erro ao atualizar tarefa", notifications: this.allNotifications}
+        }
+    }
+
     async myTasks(request: Request) {
         let userAuth = request.userAuth; 
         const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } }) // Buscar tareafas de um colaborador

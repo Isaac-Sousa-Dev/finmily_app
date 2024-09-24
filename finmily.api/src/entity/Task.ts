@@ -24,7 +24,13 @@ export class Task {
     @Column({type: "varchar", length: 255})
     userUid: string;
 
+    @Column({nullable: true})
+    everyDay: boolean;
+
+    @Column({nullable: true})
+    dayOfWeek: number;  
+
     @Column({type: "varchar", length: 15})
-    status: string; // pending, completed, or canceled
+    status: string; // pending or completed
 
 }
