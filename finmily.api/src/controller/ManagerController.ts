@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { User } from "../entity/User";
 import * as md5 from "md5";
 import { Task } from "../entity/Task";
+import { Between } from "typeorm";
 
 export class ManagerController extends BaseNotification {
 
@@ -40,13 +41,26 @@ export class ManagerController extends BaseNotification {
     }  
     
     
-    async home(request: Request, response: Response) {
+    async home(request: Request) {
 
         let userAuth = request.userAuth;
-        const allTasksByManager = await this.taskRespository.find({ where: { openByUserUid: userAuth.uid } });
-        const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuth.uid } });
 
-        // TODO: Implementar funcionalidade que pegue somente os dados do mêss atual
+        let currentDate = new Date();   
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        const startOfMonth = new Date(year, month - 1, 1); // Primeiro dia do mês
+        const endOfMonth = new Date(year, month, 0, 23, 59, 59); // Último dia do mês, 23:59:59
+
+        const allTasksByManager = await this.taskRespository.find({ 
+            where: { 
+                openByUserUid: userAuth.uid,
+                createdAt: Between(startOfMonth, endOfMonth),
+            },
+            
+        });
+
+
+        const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuth.uid } });
         let dataForReturn = {
             'tasksQuantity': allTasksByManager.length,
             'collaboratorsQuantity': allCollaborators.length,
@@ -58,14 +72,17 @@ export class ManagerController extends BaseNotification {
     }
 
 
-    async tasks(request: Request, response: Response) {
+    async tasks(request: Request) {
         let userAuth = request.userAuth;
+
+        
 
         const allCollaborators = await this.userRepository.find({ 
             where: { managerUid: userAuth.uid },
             select: ['uid', 'nickname', 'balance']
         });
 
+        
         let dataForReturn = {
             'totalPayable': 100,
             'collaborators': allCollaborators
