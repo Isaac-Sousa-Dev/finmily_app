@@ -102,8 +102,16 @@ export class ManagerController extends BaseNotification {
 
         const collaborator = await this.userRepository.findOne({ where: { uid: userUid }, select: ['uid', 'nickname', 'balance'] });
 
+        // Defina o intervalo de tempo para o dia atual
+        const currentDate = new Date();
+        const startOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+        const endOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59);
+
         const allTasksByCollaborator = await this.taskRespository.find({
-            where: { userUid: userUid },
+            where: { 
+                userUid: userUid,
+                createdAt: Between(startOfDay, endOfDay)
+            },
             select: ['uid', 'title', 'description', 'cost', 'status']
         });
 
