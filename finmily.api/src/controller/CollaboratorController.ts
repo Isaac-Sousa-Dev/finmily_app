@@ -1,5 +1,4 @@
 import { AppDataSource } from "../data-source";
-import { Collaborator } from "../entity/Collaborator";
 import { User } from "../entity/User";
 import { BaseNotification } from "../notification/BaseNotification";
 import { Request } from "express";
@@ -7,7 +6,6 @@ import * as md5 from "md5";
 
 export class CollaboratorController extends BaseNotification {
 
-    private collaboratorRepository = AppDataSource.getRepository(Collaborator);
     private userRepository = AppDataSource.getRepository(User);
 
     async save(request: Request) {
@@ -30,19 +28,13 @@ export class CollaboratorController extends BaseNotification {
         const user = Object.assign(new User(), {
             nickname,
             password,
-            role
+            role,
+            managerUid: userAuth.uid
         })
 
         if(this.valid()) {
             let userCreated = await this.userRepository.save(user)
 
-            const collaborator = Object.assign(new Collaborator(), {
-                userUid: userCreated.uid,  
-                managerUid: userAuth.uid,
-                balance: 0
-            })
-
-            await this.collaboratorRepository.save(collaborator);
             return {message: "Colaborador cadastrado com sucesso", user: userCreated};
         } else {
             return {error: "Erro ao cadastrar colaborador", notifications: this.allNotifications}

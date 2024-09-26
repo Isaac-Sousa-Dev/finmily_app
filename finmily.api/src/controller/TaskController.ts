@@ -28,7 +28,8 @@ export class TaskController extends BaseNotification {
             cost,
             happiness,
             status,
-            userUid: user
+            userUid: user,
+            openByUserUid: userAuth.uid
         })
 
         if(this.valid()) {
@@ -38,6 +39,7 @@ export class TaskController extends BaseNotification {
             return {error: "Erro ao cadastrar tarefa", notifications: this.allNotifications}
         }
     }
+    
 
     async update(request: Request) {
         let userAuth = request.userAuth;
@@ -56,7 +58,8 @@ export class TaskController extends BaseNotification {
             status,
             userUid: user,
             everyDay,
-            dayOfWeek
+            dayOfWeek,
+            openByUserUid: userAuth.uid
         })
 
         if(this.valid()) {

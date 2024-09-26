@@ -1,10 +1,9 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
-import { Collaborator } from "./Collaborator";
 import { User } from "./User";
 
 @Entity({name: "task"})
-export class Task {
+export class Task extends BaseEntity {
 
     @PrimaryGeneratedColumn("uuid")
     uid: string;
@@ -32,5 +31,8 @@ export class Task {
 
     @Column({type: "varchar", length: 15})
     status: string; // pending or completed
+
+    @Column({type: "varchar", length: 255})
+    openByUserUid: string;  
 
 }

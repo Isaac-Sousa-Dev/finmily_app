@@ -1,6 +1,5 @@
 import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
-import { Manager } from "./Manager";
 
 @Entity({name: "user"})
 export class User extends BaseEntity {
@@ -16,5 +15,17 @@ export class User extends BaseEntity {
 
     @Column({type: "varchar", length: 50})
     role: string
+
+    @Column({type: "varchar", length: 255, nullable: true}) 
+    managerUid: string
+
+    @Column({type: "varchar", length: 255, nullable: true})
+    photo: string
+
+    @Column({nullable: true})
+    age: number;
+
+    @Column({default: 0, type: "decimal", precision: 10, scale: 2})
+    balance: number;
     
 }

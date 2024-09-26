@@ -8,3 +8,8 @@
 
 # Inicializando o projeto com typeORM cli
 - typeorm init --name finmily.api --express --database mysql
+
+
+# Na tabela tasks a coluna "userUid" é sempre o uid do usuário que consequentemente será um colaborador,
+pois pela regra uma tarefa pertencerá a um colaborador que é um usuário, e a coluna "openByUser" identificar
+qual usuário que abriu essa tarefa, que nesse caso será um usuário manager

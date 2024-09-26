@@ -2,9 +2,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { User } from "./entity/User"
 import { Behavior } from "./entity/Behavior"
-import { Manager } from "./entity/Manager"
 import { Task } from "./entity/Task"
-import { Collaborator } from "./entity/Collaborator"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -17,8 +15,6 @@ export const AppDataSource = new DataSource({
     logging: false,
     entities: [
         User,
-        Manager,
-        Collaborator,
         Task,
         Behavior,
     ],

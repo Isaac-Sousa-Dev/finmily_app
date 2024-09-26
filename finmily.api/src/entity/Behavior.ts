@@ -1,6 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
-import { Collaborator } from "./Collaborator";
 
 @Entity({name: "behavior"})
 export class Behavior extends BaseEntity {
@@ -14,7 +13,6 @@ export class Behavior extends BaseEntity {
     @Column({nullable: true})
     value: number;
 
-    @ManyToOne(() => Collaborator)
-    collaborator: Collaborator;
+    
 
 }
