@@ -12,7 +12,7 @@ ion-tabs{
 	}
 	ion-tab-bar {
 		--border: 0;
-		--background: transparent;
+		--background: var(--ion-color-light);
 		position: absolute;
 		bottom: 0;
 		left:0; right: 0;
