@@ -1,38 +1,25 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar  color="tertiary">
-      <ion-title>Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div style="background-color: #6030ff; padding: 20px; border-bottom-left-radius: 50px; text-align: center; height: 20vh; color: white; position: relative;">
+ 
+    <img src="assets/icon/logo.svg" alt="Icon Right" style="width: 50px; height: 50px; border-radius: 50%; position: absolute; top: 20px; right: 20px;">
+
+    <div style="margin-top: 9vh;">
+      <h3 class="text-month"> Mês atual </h3>
+    </div>
+  
+</div>
 
   <div class="container">
-
-    <div class="subheader">
-      <div>
-        <!-- <ion-icon name="arrow-back-outline" style="font-size: 30px;"></ion-icon> -->
-      </div>
-      <div style="display: flex; gap: 5px; align-items: center;">
-        <div style="line-height: 15px;">
-          <div style="font-weight: bold;">Isaac</div>
-          <small>Admin</small>
-        </div>
-        <ion-icon name="person-circle-outline" style="font-size: 40px;"></ion-icon>
-      </div>
-    </div>
-
     <div class="conteudo-principal">
       <div class="dash">
-        <div class="text-month">
-          Mês atual
-        </div>
-  
+    
         <div class="tasks">
           <div>
-            <ion-card color="primary" style="border-radius: 20px;">
+            <ion-card color="primary" >
               <ion-card-header>
                 <div>Tarefas</div>
               </ion-card-header>
-              <div class="qtd-tasks">
+              <div class="qtd-tasks" style="border-radius: 20px;">
                 10
               </div>
             </ion-card>
@@ -41,16 +28,18 @@
   
         <div class="div-condutas-investidos">
           <ion-card class="card-condutas" color="primary">
-            <ion-card-header>
+            <ion-card-header >
               <div>Condutas</div>
             </ion-card-header>
             <div class="qtd-condutas">
               3
             </div>
           </ion-card>
+          
+          
   
           <ion-card color="primary">
-            <ion-card-header>
+            <ion-card-header >
               <div>Investidos</div>
             </ion-card-header>
             <div class="qtd-investidos">
@@ -66,3 +55,25 @@
   </div>
 
 </ion-content>
+<style>
+  ion-card{
+    /* box-shadow: 0px 0px 13px 0px #211f1fb8; */
+  }
+  ion-card-header{
+    height: 60%;
+    
+  }
+.card-condutas {
+  height: 100px; /* Ou a altura desejada */
+  display: flex;
+  flex-direction: column;
+}
+
+.qtd-condutas{
+  height: 40%; display: flex; justify-content: center; align-items: center;
+
+}
+.qtd-investidos{
+  height: 40%; display: flex; justify-content: center; align-items: center;
+}
+</style>
