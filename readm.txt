@@ -1,3 +1,8 @@
+# Comandos para rodar o projeto
+- npm install ( Para instalar todas dependências )
+- npm run serve ( Para iniciar o Servidor )
+- ionic start ( Para iniciar o App )
+
 # Dependências instaladas
 - npm install -g ts-node
 - npm install -g typeorm
@@ -13,3 +18,10 @@
 # Na tabela tasks a coluna "userUid" é sempre o uid do usuário que consequentemente será um colaborador,
 pois pela regra uma tarefa pertencerá a um colaborador que é um usuário, e a coluna "openByUser" identificar
 qual usuário que abriu essa tarefa, que nesse caso será um usuário manager
+
+
+# Iniciando o App (Ionic)
+- npm install -g @ionic/cli
+- ionic start finmilyApp tabs
+  * Seleciona Angular
+  * Em seguida seleciona NgModules
