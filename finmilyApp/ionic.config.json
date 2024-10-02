@@ -1,0 +1,7 @@
+{
+  "name": "finmilyApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
