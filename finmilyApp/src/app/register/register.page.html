@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+
+    <div class="logo">
+      <img src="../../assets/images/logo_menor.png" alt="" >
+    </div>
+
+    <!-- <div class="text-login">
+      Cadastro.
+    </div> -->
+
+    <div class="form">
+      <div>
+        <ion-label>Nickname</ion-label>
+        <input placeholder="Nickname"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Celular</ion-label>
+        <input placeholder="Celular"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Senha</ion-label>
+        <input type="password" placeholder="Senha"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Confirmação de Senha</ion-label>
+        <input type="password" placeholder="Confirmação"/>
+      </div>
+
+
+      <ion-button [routerLink]="['/tabs/home']" expand="block" color="primary" style="margin-top: 50px;">Cadastre-se</ion-button>
+
+
+    </div>
+
+    <div style="margin-top: 30px; font-size: 15px; text-align: center;">
+      Tem uma conta? <a [routerLink]="['/login']" style="font-size: 13px; text-decoration: none; font-weight: bold;">Conecte-se</a>
+    </div>
+  </div>
+</ion-content>

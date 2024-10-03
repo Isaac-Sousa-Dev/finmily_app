@@ -1,0 +1,43 @@
+.container {
+    // text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 80px;
+    padding: 0px 30px;
+
+    .text-login {
+        font-size: 30px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: var(--ion-color-primary);
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+
+        img {
+            width: 150px;
+        }
+    }
+
+    .form {
+        margin-top: 40px;
+
+        input {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 55px;
+            width: 100%;
+            border: none;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--ion-color-primary);
+        }
+    }
+}
