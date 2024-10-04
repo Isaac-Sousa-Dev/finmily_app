@@ -13,11 +13,23 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'filhos',
+    loadChildren: () => import('./filhos/filhos.module').then( m => m.FilhosPageModule)
   },
   {
-    path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+    path: 'minhas-tarefas',
+    loadChildren: () => import('./minhas-tarefas/minhas-tarefas.module').then( m => m.MinhasTarefasPageModule)
   },
+  {
+    path: 'meus-ganhos',
+    loadChildren: () => import('./meus-ganhos/meus-ganhos.module').then( m => m.MeusGanhosPageModule)
+  },
+
+  // {
+  //   path: 'menu',
+  //   loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+  // },
 
 
 ];

@@ -1,5 +1,13 @@
 <ion-content [fullscreen]="true">
-<app-herd></app-herd>
+<!-- <app-herd></app-herd> -->
+
+  <div class="herdComponent" >
+    <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+    <div class="mesAtual">
+      <h3 class="text-month"> Mês atual </h3>
+    </div>
+  
+  </div>
 
   <div class="container">
     <div class="conteudo-principal">
@@ -48,9 +56,7 @@
 
 </ion-content>
 <style>
-  ion-card{
-    /* box-shadow: 0px 0px 13px 0px #211f1fb8; */
-  }
+
   ion-card-header{
     height: 60%;
     

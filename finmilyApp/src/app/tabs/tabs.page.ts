@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  perfil: string | null = localStorage.getItem('finmily:perfl');
+
+  constructor() {
+    
+  }
 
 }

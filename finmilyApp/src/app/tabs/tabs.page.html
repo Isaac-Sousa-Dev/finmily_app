@@ -1,11 +1,11 @@
 <ion-tabs>  
 
   <ion-fab vertical="bottom" horizontal="center" translucent="true" style="margin-bottom: 20px;">
-    <ion-fab-button color="tertiary">
+    <ion-fab-button color="tertiary" *ngIf="perfil == 'manager'">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-list side="top" style="width: 200px; margin-left: -70px;">
+    <ion-fab-list side="top" style="width: 200px; margin-left: -70px;" *ngIf="perfil == 'manager'">
       <div style="display: flex; gap: 20px; justify-content: space-between;">
         <ion-button style="width: 80px; border-radius: 0px;" color="tertiary">
           Tarefas
@@ -19,14 +19,30 @@
   </ion-fab>
 
   <ion-tab-bar slot="bottom" class="ion-no-border">
-    <ion-tab-button tab="tab1" class="ion-no-border">
+
+    <!-- Gerente -->
+    <ion-tab-button tab="tabTarefas" class="ion-no-border" *ngIf="perfil == 'manager'">
       <ion-icon name="book"></ion-icon>
       <ion-label>Tarefas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" class="ion-no-border">
+    <ion-tab-button tab="tabFilhos" class="ion-no-border" *ngIf="perfil == 'manager'">
       <ion-icon name="people"></ion-icon>
       <ion-label>Filhos</ion-label>
     </ion-tab-button>
+
+
+
+    <!-- Colaborador -->
+    <ion-tab-button tab="tabMinhasTarefas" class="ion-no-border" *ngIf="perfil == 'collaborator'">
+      <ion-icon name="book"></ion-icon>
+      <ion-label>Minhas Tarefas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabMeusGanhos" class="ion-no-border" *ngIf="perfil == 'collaborator'">
+      <ion-icon name="wallet-outline"></ion-icon>
+      <ion-label>Meus ganhos</ion-label>
+    </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>
