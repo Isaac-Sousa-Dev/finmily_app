@@ -1,9 +1,71 @@
 <ion-content [fullscreen]="true">
   <!-- <app-herd></app-herd> -->
+  
+    <div class="herdComponent" >
+      <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+      <div class="mesAtual">
+        <h3 class="text-month"> Tarefas </h3>
+      </div>
+    
+    </div>
+  
+    <div class="container">
+      <div class="conteudo-principal">
+        <div class="dash">
+      
+          <div class="header-container">
+            <div class="text-total-pagar">
+              Total a pagar no mês
+            </div>  
+            
+            <div class="div-total-pagar">
+              R$ 100,00
+            </div>
+          </div>
+    
+          <div class="body-container">
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tarefas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+            <div class="cards-filhos">
+              
+              <ion-card color="primary">
+                <ion-card-header >
+                  <div>Luiza</div>
+                </ion-card-header>
+                <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </div>
+              </ion-card>
+  
+            </div>
+            
+
+          </div>
+    
+        </div>
+      </div>
+      
+  
+    </div>
+  
+  </ion-content>
+  <style>
+  
+    ion-card-header{
+      height: 60%;
+      
+    }
+  .card-condutas {
+    height: 100px; /* Ou a altura desejada */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .qtd-condutas{
+    height: 40%; display: flex; justify-content: center; align-items: center;
+  
+  }
+  .qtd-investidos{
+    height: 40%; display: flex; justify-content: center; align-items: center;
+  }
+  </style>

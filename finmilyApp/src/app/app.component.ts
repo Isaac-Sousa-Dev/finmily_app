@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   constructor() {
 
-    localStorage.setItem('finmily:perfl', 'collaborator');
+    localStorage.setItem('finmily:perfl', 'manager');
   }
 }

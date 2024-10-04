@@ -1,7 +1,105 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">filhos</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <!-- <app-herd></app-herd> -->
+  
+    <div class="herdComponent" >
+      <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+      <div class="mesAtual">
+        <h3 class="text-month"> Filhos </h3>
+      </div>
+    
+    </div>
+  
+    <div class="container">
+      <div class="conteudo-principal">
+        <div class="dash">
+      
+          <div class="header-container">
+            <div class="text-total-pagar">
+              Total a pagar no mês
+            </div>  
+            
+            <div class="div-total-pagar">
+              R$ 100,00
+            </div>
+          </div>
+    
+          <div class="body-container">
+
+
+            <div class="cards-filhos">
+
+              <ion-card color="primary">
+                <header>
+                  <div>Luiza</div>
+                  <div style="font-size: 13px; margin-top: 2px; color: var(--ion-color-warning-tint);">
+                    R$ 50,00
+                  </div>
+                </header>
+                <div>
+                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card>
+
+              <ion-card color="primary">
+                <header>
+                  <div>André</div>
+                  <div style="font-size: 13px; margin-top: 2px; color: var(--ion-color-warning-tint);">
+                    R$ 25,00
+                  </div>
+                </header>
+                <div>
+                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card>
+
+              <ion-card color="primary">
+                <header>
+                  <div>Daniel</div>
+                  <div style="font-size: 13px; margin-top: 2px; color: var(--ion-color-warning-tint);">
+                    R$ 25,00
+                  </div>
+                </header>
+                <div>
+                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </div>
+              </ion-card>
+  
+              
+            </div>
+            
+
+          </div>
+    
+        </div>
+      </div>
+      
+  
+    </div>
+  
+  </ion-content>
+  <style>
+  
+    ion-card-header{
+      height: 60%;
+      
+    }
+  .card-condutas {
+    height: 100px; /* Ou a altura desejada */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .qtd-condutas{
+    height: 40%; display: flex; justify-content: center; align-items: center;
+  
+  }
+  .qtd-investidos{
+    height: 40%; display: flex; justify-content: center; align-items: center;
+  }
+  </style>
