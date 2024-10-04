@@ -25,19 +25,89 @@
     
           <div class="body-container">
 
+            <ion-list>
+              <ion-item-sliding>
 
-            <div class="cards-filhos">
+                <ion-item-options side="start">
+                  <ion-item-option color="warning">
+                    <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="danger">
+                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+
+                <ion-item color="primary">
+                  <div class="detalhes-tarefa" style="width: 80%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px;">
+                      <ion-icon name="rocket-outline"></ion-icon>
+                      <ion-label>Varrer a casa</ion-label>
+                      <ion-badge color="success">Feito</ion-badge>
+                    </div>
+                    <div class="descricao">
+                      Lorem ipsum dolor sit amet consectetur adipis.
+                    </div>
+                  </div>
+
+                  <div style="width: 20%; height: 100%;">
+                    <ion-checkbox labelPlacement="end"></ion-checkbox>
+                  </div>
+                </ion-item>
+            
+                <ion-item-options>
+                  <ion-item-option class="responsavel" color="light">Luiza</ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+
+
+              <ion-item-sliding>
+                <ion-item-options side="start">
+                  <ion-item-option color="warning">
+                    <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
+                  </ion-item-option>
+                  <ion-item-option color="danger">
+                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+
+                <ion-item color="primary">
+                  <div class="detalhes-tarefa" style="width: 80%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px;">
+                      <ion-icon name="rocket-outline"></ion-icon>
+                      <ion-label>Lavar os pratos</ion-label>
+                      <ion-badge color="warning">Pendente</ion-badge>
+                    </div>
+                    <div class="descricao">
+                      Lorem ipsum dolor sit amet consectetur adipis.
+                    </div>
+                  </div>
+
+                  <div style="width: 20%; height: 100%;">
+                    <ion-checkbox labelPlacement="end"></ion-checkbox>
+                  </div>
+                </ion-item>
+            
+                <ion-item-options>
+                  <ion-item-option class="responsavel" color="light">André</ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+          
+            </ion-list>
+
+
+            <!-- <div class="cards-filhos">
               
               <ion-card color="primary">
                 <ion-card-header >
-                  <div>Luiza</div>
+                  <div>Titulo Tarefa</div>
                 </ion-card-header>
+                
                 <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
                   <ion-icon name="arrow-forward-outline"></ion-icon>
                 </div>
               </ion-card>
   
-            </div>
+            </div> -->
             
 
           </div>

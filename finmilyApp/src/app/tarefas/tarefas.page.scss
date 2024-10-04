@@ -80,6 +80,67 @@ img {
                     margin-top: 15px;
                 }
 
+                ion-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    ion-item-sliding {
+    
+                        ion-item-options {
+    
+                            ion-item-option {
+                                color: white;
+                                font-weight: bold;
+                                border-radius: 10px;
+                                margin-right: 7px;
+                                width: 70px;
+                            }
+    
+                            ion-item-option.responsavel {
+                                background: var(--ion-color-tertiary-gradient);
+                                width: 100px;
+                                margin-left: 7px;
+                            }
+                        }
+    
+                        ion-item {
+                            border-radius: 10px;
+        
+                            ion-label {
+                                font-size: 15px;
+                                font-weight: bold;
+                                
+                                span{
+                                    background: var(--ion-color-tertiary-gradient);
+                                    padding: 3px;
+                                    border-radius: 4px;
+                                }
+                            }   
+        
+                            .descricao {
+                                margin-top: 4px;
+                                font-size: 11px;
+                                font-weight: 500;
+                                height: 50px;
+                            }
+    
+    
+                            ion-checkbox {
+                                --size: 30px;
+                                --checkbox-background-checked: var(--ion-color-success);    
+                            }
+                            
+                            ion-checkbox::part(container) {
+                                border-radius: 20px;
+                                border: 2px solid var(--ion-color-success);
+                            }
+                        }
+                    }
+                }
+
+
+
                 .cards-filhos {
                     display: flex;
                     justify-content: space-between;
@@ -90,7 +151,7 @@ img {
                     ion-card {
                         margin: 0px;
                         height: 100px;
-                        width: 47%;
+                        width: 100%;
                         font-size: 15px;
                         color: white;
                         font-weight: bold;
