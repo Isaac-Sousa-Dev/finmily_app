@@ -3,6 +3,7 @@
 - npm run serve ( Para iniciar o Servidor )
 - ionic start ( Para iniciar o App )
 
+
 # Dependências instaladas
 - npm install -g ts-node
 - npm install -g typeorm

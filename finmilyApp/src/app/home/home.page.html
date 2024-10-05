@@ -18,7 +18,7 @@
                 <div>Tarefas</div>
               </ion-card-header>
               <div class="qtd-tasks" style="border-radius: 20px;">
-                10
+                {{data.tasksQuantity}}
               </div>
             </ion-card>
           </div>    
@@ -30,7 +30,7 @@
               <div>Condutas</div>
             </ion-card-header>
             <div class="qtd-condutas">
-              3
+              {{data.behaviorsQuantity}}
             </div>
           </ion-card>
           
@@ -41,7 +41,7 @@
               <div>Investidos</div>
             </ion-card-header>
             <div class="qtd-investidos">
-              R$ 50,00
+              {{data.investQuantity | currency}}
             </div>
           </ion-card>
         </div>

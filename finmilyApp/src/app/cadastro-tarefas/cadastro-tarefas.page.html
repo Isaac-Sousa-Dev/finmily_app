@@ -29,7 +29,7 @@
         <textarea type="text" rows="3" placeholder="Descrição"></textarea>
       </div>
 
-      <ion-radio-group value="felicidade">
+      <ion-radio-group [(ngModel)]="tipoTarefa">
         <div class="div-tipo">
           <ion-icon name="happy-outline"></ion-icon><ion-radio value="felicidade">Felicidade</ion-radio>
         </div>
@@ -39,12 +39,15 @@
         </div>
       </ion-radio-group>
 
-      <div style="margin-top: 25px;"> 
-        <ion-label>Valor</ion-label>
-        <input type="text" placeholder="Valor"/>
+      <div style="margin-top: 5px;"> 
+        @if(tipoTarefa == 'felicidade') {
+          <input *ngIf="tipoTarefa == 'felicidade'" type="text" placeholder="Felicidade (%)"/>
+        } @else {
+          <input type="text" placeholder="Valor (R$)"/>
+        }
       </div>
 
-      <ion-radio-group value="diaSemana">
+      <ion-radio-group [(ngModel)]="diaFrequencia">
         <div class="div-tipo">
           <ion-radio value="diaSemana">Dia na semana</ion-radio>
         </div>
@@ -54,13 +57,33 @@
         </div>
       </ion-radio-group>
 
-      <div style="margin-top: 15px;"> 
-        <input type="text" placeholder="Dia na semana"/>
-      </div>
-      <ion-chip color="primary">Segunda</ion-chip>
-      <ion-chip color="primary">Sábado</ion-chip>
 
-      <ion-button [routerLink]="['/tabs/tabHome']" expand="block" color="primary" style="margin-top: 50px;">Salvar</ion-button>
+      @if(diaFrequencia == 'diaSemana') {
+        <ion-item>
+          <ion-select placeholder="Selecione os dias" [multiple]="true">
+            <ion-select-option value="domingo">Domingo</ion-select-option>
+            <ion-select-option value="segunda">Segunda</ion-select-option>
+            <ion-select-option value="terca">Terça</ion-select-option>
+            <ion-select-option value="quarta">Quarta</ion-select-option>
+            <ion-select-option value="quinta">Quinta</ion-select-option>
+            <ion-select-option value="sexta">Sexta</ion-select-option>
+            <ion-select-option value="sabado">Sábado</ion-select-option>
+          </ion-select>
+        </ion-item>
+      } @else {
+        <div style="margin-top: 10px;">
+          <ion-chip color="primary">Domingo</ion-chip>
+          <ion-chip color="primary">Segunda</ion-chip>
+          <ion-chip color="primary">Terça</ion-chip>
+          <ion-chip color="primary">Quarta</ion-chip>
+          <ion-chip color="primary">Quinta</ion-chip>
+          <ion-chip color="primary">Sexta</ion-chip>
+          <ion-chip color="primary">Sábado</ion-chip>
+        </div>
+      }
+  
+
+      <ion-button [routerLink]="['/tabs/tabHome']" expand="block" color="primary" style="margin-top: 40px;">Salvar</ion-button>
 
     </div>
 

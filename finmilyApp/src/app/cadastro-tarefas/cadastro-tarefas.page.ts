@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 })
 export class CadastroTarefasPage implements OnInit {
 
+  diaFrequencia: string = 'diaSemana';
+  tipoTarefa: string = 'felicidade';
+
   constructor(private router: Router) { }
 
   ngOnInit() {

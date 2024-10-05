@@ -1,5 +1,4 @@
-<ion-content [fullscreen]="true">
-  <!-- <app-herd></app-herd> -->
+<div class="contentScreen">
   
     <div class="herdComponent" >
       <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
@@ -25,126 +24,73 @@
     
           <div class="body-container">
 
-            <div style="font-size: 11px;">
+            <div style="font-size: 13px;">
               <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
               <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon>Arraste para a esquerda para saber o responsável</div>
             </div> 
 
-            <ion-list>
+            <div class="task-list-container">
 
-              <ion-item-sliding>
-                <ion-item-options side="start">
-                  <ion-item-option color="warning">
-                    <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
-                  </ion-item-option>
-                  <ion-item-option color="danger">
-                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
-                  </ion-item-option>
-                </ion-item-options>
+              
 
-                <ion-item color="primary">
-                  <div style="width: 100%;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
-                      <div style="display: flex; gap: 6px;">
-                        <ion-icon name="rocket-outline"></ion-icon>
-                        <ion-label>Varrer a casa</ion-label>
-                      </div>
-                      <div style="display: flex; gap: 5px;">
-                        <ion-badge color="success">Feito</ion-badge>
-                        <ion-badge color="tertiary">R$ 10,50</ion-badge>
-                      </div>
-                    </div>
-
-                    <div style="display: flex;">
-                      <div class="detalhes-tarefa" style="width: 80%;">      
-                        <div class="descricao">
-                          Lorem ipsum dolor sit amet consectetur adipis.
-                        </div>
-                      </div>
-    
-                      <div style="width: 20%; height: 100%;">
-                        <ion-checkbox labelPlacement="end"></ion-checkbox>
-                      </div>
-                    </div>
-                  </div>               
-                </ion-item>
-            
-                <ion-item-options>
-                  <ion-item-option class="responsavel" color="light">Luiza</ion-item-option>
-                </ion-item-options>
-              </ion-item-sliding>
-
-              <ion-item-sliding>
-                <ion-item-options side="start">
-                  <ion-item-option color="warning">
-                    <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
-                  </ion-item-option>
-                  <ion-item-option color="danger">
-                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
-                  </ion-item-option>
-                </ion-item-options>
-
-                <ion-item color="primary">
-                  <div style="width: 100%;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
-                      <div style="display: flex; gap: 6px;">
-                        <ion-icon name="rocket-outline"></ion-icon>
-                        <ion-label>Lavar os pratos</ion-label>
-                      </div>
-                      <div style="display: flex; gap: 5px;">
-                        <ion-badge color="warning">Pendente</ion-badge>
-                        <ion-badge color="tertiary">R$ 9,25</ion-badge>
-                      </div>
-                    </div>
-
-                    <div style="display: flex;">
-                      <div class="detalhes-tarefa" style="width: 80%;">        
-                        <div class="descricao">
-                          Lorem ipsum dolor sit amet consectetur adipis.
-                        </div>
-                      </div>
-    
-                      <div style="width: 20%; height: 100%;">
-                        <ion-checkbox labelPlacement="end"></ion-checkbox>
-                      </div>
-                    </div>
-                  </div>
-       
-                </ion-item>
-            
-                <ion-item-options>
-                  <ion-item-option class="responsavel" color="light">André</ion-item-option>
-                </ion-item-options>
-              </ion-item-sliding>
-
-            </ion-list>
+            </div>
             
           </div>
     
         </div>
       </div>
       
-  
     </div>
-  
-  </ion-content>
-  <style>
-  
-    ion-card-header{
-      height: 60%;
+  <!-- </div> -->
+  <ion-content>
+    <ion-list>
+      @for (tarefa of tarefas; track $index) {
+        <ion-item-sliding>
+          <ion-item-options side="start">
+            <ion-item-option color="warning">
+              <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger">
+              <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+
+          <ion-item color="primary">
+            <div style="width: 100%;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
+                <div style="display: flex; gap: 6px;">
+                  <ion-icon name="rocket-outline"></ion-icon>
+                  <ion-label>{{ tarefa.titulo }}</ion-label>
+                </div>
+                <div style="display: flex; gap: 5px;">
+                  <ion-badge  [color]="tarefa.status == 'Pendente' ? 'warning' : 'success'">{{ tarefa.status }}</ion-badge>
+                  <ion-badge color="tertiary">{{ tarefa.valor | currency }}</ion-badge>
+                </div>
+              </div>
+
+              <div style="display: flex;">
+                <div class="detalhes-tarefa" style="width: 80%;">      
+                  <div class="descricao">
+                    {{ tarefa.descricao }}
+                  </div>
+                </div>
+
+                <div style="width: 20%; height: 100%;">
+                  <ion-checkbox labelPlacement="end"></ion-checkbox>
+                </div>
+              </div>
+            </div>               
+          </ion-item>
       
-    }
-  .card-condutas {
-    height: 100px; /* Ou a altura desejada */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .qtd-condutas{
-    height: 40%; display: flex; justify-content: center; align-items: center;
-  
-  }
-  .qtd-investidos{
-    height: 40%; display: flex; justify-content: center; align-items: center;
-  }
-  </style>
+          <ion-item-options>
+            <ion-item-option class="responsavel" color="light">{{ tarefa.filhoName }}</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      }
+
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
+      <!-- <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais tarefas...">
+      </ion-infinite-scroll-content> -->
+    </ion-infinite-scroll>
+  </ion-content>
