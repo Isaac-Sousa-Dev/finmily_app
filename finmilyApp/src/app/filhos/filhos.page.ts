@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ChildService } from '../services/child.service';
 
 @Component({
   selector: 'app-filhos',
@@ -8,13 +9,16 @@ import { Router } from '@angular/router';
 })
 export class FilhosPage implements OnInit {
 
+  childService = new ChildService();
+  childrens = this.childService.getAllChildrensByParent(1);
+
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   navegarParaMenu() {
-    this.router.navigate(['/menu']);  // Redireciona para a rota 'menu'
+    this.router.navigate(['/menu']); 
   }
 
 }

@@ -28,48 +28,21 @@
 
             <div class="cards-filhos">
 
-              <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho']">
-                <header>
-                  <div>Luiza</div>
-                  <div style="font-size: 13px; margin-top: 2px; color: #76f56b;">
-                    R$ 50,00
+              @for (child of childrens; track $index) {
+                <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho/'+child.id]">
+                  <header>
+                    <div>{{ child.name }}</div>
+                    <div style="font-size: 13px; margin-top: 2px; color: #76f56b;">
+                      {{ child.balance | currency }}  
+                    </div>
+                  </header>
+                  <div>
+                    <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
+                      <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
                   </div>
-                </header>
-                <div>
-                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                  </div>
-                </div>
-              </ion-card>
-
-              <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho']">
-                <header>
-                  <div>André</div>
-                  <div style="font-size: 13px; margin-top: 2px; color: #76f56b;">
-                    R$ 25,00
-                  </div>
-                </header>
-                <div>
-                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                  </div>
-                </div>
-              </ion-card>
-
-              <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho']">
-                <header>
-                  <div>Daniel</div>
-                  <div style="font-size: 13px; margin-top: 2px; color: #76f56b;">
-                    R$ 25,00
-                  </div>
-                </header>
-                <div>
-                  <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                  </div>
-                </div>
-              </ion-card>
-  
+                </ion-card>
+              }
               
             </div>
             

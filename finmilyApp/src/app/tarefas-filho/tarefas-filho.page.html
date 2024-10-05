@@ -3,7 +3,7 @@
   <div class="herdComponent" >
     <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
     <div class="mesAtual">
-      <h3 class="text-month"> Tarefas ( Luiza ) </h3>
+      <h3 class="text-month"> Tarefas ( {{child.name}} ) </h3>
     </div>
   </div>
 
@@ -17,7 +17,7 @@
           </div>  
           
           <div class="div-total-pagar">
-            R$ 10,00
+            {{ totalPaymentByDay | currency }}
           </div>
         </div>
   
@@ -48,7 +48,7 @@
 
   <ion-content>
     <ion-list>
-      @for (tarefa of tarefas; track $index) {
+      @for (task of tasksByChild; track $index) {
         <ion-item-sliding>
           <ion-item-options side="start">
             <ion-item-option color="warning">
@@ -64,18 +64,18 @@
               <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
                 <div style="display: flex; gap: 6px;">
                   <ion-icon name="rocket-outline"></ion-icon>
-                  <ion-label>{{ tarefa.titulo }}</ion-label>
+                  <ion-label>{{ task.title }}</ion-label>
                 </div>
                 <div style="display: flex; gap: 5px;">
-                  <ion-badge  [color]="tarefa.status == 'Pendente' ? 'warning' : 'success'">{{ tarefa.status }}</ion-badge>
-                  <ion-badge color="tertiary">{{ tarefa.valor | currency }}</ion-badge>
+                  <ion-badge  [color]="task.status == 'Pendente' ? 'warning' : 'success'">{{ task.status }}</ion-badge>
+                  <ion-badge color="tertiary">{{ task.cost | currency }}</ion-badge>
                 </div>
               </div>
   
               <div style="display: flex;">
                 <div class="detalhes-tarefa" style="width: 80%;">      
                   <div class="descricao">
-                    {{ tarefa.descricao }}
+                    {{ task.description }}
                   </div>
                 </div>
   

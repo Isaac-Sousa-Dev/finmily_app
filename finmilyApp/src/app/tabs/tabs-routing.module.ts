@@ -30,7 +30,7 @@ const routes: Routes = [
         loadChildren: () => import('../meus-ganhos/meus-ganhos.module').then( m => m.MeusGanhosPageModule)
       },
       {
-        path: 'tabTarefasFilho',
+        path: 'tabTarefasFilho/:childId',
         loadChildren: () => import('../tarefas-filho/tarefas-filho.module').then( m => m.TarefasFilhoPageModule)
       },
       {

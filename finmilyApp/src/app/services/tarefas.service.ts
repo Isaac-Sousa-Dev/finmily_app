@@ -1,60 +1,58 @@
 export class TarefasService {
 
+    constructor() {}
+
+
+    getTaskByChild(childId: any) {
+        let allTasks = this.getAllTasksByManager(1);
+        let arrayOfTasks: any = [];
+
+        allTasks.forEach((task) => {
+            if(task.childId === childId) {
+                arrayOfTasks.push(task);
+            }
+        });
+
+        return arrayOfTasks;
+    }
+
     getAllTasksByManager(managerId: any) {
         return [
             {
                 id: 1,
-                titulo: 'Varrer a casa',
-                descricao: 'Varrer a casa inteira',
+                title: 'Varrer a casa',
+                description: 'Varrer a casa inteira',
                 status: 'Feita',
-                valor: 3,
-                filhoName: 'Luiza',
-                idFilho: 1
+                cost: 3,
+                childName: 'Luiza',
+                childId: 1
             },
             {
                 id: 2,
-                titulo: 'Arrumar a cama',
-                descricao: 'Arrumar a cama inteira',
+                title: 'Arrumar a cama',
+                description: 'Arrumar a cama inteira',
                 status: 'Pendente',
-                valor: 2,
-                filhoName: 'André',
-                idFilho: 2 
+                cost: 2,
+                childName: 'André',
+                childId: 2 
             },
             {
                 id: 3,
-                titulo: 'Lavar os pratos',
-                descricao: 'Lavar todos os pratos',
+                title: 'Lavar os pratos',
+                description: 'Lavar todos os pratos',
                 status: 'Feita',
-                valor: 4,
-                filhoName: 'Luiza',
-                idFilho: 1
+                cost: 4,
+                childName: 'Luiza',
+                childId: 1
             },
             {
                 id: 4,
-                titulo: 'Encher as garrafas',
-                descricao: 'Encher a garrafa de água',
+                title: 'Encher as garrafas',
+                description: 'Encher a garrafa de água',
                 status: 'Feita',
-                valor: 5,
-                filhoName: 'André',
-                idFilho: 2
-            },
-            {
-                id: 5,
-                titulo: 'Encher as garrafas',
-                descricao: 'Encher a garrafa de água',
-                status: 'Feita',
-                valor: 5,
-                filhoName: 'André',
-                idFilho: 2
-            },
-            {
-                id: 6,
-                titulo: 'Encher as garrafas',
-                descricao: 'Encher a garrafa de água',
-                status: 'Feita',
-                valor: 5,
-                filhoName: 'André',
-                idFilho: 2
+                cost: 10,
+                childName: 'André',
+                childId: 2
             }
         ]
     }

@@ -60,18 +60,18 @@
               <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
                 <div style="display: flex; gap: 6px;">
                   <ion-icon name="rocket-outline"></ion-icon>
-                  <ion-label>{{ tarefa.titulo }}</ion-label>
+                  <ion-label>{{ tarefa.title }}</ion-label>
                 </div>
                 <div style="display: flex; gap: 5px;">
                   <ion-badge  [color]="tarefa.status == 'Pendente' ? 'warning' : 'success'">{{ tarefa.status }}</ion-badge>
-                  <ion-badge color="tertiary">{{ tarefa.valor | currency }}</ion-badge>
+                  <ion-badge color="tertiary">{{ tarefa.cost | currency }}</ion-badge>
                 </div>
               </div>
 
               <div style="display: flex;">
                 <div class="detalhes-tarefa" style="width: 80%;">      
                   <div class="descricao">
-                    {{ tarefa.descricao }}
+                    {{ tarefa.description }}
                   </div>
                 </div>
 
@@ -83,7 +83,7 @@
           </ion-item>
       
           <ion-item-options>
-            <ion-item-option class="responsavel" color="light">{{ tarefa.filhoName }}</ion-item-option>
+            <ion-item-option class="responsavel" color="light">{{ tarefa.childName }}</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
       }
