@@ -1,0 +1,78 @@
+.mesAtual {
+    margin-top: 9vh;
+}
+
+.herdComponent {
+    background: var(--ion-color-tertiary-gradient);
+    padding: 20px;
+    border-bottom-left-radius: 50px;
+    text-align: center;
+    height: 20vh;
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0px 0px 10px 0px #ccc;
+}
+
+
+.container {
+    padding: 0px 30px;
+    margin-top: 190px;
+    margin-bottom: 100px;
+
+    .form {
+        margin-top: 40px;
+
+        select {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 55px;
+            width: 100%;
+            border: none;
+        }
+
+        textarea {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 80px;
+            width: 100%;
+            border: none;
+        }
+
+        input {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 55px;
+            width: 100%;
+            border: none;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--ion-color-primary);
+        }
+
+        ion-radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-right: 20px;
+
+            .div-tipo {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+        }
+    }
+}

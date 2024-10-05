@@ -1,0 +1,69 @@
+<ion-content [fullscreen]="true">
+
+  <div class="herdComponent">
+    <img (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right" style="float: right;">
+    <div class="mesAtual">
+      <h3 class="text-month"> Nova Tarefa </h3>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="form">
+      <div>
+        <ion-label>Filho</ion-label>
+        <ion-select label="Selecione o filho">
+          <ion-select-option value="luiza">Luiza</ion-select-option>
+          <ion-select-option value="andre">André</ion-select-option>
+          <ion-select-option value="daniel">Daniel</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Titulo</ion-label>
+        <input type="text" placeholder="Titulo"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Descrição</ion-label>
+        <textarea type="text" rows="3" placeholder="Descrição"></textarea>
+      </div>
+
+      <ion-radio-group value="felicidade">
+        <div class="div-tipo">
+          <ion-icon name="happy-outline"></ion-icon><ion-radio value="felicidade">Felicidade</ion-radio>
+        </div>
+
+        <div class="div-tipo"> 
+          <ion-icon name="cash-outline"></ion-icon><ion-radio value="valor">Valor</ion-radio>
+        </div>
+      </ion-radio-group>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Valor</ion-label>
+        <input type="text" placeholder="Valor"/>
+      </div>
+
+      <ion-radio-group value="diaSemana">
+        <div class="div-tipo">
+          <ion-radio value="diaSemana">Dia na semana</ion-radio>
+        </div>
+
+        <div class="div-tipo"> 
+          <ion-radio value="todoDia">Todo dia</ion-radio>
+        </div>
+      </ion-radio-group>
+
+      <div style="margin-top: 15px;"> 
+        <input type="text" placeholder="Dia na semana"/>
+      </div>
+      <ion-chip color="primary">Segunda</ion-chip>
+      <ion-chip color="primary">Sábado</ion-chip>
+
+      <ion-button [routerLink]="['/tabs/tabHome']" expand="block" color="primary" style="margin-top: 50px;">Salvar</ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>

@@ -7,7 +7,7 @@
 
     <ion-fab-list side="top" style="width: 200px; margin-left: -70px;" *ngIf="perfil == 'manager'">
       <div style="display: flex; gap: 20px; justify-content: space-between;">
-        <ion-button style="width: 80px; border-radius: 0px;" color="tertiary">
+        <ion-button style="width: 80px; border-radius: 0px;" color="tertiary" (click)="goToCadastroTarefas()">
           Tarefas
         </ion-button>
         <ion-button color="tertiary">

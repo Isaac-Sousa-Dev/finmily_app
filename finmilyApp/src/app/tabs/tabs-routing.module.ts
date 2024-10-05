@@ -30,6 +30,14 @@ const routes: Routes = [
         loadChildren: () => import('../meus-ganhos/meus-ganhos.module').then( m => m.MeusGanhosPageModule)
       },
       {
+        path: 'tabTarefasFilho',
+        loadChildren: () => import('../tarefas-filho/tarefas-filho.module').then( m => m.TarefasFilhoPageModule)
+      },
+      {
+        path: 'tabCadastroTarefas',
+        loadChildren: () => import('../cadastro-tarefas/cadastro-tarefas.module').then( m => m.CadastroTarefasPageModule)
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'

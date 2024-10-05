@@ -4,7 +4,7 @@
     <div class="herdComponent" >
       <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
       <div class="mesAtual">
-        <h3 class="text-month"> Tarefas </h3>
+        <h3 class="text-month"> Tarefas (Luiza) </h3>
       </div>
     
     </div>
@@ -25,11 +25,21 @@
     
           <div class="body-container">
 
-            <div style="font-size: 11px;">
+            <div style="font-size: 13px;">
               <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
-              <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon>Arraste para a esquerda para saber o responsável</div>
             </div> 
 
+            <ion-segment color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
+              <ion-segment-button value="hoje">
+                <ion-label style="font-size: 13px;">Hoje</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="feitas">
+                <ion-label style="font-size: 13px;">Feitas</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="pendentes">
+                <ion-label style="font-size: 13px;">Pendentes</ion-label>
+              </ion-segment-button>
+            </ion-segment>
             <ion-list>
 
               <ion-item-sliding>
@@ -51,7 +61,7 @@
                       </div>
                       <div style="display: flex; gap: 5px;">
                         <ion-badge color="success">Feito</ion-badge>
-                        <ion-badge color="tertiary">R$ 10,50</ion-badge>
+                        <ion-badge color="tertiary">R$ 0,50</ion-badge>
                       </div>
                     </div>
 
@@ -93,7 +103,7 @@
                       </div>
                       <div style="display: flex; gap: 5px;">
                         <ion-badge color="warning">Pendente</ion-badge>
-                        <ion-badge color="tertiary">R$ 9,25</ion-badge>
+                        <ion-badge color="tertiary">R$ 0,25</ion-badge>
                       </div>
                     </div>
 
