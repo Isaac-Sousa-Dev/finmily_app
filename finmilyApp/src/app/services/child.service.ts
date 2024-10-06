@@ -20,13 +20,13 @@ export class ChildService {
                 id: 1,
                 name: 'Luiza',
                 age: 10,
-                balance: 10,
+                balance: 2,
             },
             {
                 id: 2,
                 name: 'André',
                 age: 8,
-                balance: 20,
+                balance: 4,
             },
         ]
     }

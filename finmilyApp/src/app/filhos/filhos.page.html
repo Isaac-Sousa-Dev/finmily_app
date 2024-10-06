@@ -1,8 +1,11 @@
 <ion-content [fullscreen]="true">
-  <!-- <app-herd></app-herd> -->
   
-    <div class="herdComponent" >
-      <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+    <div class="herdComponent">
+      <div style="display: flex; align-items: center;">
+        <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+        <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+        <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+      </div>
       <div class="mesAtual">
         <h3 class="text-month"> Filhos </h3>
       </div>
@@ -19,7 +22,7 @@
             </div>  
             
             <div class="div-total-pagar">
-              R$ 100,00
+              {{ totalPaymentByMonth | currency }}
             </div>
           </div>
     
@@ -31,12 +34,17 @@
               @for (child of childrens; track $index) {
                 <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho/'+child.id]">
                   <header>
-                    <div>{{ child.name }}</div>
-                    <div style="font-size: 13px; margin-top: 2px; color: #76f56b;">
-                      {{ child.balance | currency }}  
-                    </div>
+                    <div>{{ child.name }}</div> 
                   </header>
                   <div>
+                    <div style="font-size: 13px; margin-top: 2px; display: flex; align-items: center;">
+                      <div style="font-size: 14px; color: black; padding: 2px; text-align: center; background-color: white; border-radius: 3px;">
+                        Saldo
+                      </div>
+                      <div style="margin-left: 5px; background-color: #76f56b; color: black; padding: 2px; border-radius: 3px; font-weight: bold;"> 
+                        {{ child.balance | currency }}  
+                      </div>
+                    </div>
                     <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
                       <ion-icon name="arrow-forward-outline"></ion-icon>
                     </div>

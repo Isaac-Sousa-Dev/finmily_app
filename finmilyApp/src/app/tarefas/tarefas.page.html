@@ -1,7 +1,11 @@
 <div class="contentScreen">
   
     <div class="herdComponent" >
-      <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+      <div style="display: flex; align-items: center;">
+        <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+        <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+        <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+      </div>
       <div class="mesAtual">
         <h3 class="text-month"> Tarefas </h3>
       </div>
@@ -18,7 +22,7 @@
             </div>  
             
             <div class="div-total-pagar">
-              R$ 100,00
+              {{ totalPaymentByMonth | currency }}
             </div>
           </div>
     
@@ -44,7 +48,7 @@
   <!-- </div> -->
   <ion-content>
     <ion-list>
-      @for (tarefa of tarefas; track $index) {
+      @for (task of allTasks; track $index) {
         <ion-item-sliding>
           <ion-item-options side="start">
             <ion-item-option color="warning">
@@ -60,18 +64,18 @@
               <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
                 <div style="display: flex; gap: 6px;">
                   <ion-icon name="rocket-outline"></ion-icon>
-                  <ion-label>{{ tarefa.title }}</ion-label>
+                  <ion-label>{{ task.title }}</ion-label>
                 </div>
                 <div style="display: flex; gap: 5px;">
-                  <ion-badge  [color]="tarefa.status == 'Pendente' ? 'warning' : 'success'">{{ tarefa.status }}</ion-badge>
-                  <ion-badge color="tertiary">{{ tarefa.cost | currency }}</ion-badge>
+                  <ion-badge  [color]="task.status == 'Pendente' ? 'warning' : 'success'">{{ task.status }}</ion-badge>
+                  <ion-badge color="tertiary">{{ task.cost | currency }}</ion-badge>
                 </div>
               </div>
 
               <div style="display: flex;">
                 <div class="detalhes-tarefa" style="width: 80%;">      
                   <div class="descricao">
-                    {{ tarefa.description }}
+                    {{ task.description }}
                   </div>
                 </div>
 
@@ -83,7 +87,7 @@
           </ion-item>
       
           <ion-item-options>
-            <ion-item-option class="responsavel" color="light">{{ tarefa.childName }}</ion-item-option>
+            <ion-item-option class="responsavel" color="light">{{ task.childName }}</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
       }

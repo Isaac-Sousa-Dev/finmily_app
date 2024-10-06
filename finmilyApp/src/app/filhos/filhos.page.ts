@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChildService } from '../services/child.service';
+import { PaymentService } from '../services/payment.service';
+import { TarefasService } from '../services/tarefas.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-filhos',
@@ -10,15 +13,25 @@ import { ChildService } from '../services/child.service';
 export class FilhosPage implements OnInit {
 
   childService = new ChildService();
-  childrens = this.childService.getAllChildrensByParent(1);
+  paymentService = new PaymentService();
+  tarefasService = new TarefasService();
 
-  constructor(private router: Router) { }
+  childrens = this.childService.getAllChildrensByParent(1);
+  allTasks = this.tarefasService.getAllTasksOpenByParent(1);
+  totalPaymentByMonth: number = 0;
+
+  constructor(private router: Router, private location: Location) { }
 
   ngOnInit() {
+    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
   }
 
   navegarParaMenu() {
     this.router.navigate(['/menu']); 
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

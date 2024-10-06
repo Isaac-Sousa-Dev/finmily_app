@@ -4,7 +4,7 @@ export class TarefasService {
 
 
     getTaskByChild(childId: any) {
-        let allTasks = this.getAllTasksByManager(1);
+        let allTasks = this.getAllTasksOpenByParent(1);
         let arrayOfTasks: any = [];
 
         allTasks.forEach((task) => {
@@ -16,7 +16,7 @@ export class TarefasService {
         return arrayOfTasks;
     }
 
-    getAllTasksByManager(managerId: any) {
+    getAllTasksOpenByParent(managerId: any) {
         return [
             {
                 id: 1,

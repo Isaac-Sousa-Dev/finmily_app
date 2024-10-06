@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TarefasService } from '../services/tarefas.service';
 import { PaymentService } from '../services/payment.service';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tarefas',
@@ -14,19 +15,22 @@ export class TarefasPage implements OnInit {
   tarefasService = new TarefasService();
   paymentService = new PaymentService(); 
   
-  tarefas = this.tarefasService.getAllTasksByManager(1);
+  allTasks = this.tarefasService.getAllTasksOpenByParent(1);
+  totalPaymentByMonth: number = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private location: Location) { }
 
   ngOnInit() {
-    console.log(this.tarefasService.getAllTasksByManager(1));
-    console.log(this.paymentService.getTotalPaymentMonthByManager(1));
+    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
   }
 
   navegarParaMenu() {
     this.router.navigate(['/menu']); 
   }
 
+  goBack() {
+    this.location.back();
+  }
 
   onIonInfinite(ev: any) {
     setTimeout(() => {

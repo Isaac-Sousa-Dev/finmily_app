@@ -1,7 +1,11 @@
 <div class="contentScreen">
   
   <div class="herdComponent" >
-    <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+    <div style="display: flex; align-items: center;">
+      <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+      <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+      <img  (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+    </div>
     <div class="mesAtual">
       <h3 class="text-month"> Tarefas ( {{child.name}} ) </h3>
     </div>
@@ -23,9 +27,9 @@
   
         <div class="body-container">
 
-          <div style="font-size: 13px;">
-            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
-          </div> 
+          <button class="btn-conduta">
+            Conduta +
+          </button>       
 
           <ion-segment color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
             <ion-segment-button value="hoje">
@@ -38,6 +42,10 @@
               <ion-label style="font-size: 13px;">Pendentes</ion-label>
             </ion-segment-button>
           </ion-segment>
+
+          <div style="font-size: 13px;">
+            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
+          </div>
           
         </div>
   

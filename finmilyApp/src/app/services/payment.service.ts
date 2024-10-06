@@ -2,8 +2,13 @@ export class PaymentService {
 
     constructor() { }
 
-    getTotalPaymentMonthByManager(managerId: number): number {
-        return 100;
+    getTotalPaymentByMonth(tasks: any): number {
+        let totalPaymentByMonth = 0;
+
+        tasks.forEach((task: any) => {
+            totalPaymentByMonth += task.cost;
+        });
+        return totalPaymentByMonth;
     }
 
 }

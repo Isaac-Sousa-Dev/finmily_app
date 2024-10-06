@@ -1,12 +1,12 @@
 .mesAtual {
     margin-top: 9vh;
+    text-align: center;
 }
 
 .herdComponent {
     background: var(--ion-color-tertiary-gradient);
     padding: 20px;
     border-bottom-left-radius: 50px;
-    text-align: center;
     height: 20vh;
     color: white;
     position: relative;
@@ -99,7 +99,8 @@ img {
                         justify-content: space-between;
 
                         header {
-                            margin-top: 10px;
+                            margin-top: 5px;
+                            font-size: 20px;
                         }
                         
                         

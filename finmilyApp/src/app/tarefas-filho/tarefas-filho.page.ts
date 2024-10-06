@@ -4,6 +4,7 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { TarefasService } from '../services/tarefas.service';
 import { PaymentService } from '../services/payment.service';
 import { ChildService } from '../services/child.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tarefas-filho',
@@ -20,7 +21,7 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   child: any = {};
   totalPaymentByDay: number = 0;
   
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
     
@@ -57,6 +58,10 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
     this.router.navigate(['/menu']); 
   }
 
+  goBack() {
+    // this.router.navigate(['/tabs/tabFilhos']);
+    this.location.back();
+  }
 
   onIonInfinite(ev: any) {
     setTimeout(() => {

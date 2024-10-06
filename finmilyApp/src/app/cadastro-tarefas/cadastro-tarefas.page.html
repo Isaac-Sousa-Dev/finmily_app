@@ -1,7 +1,13 @@
 <ion-content [fullscreen]="true">
 
   <div class="herdComponent">
-    <img (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right" style="float: right;">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+        <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+      </div>
+      <img (click)="navegarParaMenu()" src="assets/icon/logo.svg" alt="Icon Right">
+    </div>
     <div class="mesAtual">
       <h3 class="text-month"> Nova Tarefa </h3>
     </div>
@@ -15,7 +21,6 @@
         <ion-select label="Selecione o filho">
           <ion-select-option value="luiza">Luiza</ion-select-option>
           <ion-select-option value="andre">André</ion-select-option>
-          <ion-select-option value="daniel">Daniel</ion-select-option>
         </ion-select>
       </div>
 
