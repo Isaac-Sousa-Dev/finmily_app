@@ -21,7 +21,7 @@
           </div>  
           
           <div class="div-total-pagar">
-            {{ totalPaymentByDay | currency }}
+            {{ totalPaymentByDay | currency:'BRL':'symbol' }}
           </div>
         </div>
   
@@ -31,12 +31,12 @@
             Conduta +
           </button>       
 
-          <ion-segment color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
+          <ion-segment (click)="filterTasksByStatus($event)" color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
             <ion-segment-button value="hoje">
               <ion-label style="font-size: 13px;">Hoje</ion-label>
             </ion-segment-button>
             <ion-segment-button value="feitas">
-              <ion-label style="font-size: 13px;">Feitas</ion-label>
+              <ion-label style="font-size: 13px;" >Feitas</ion-label>
             </ion-segment-button>
             <ion-segment-button value="pendentes">
               <ion-label style="font-size: 13px;">Pendentes</ion-label>
@@ -76,7 +76,7 @@
                 </div>
                 <div style="display: flex; gap: 5px;">
                   <ion-badge  [color]="task.status == 'Pendente' ? 'warning' : 'success'">{{ task.status }}</ion-badge>
-                  <ion-badge color="tertiary">{{ task.cost | currency }}</ion-badge>
+                  <ion-badge color="tertiary">{{ task.cost | currency:'BRL':'symbol' }}</ion-badge>
                 </div>
               </div>
   

@@ -63,6 +63,20 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
     this.location.back();
   }
 
+
+  filterTasksByStatus(event: any) {
+    this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
+    let value = event.target.value;
+    if(value == 'feitas') {
+      this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Feita');
+    } else if(value == 'pendentes') {
+      this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Pendente');
+    } else if(value == 'hoje') {
+      this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
+    }
+
+  }
+
   onIonInfinite(ev: any) {
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();

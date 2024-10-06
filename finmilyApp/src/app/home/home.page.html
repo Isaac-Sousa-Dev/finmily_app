@@ -12,16 +12,16 @@
       <div class="dash">
     
         <div class="tasks">
-          <div>
-            <ion-card color="primary" >
-              <ion-card-header>
+          <ion-card color="primary" [routerLink]="['/tabs/tabTarefas']">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-left: 20px;">
+              <div>
                 <div>Tarefas</div>
-              </ion-card-header>
-              <div class="qtd-tasks" style="border-radius: 20px;">
+              </div>
+              <div class="qtd-tasks" style="border-radius: 20px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
                 {{data.tasksQuantity}}
               </div>
-            </ion-card>
-          </div>    
+            </div>
+          </ion-card>  
         </div>
   
         <div class="div-condutas-investidos">
@@ -41,7 +41,7 @@
               <div>Investidos</div>
             </ion-card-header>
             <div class="qtd-investidos">
-              {{data.investQuantity | currency}}
+              {{data.investQuantity | currency: 'BRL': 'symbol'}}
             </div>
           </ion-card>
         </div>

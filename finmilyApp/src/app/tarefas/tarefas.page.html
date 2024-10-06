@@ -22,7 +22,7 @@
             </div>  
             
             <div class="div-total-pagar">
-              {{ totalPaymentByMonth | currency }}
+              {{ totalPaymentByMonth | currency:'BRL':'symbol' }}
             </div>
           </div>
     
@@ -67,24 +67,20 @@
                   <ion-label>{{ task.title }}</ion-label>
                 </div>
                 <div style="display: flex; gap: 5px;">
-                  <ion-badge  [color]="task.status == 'Pendente' ? 'warning' : 'success'">{{ task.status }}</ion-badge>
-                  <ion-badge color="tertiary">{{ task.cost | currency }}</ion-badge>
+                  <ion-badge color="tertiary">{{ task.cost | currency:'BRL':'symbol' }}</ion-badge>
                 </div>
               </div>
 
-              <div style="display: flex;">
-                <div class="detalhes-tarefa" style="width: 80%;">      
-                  <div class="descricao">
-                    {{ task.description }}
-                  </div>
-                </div>
-
-                <div style="width: 20%; height: 100%;">
-                  <ion-checkbox labelPlacement="end"></ion-checkbox>
-                </div>
+              <div style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
+                @for (day of task.days; track $index) {
+                  <ion-badge color="light">{{ day.day }}</ion-badge>
+                }
               </div>
-            </div>               
+            </div>   
+            
+
           </ion-item>
+  
       
           <ion-item-options>
             <ion-item-option class="responsavel" color="light">{{ task.childName }}</ion-item-option>

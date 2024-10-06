@@ -25,7 +25,25 @@ export class TarefasService {
                 status: 'Feita',
                 cost: 3,
                 childName: 'Luiza',
-                childId: 1
+                childId: 1,
+                days: [
+                    {
+                        id: 1,
+                        day: 'Seg'
+                    },
+                    {
+                        id: 2,
+                        day: 'Ter'
+                    },
+                    {
+                        id: 3,
+                        day: 'Qua'
+                    },
+                    {
+                        id: 4,
+                        day: 'Qui'
+                    }
+                ]
             },
             {
                 id: 2,
@@ -34,7 +52,12 @@ export class TarefasService {
                 status: 'Pendente',
                 cost: 2,
                 childName: 'André',
-                childId: 2 
+                childId: 2,
+                days: [
+                    {
+                        day: 'Todo dia'
+                    }
+                ]
             },
             {
                 id: 3,
@@ -43,7 +66,12 @@ export class TarefasService {
                 status: 'Feita',
                 cost: 4,
                 childName: 'Luiza',
-                childId: 1
+                childId: 1,
+                days: [
+                    {
+                        day: 'Todo dia'
+                    }
+                ]
             },
             {
                 id: 4,
@@ -52,7 +80,12 @@ export class TarefasService {
                 status: 'Feita',
                 cost: 10,
                 childName: 'André',
-                childId: 2
+                childId: 2,
+                days: [
+                    {
+                        day: 'Todo dia'
+                    }
+                ]
             }
         ]
     }
