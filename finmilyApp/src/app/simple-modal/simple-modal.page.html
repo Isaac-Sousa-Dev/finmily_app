@@ -1,0 +1,32 @@
+<ion-header style="background: var(--ion-color-tertiary-gradient);">
+  <ion-toolbar color="tertiary-gradient">
+    <ion-title color="light">Nova Conduta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+
+  <div class="form">
+ 
+    <div style="margin-top: 25px;"> 
+      <ion-label>Descrição</ion-label>
+      <textarea type="text" rows="3" placeholder="Descrição"></textarea>
+    </div>
+
+    <ion-segment value="default">
+      <ion-segment-button value="default">
+        <ion-label color="danger">Débito</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="segment">
+        <ion-label color="success">Crédito</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <input type="text" placeholder="Valor (R$)"/>
+
+    <ion-button expand="block" color="primary" style="margin-top: 40px;">Salvar</ion-button>
+
+  </div>
+
+
+</ion-content>

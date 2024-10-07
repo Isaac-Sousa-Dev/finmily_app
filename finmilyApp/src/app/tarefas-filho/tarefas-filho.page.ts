@@ -1,10 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonModal } from '@ionic/angular';
 import { TarefasService } from '../services/tarefas.service';
 import { PaymentService } from '../services/payment.service';
 import { ChildService } from '../services/child.service';
 import { Location } from '@angular/common';
+import { OverlayEventDetail } from '@ionic/core/components';
+
+import { ModalController } from '@ionic/angular';
+import { SimpleModalPage } from '../simple-modal/simple-modal.page';
 
 @Component({
   selector: 'app-tarefas-filho',
@@ -12,6 +16,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./tarefas-filho.page.scss'],
 })
 export class TarefasFilhoPage implements OnInit, OnDestroy {
+
+  @ViewChild(IonModal) modal: IonModal = {} as IonModal;  
+  name: string = '';
 
   tarefasService = new TarefasService();
   paymentService = new PaymentService(); 
@@ -21,20 +28,31 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   child: any = {};
   totalPaymentByDay: number = 0;
   
-  constructor(private router: Router, private route: ActivatedRoute, private location: Location) { }
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private location: Location,
+    private modalCtrl: ModalController
+  ) { }
 
-  ngOnInit() {
-    
+  ngOnInit() { 
     this.route.paramMap.subscribe(params => {
       const childId = +params.get('childId')!;
-
+      
       this.tasksByChild = this.tarefasService.getTaskByChild(childId);
 
       this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild);
-
       this.child = this.childService.getChildById(childId);
-
     });
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: SimpleModalPage,
+      breakpoints: [0, 0.3, 0.5, 0.8],
+      initialBreakpoint: 0.5
+    });
+    await modal.present();
   }
 
 
@@ -55,7 +73,7 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   }
 
   navegarParaMenu() {
-    this.router.navigate(['/menu']); 
+    this.router.navigate(['/tabs/tabPerfil']); 
   }
 
   goBack() {
@@ -81,6 +99,23 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
+  }
+
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
   }
 
 }

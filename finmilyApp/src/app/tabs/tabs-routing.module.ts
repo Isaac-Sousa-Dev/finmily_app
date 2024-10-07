@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('../cadastro-tarefas/cadastro-tarefas.module').then( m => m.CadastroTarefasPageModule)
       },
       {
+        path: 'tabPerfil',
+        loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule)
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'

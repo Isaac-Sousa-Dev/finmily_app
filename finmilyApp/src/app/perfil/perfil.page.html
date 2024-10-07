@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+
+  <div class="herdComponent">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+        <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+      </div>
+      <img class="perfil" (click)="navegarParaMenu()" src="assets/images/perfil_icon.png" alt="Icon Right">
+    </div>
+    <div class="mesAtual">
+      <h3 class="text-month"> Perfil </h3>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="form">
+
+      <div style="height: 150px; display: flex; justify-content: center; align-items: center;">
+        <div style="height: 140px; width: 140px; border-radius: 100%; border: 1px solid #ccc;">
+          <img src="assets/images/perfil_profile.png">
+        </div>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Nickname</ion-label>
+        <input type="text" placeholder="Nickname" value="isaacsousa0"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>E-mail</ion-label>
+        <input type="text" placeholder="E-mail" value="isaac.sousa@gmail.com"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Celular</ion-label>
+        <input type="text" placeholder="Celular" value="(00) 00000-0000"/>
+      </div>
+
+      <ion-button [routerLink]="['/login']" expand="block" color="primary" style="margin-top: 40px;">Sair do app</ion-button>
+      <ion-button [routerLink]="['/register']" expand="block" color="danger" style="margin-top: 25px;">Desativar conta</ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>

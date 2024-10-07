@@ -1,0 +1,38 @@
+
+.container {
+    padding: 0px 30px;
+    margin-top: 190px;
+    margin-bottom: 100px;
+
+    .form {
+        margin-top: 40px;
+        padding: 0px 30px;  
+
+        textarea {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 80px;
+            width: 100%;
+            border: none;
+        }
+
+        input {
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: #f4eded;
+            border: 1px solid var(--ion-color-primary);
+            padding: 10px;
+            height: 55px;
+            width: 100%;
+            border: none;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--ion-color-primary);
+        }
+    }
+}

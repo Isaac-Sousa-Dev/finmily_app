@@ -25,7 +25,7 @@ export class TarefasPage implements OnInit {
   }
 
   navegarParaMenu() {
-    this.router.navigate(['/menu']); 
+    this.router.navigate(['/tabs/tabPerfil']); 
   }
 
   goBack() {

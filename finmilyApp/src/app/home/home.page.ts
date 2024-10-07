@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
 
 
   navegarParaMenu() {
-    this.router.navigate(['/menu']);  // Redireciona para a rota 'menu'
+    this.router.navigate(['/tabs/tabPerfil']);  // Redireciona para a rota 'menu'
   }
 
 }

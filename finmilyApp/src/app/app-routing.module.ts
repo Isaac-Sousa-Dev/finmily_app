@@ -13,7 +13,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  },
+  },  {
+    path: 'simple-modal',
+    loadChildren: () => import('./simple-modal/simple-modal.module').then( m => m.SimpleModalPageModule)
+  }
 
 ];
 @NgModule({
