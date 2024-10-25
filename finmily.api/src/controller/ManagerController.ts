@@ -43,7 +43,9 @@ export class ManagerController extends BaseNotification {
     
     async home(request: Request) {
 
-        let userAuth = request.userAuth;
+        // let userAuth = request.userAuth;
+
+        const userAuthUid = '2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7';
 
         let currentDate = new Date();   
         let year = currentDate.getFullYear();
@@ -53,14 +55,16 @@ export class ManagerController extends BaseNotification {
 
         const allTasksByManager = await this.taskRespository.find({ 
             where: { 
-                openByUserUid: userAuth.uid,
+                // openByUserUid: userAuth.uid,
+                openByUserUid: userAuthUid,
                 createdAt: Between(startOfMonth, endOfMonth),
             },
             
         });
 
 
-        const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuth.uid } });
+        // const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuth.uid } });
+        const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuthUid } });
         let dataForReturn = {
             'tasksQuantity': allTasksByManager.length,
             'collaboratorsQuantity': allCollaborators.length,

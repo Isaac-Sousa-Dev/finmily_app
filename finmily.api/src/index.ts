@@ -4,13 +4,16 @@ import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import config from "./configuration/config"
+const cors = require('cors');
 
 import auth from "./middleware/auth"
 
 // create express app
 const app = express()
 app.use(bodyParser.json())
-app.use(auth)
+// app.use(auth)
+
+app.use(cors());
 
 // register express routes from defined application routes
 Routes.forEach(route => {

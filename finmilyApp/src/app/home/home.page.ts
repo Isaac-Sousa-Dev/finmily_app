@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomePageMock } from '../mocks/HomePage';
+import { HomeService } from 'src/services/home.service';
 
+@Injectable()
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -9,18 +10,30 @@ import { HomePageMock } from '../mocks/HomePage';
 })
 export class HomePage implements OnInit {
 
-  homeMock = new HomePageMock();
-  data = this.homeMock.data;
+  data: any = '';
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private HomeService: HomeService,
+  ) { 
+
+  }
 
   ngOnInit() {
-    console.log(this.homeMock); 
+    this.loadData();
+  }
+
+  async loadData(): Promise<void> {
+    const result = await this.HomeService.GetAll();
+    if(result.success) {
+      this.data = result.data.data;
+    }
+    console.log(this.data, 'Meu resultado');
   }
 
 
   navegarParaMenu() {
-    this.router.navigate(['/tabs/tabPerfil']);  // Redireciona para a rota 'menu'
+    this.router.navigate(['/tabs/tabPerfil']);
   }
 
 }
