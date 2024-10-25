@@ -48,7 +48,7 @@
   <!-- </div> -->
   <ion-content>
     <ion-list>
-      @for (task of allTasks; track $index) {
+      @for (task of allTasks.tasks; track $index) {
         <ion-item-sliding>
           <ion-item-options side="start">
             <ion-item-option color="warning">
@@ -72,8 +72,12 @@
               </div>
 
               <div style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
-                @for (day of task.days; track $index) {
-                  <ion-badge color="light">{{ day.day }}</ion-badge>
+                @for (day of task.daysOfWeek; track $index) {
+                  <ion-badge color="light">{{ day }}</ion-badge>
+                }
+
+                @if(task.daysOfWeek == null && task.everyDay == true) {
+                  <ion-badge color="light">Todo dia</ion-badge>
                 }
               </div>
             </div>   
@@ -83,7 +87,7 @@
   
       
           <ion-item-options>
-            <ion-item-option class="responsavel" color="light">{{ task.childName }}</ion-item-option>
+            <ion-item-option class="responsavel" color="light">{{ task.user.nickname }}</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
       }

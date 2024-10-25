@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
 import { User } from "./User";
 
@@ -26,13 +26,17 @@ export class Task extends BaseEntity {
     @Column({nullable: true})
     everyDay: boolean;
 
-    @Column({nullable: true})
-    dayOfWeek: number;  
+    @Column({type: "varchar", length: 255, nullable: true})
+    daysOfWeek: string;  
 
     @Column({type: "varchar", length: 15})
     status: string; // pending or completed
 
     @Column({type: "varchar", length: 255})
     openByUserUid: string;  
+
+    @ManyToOne(() => User, user => user.tasks)
+    @JoinColumn({ name: 'userUid' })  // Nome da coluna na tabela de `Task`
+    user: User;
 
 }

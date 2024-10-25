@@ -59,7 +59,6 @@ export class ManagerController extends BaseNotification {
                 openByUserUid: userAuthUid,
                 createdAt: Between(startOfMonth, endOfMonth),
             },
-            
         });
 
 
@@ -77,19 +76,24 @@ export class ManagerController extends BaseNotification {
 
 
     async tasks(request: Request) {
-        let userAuth = request.userAuth;
+        // let userAuth = request.userAuth;
 
-        
+        const userAuthUid = '2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7'; 
 
-        const allCollaborators = await this.userRepository.find({ 
-            where: { managerUid: userAuth.uid },
-            select: ['uid', 'nickname', 'balance']
-        });
 
+        const allTasksOpenByManager = await this.taskRespository.find({
+            where: { 
+                // openByUserUid: userAuth.uid,
+                openByUserUid: userAuthUid,
+                status: 'pending'
+            },
+            select: ['uid', 'title', 'description', 'cost', 'daysOfWeek', 'status', 'everyDay'],
+            relations: ['user']
+        })
         
         let dataForReturn = {
             'totalPayable': 100,
-            'collaborators': allCollaborators
+            'tasks': allTasksOpenByManager,
         }
 
         return {

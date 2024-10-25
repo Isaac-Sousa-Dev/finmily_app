@@ -3,6 +3,7 @@ import { Task } from "../entity/Task";
 import { BaseNotification } from "../notification/BaseNotification";
 import { Request } from "express";
 import { User } from "../entity/User";
+import { open } from "fs";
 
 export class TaskController extends BaseNotification {
 
@@ -10,11 +11,14 @@ export class TaskController extends BaseNotification {
 
     async save(request: Request) {
 
-        let userAuth = request.userAuth;
+        // let userAuth = request.userAuth;
+        let userAuth = {
+            role: "manager",
+        }
         
         if(userAuth.role !== "manager") return {error: "Você não tem permissão para cadastrar tarefas"};
 
-        let { title, description, cost, happiness, status, user } = request.body;
+        let { title, description, cost, happiness, status, user, daysOfWeek } = request.body;
 
         this.isRequired(title, "O título é obrigatório");
         this.isRequired(status, "O status é obrigatório");
@@ -29,7 +33,9 @@ export class TaskController extends BaseNotification {
             happiness,
             status,
             userUid: user,
-            openByUserUid: userAuth.uid
+            daysOfWeek,
+            // openByUserUid: userAuth.uid
+            openByUserUid: "2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7"
         })
 
         if(this.valid()) {

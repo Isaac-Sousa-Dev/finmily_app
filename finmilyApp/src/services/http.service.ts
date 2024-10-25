@@ -27,16 +27,17 @@ export class HttpService {
   }
 
   public get(url: string): Promise<IResultHttp> {
+    console.log('url', url);
     const header = this.createHeader();
 
     return new Promise(async (resolve) => {
       try {
-        this.spinnerSrv.Show();
+        await this.spinnerSrv.Show();
         const res = await this.http.get(url, {headers: header}).toPromise();
         resolve({success: true, error: null, data: res});
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
       } catch (error) {
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
         resolve({success: false, error: error, data: null});
       }
     })
@@ -48,12 +49,12 @@ export class HttpService {
 
     return new Promise(async (resolve) => {
       try {
-        this.spinnerSrv.Show();
+        await this.spinnerSrv.Show();
         const res = await this.http.post(url, model, {headers: header}).toPromise();
         resolve({success: true, error: null, data: res});
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
       } catch (error) {
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
         resolve({success: false, error, data: null});
       }
     })
@@ -65,12 +66,12 @@ export class HttpService {
 
     return new Promise(async (resolve) => {
       try {
-        this.spinnerSrv.Show();
+        await this.spinnerSrv.Show();
         const res = await this.http.delete(url, {headers: header}).toPromise();
         resolve({success: true, error: null, data: res});
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
       } catch (error) {
-        this.spinnerSrv.Hide();
+        await this.spinnerSrv.Hide();
         resolve({success: false, error, data: null});
       }
     })

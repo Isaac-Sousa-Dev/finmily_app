@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class CadastroTarefasPage implements OnInit {
 
   diaFrequencia: string = 'diaSemana';
-  tipoTarefa: string = 'felicidade';
+  tipoTarefa: string = 'pontos';
 
   constructor(private router: Router, private location: Location) { }
 

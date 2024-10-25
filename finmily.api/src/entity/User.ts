@@ -1,5 +1,6 @@
-import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
+import { Task } from "./Task";
 
 @Entity({name: "user"})
 export class User extends BaseEntity {
@@ -27,5 +28,8 @@ export class User extends BaseEntity {
 
     @Column({default: 0, type: "decimal", precision: 10, scale: 2})
     balance: number;
+
+    @OneToMany(() => Task, task => task.user)
+    tasks: Task[];
     
 }
