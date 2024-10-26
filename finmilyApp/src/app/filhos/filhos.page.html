@@ -32,9 +32,9 @@
             <div class="cards-filhos">
 
               @for (child of childrens; track $index) {
-                <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho/'+child.id]">
+                <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]">
                   <header>
-                    <div>{{ child.name }}</div> 
+                    <div>{{ child.nickname }}</div> 
                   </header>
                   <div>
                     <div style="font-size: 13px; margin-top: 2px; display: flex; align-items: center;">

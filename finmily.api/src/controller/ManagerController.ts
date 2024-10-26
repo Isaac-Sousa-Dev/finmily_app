@@ -147,4 +147,23 @@ export class ManagerController extends BaseNotification {
             'data': dataForReturn
         }
     }
+
+
+    async childrensByManager(request: Request) {
+        // let userAuth = request.userAuth;
+
+        const userAuthUid = '2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7';
+
+        const allChildrensByManager = await this.userRepository.find(
+            { 
+                where: { managerUid: userAuthUid },
+                select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance'],
+            }
+        );
+
+        return {
+            'message': 'Dados carregados com sucesso',
+            'data': allChildrensByManager
+        }
+    }
 }

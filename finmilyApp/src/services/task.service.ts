@@ -2,25 +2,22 @@ import { Injectable } from '@angular/core';
 import { SpinnerService } from './spinner.service';
 import { HttpService } from './http.service';
 import { IResultHttp } from 'src/interfaces/IResultHttp';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  urlBase: string = 'localhost:3000'; 
-
-  constructor( public http: HttpService, private spinnerSrv: SpinnerService ) { }
+  constructor( public http: ApiService ) { }
 
   async GetTasksOpenByManager() {
-    try {
-      await this.spinnerSrv.Show();
-      const result = await this.http.get(`http://localhost:3000/manager/tasks/`);
-      await this.spinnerSrv.Hide();
-      return result.data;
-    } catch (error) {
-      await this.spinnerSrv.Hide();
-      return error;
-    }
+    const result = await this.http.get(`/manager/tasks`);
+    return result.data;
+  }
+
+  async GetTasksByChild(uid: string | null) {
+    const result = await this.http.get(`/child/tasks/${uid}`);
+    return result.data;
   }
 }

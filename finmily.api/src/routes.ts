@@ -15,6 +15,7 @@ export const Routes = [
     { method: "get", route: "/manager/home", controller: ManagerController, action: "home" },
     { method: "get", route: "/manager/tasks", controller: ManagerController, action: "tasks" },
     { method: "get", route: "/manager/tasks-by-collaborator/:userUid", controller: ManagerController, action: "tasksByCollaborator" },
+    { method: "get", route: "/manager/childrens/", controller: ManagerController, action: "childrensByManager" },
 
     // Routes for Collaborator
     { method: "get", route: "/collaborator", controller: CollaboratorController, action: "all" }, 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChildService } from '../services/child.service';
 import { PaymentService } from '../services/payment.service';
 import { TarefasService } from '../services/tarefas.service';
 import { Location } from '@angular/common';
+import { ChildrenService } from 'src/services/children.service';
+import { TaskService } from 'src/services/task.service';
 
 @Component({
   selector: 'app-filhos',
@@ -12,18 +13,36 @@ import { Location } from '@angular/common';
 })
 export class FilhosPage implements OnInit {
 
-  childService = new ChildService();
   paymentService = new PaymentService();
   tarefasService = new TarefasService();
 
-  childrens = this.childService.getAllChildrensByParent(1);
-  allTasks = this.tarefasService.getAllTasksOpenByParent(1);
+  allTasks: any = [];
+  childrens: any;
   totalPaymentByMonth: number = 0;
 
-  constructor(private router: Router, private location: Location) { }
+  constructor(
+    private router: Router, 
+    private location: Location,
+    private childService: ChildrenService,
+    private TaskService: TaskService,
+  ) { }
 
-  ngOnInit() {
-    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
+
+  async ngOnInit() {
+    this.getChildrensByManager();
+    // this.GetTasksOpenByManager();
+  }
+
+
+  async getChildrensByManager() {
+    this.childrens = await this.childService.getAllChildrensByParent(); 
+    this.GetTasksOpenByManager();
+  }
+
+
+  async GetTasksOpenByManager(){
+    this.allTasks = await this.TaskService.GetTasksOpenByManager();
+    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks.tasks);
   }
 
   navegarParaMenu() {

@@ -17,6 +17,7 @@ export class TarefasPage implements OnInit {
 
   paymentService = new PaymentService(); 
 
+  data: any;
   allTasks: any = []; 
   totalPaymentByMonth: number = 0;
 
@@ -24,31 +25,21 @@ export class TarefasPage implements OnInit {
     private router: Router, 
     private location: Location,
     private TaskService: TaskService,
-    private spinnerSrv: SpinnerService,
-    public http: HttpService
   ) { }
 
   ngOnInit() {
     this.GetTasksOpenByManager();
   }
 
-
-  async GetTasksOpenByManager(): Promise<void> {
-    try {
-      await this.spinnerSrv.Show();
-      const result = await this.http.get(`http://localhost:3000/manager/tasks/`);
-      this.allTasks = result.data.data;
-      this.allTasks.tasks.forEach((task: any) => {
-        if(task.daysOfWeek != null) {
-          task.daysOfWeek = task.daysOfWeek.split(',');
-        }
-      });
-      this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks.tasks);
-      this.spinnerSrv.Hide();
-    } catch (error) {
-      this.spinnerSrv.Hide();
-      console.log(error);
-    }
+  async GetTasksOpenByManager(){
+    this.data = await this.TaskService.GetTasksOpenByManager();
+    this.allTasks = this.data.tasks;
+    this.allTasks.forEach((task: any) => {
+      if(task.daysOfWeek != null) {
+        task.daysOfWeek = task.daysOfWeek.split(',');
+      }
+    });
+    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
   }
 
 

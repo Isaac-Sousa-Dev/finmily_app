@@ -9,6 +9,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 
 import { ModalController } from '@ionic/angular';
 import { SimpleModalPage } from '../simple-modal/simple-modal.page';
+import { TaskService } from 'src/services/task.service';
 
 @Component({
   selector: 'app-tarefas-filho',
@@ -18,13 +19,13 @@ import { SimpleModalPage } from '../simple-modal/simple-modal.page';
 export class TarefasFilhoPage implements OnInit, OnDestroy {
 
   @ViewChild(IonModal) modal: IonModal = {} as IonModal;  
-  name: string = '';
+  nickname: string = '';
 
   tarefasService = new TarefasService();
   paymentService = new PaymentService(); 
   childService = new ChildService();
 
-  tasksByChild: any[] = [];
+  tasksByChild: any;
   child: any = {};
   totalPaymentByDay: number = 0;
   
@@ -32,17 +33,20 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
     private router: Router, 
     private route: ActivatedRoute, 
     private location: Location,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private taskService: TaskService
   ) { }
 
   ngOnInit() { 
-    this.route.paramMap.subscribe(params => {
-      const childId = +params.get('childId')!;
-      
-      this.tasksByChild = this.tarefasService.getTaskByChild(childId);
 
-      this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild);
-      this.child = this.childService.getChildById(childId);
+    this.route.paramMap.subscribe(params => {
+      const childId = params.get('childId');
+      this.tasksByChild = this.taskService.GetTasksByChild(childId);
+      
+      // this.tasksByChild = this.tarefasService.getTaskByChild(childId);
+
+      // this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild);
+      // this.child = this.childService.getChildById(childId);
     });
   }
 
@@ -82,18 +86,18 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   }
 
 
-  filterTasksByStatus(event: any) {
-    this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
-    let value = event.target.value;
-    if(value == 'feitas') {
-      this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Feita');
-    } else if(value == 'pendentes') {
-      this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Pendente');
-    } else if(value == 'hoje') {
-      this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
-    }
+  // filterTasksByStatus(event: any) {
+  //   this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
+  //   let value = event.target.value;
+  //   if(value == 'feitas') {
+  //     this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Feita');
+  //   } else if(value == 'pendentes') {
+  //     this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Pendente');
+  //   } else if(value == 'hoje') {
+  //     this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
+  //   }
 
-  }
+  // }
 
   onIonInfinite(ev: any) {
     setTimeout(() => {
@@ -108,7 +112,7 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   }
 
   confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+    this.modal.dismiss(this.nickname, 'confirm');
   }
 
   onWillDismiss(event: Event) {
