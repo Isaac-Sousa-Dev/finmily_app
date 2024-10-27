@@ -17,7 +17,8 @@ export class TaskService {
   }
 
   async GetTasksByChild(uid: string | null) {
-    const result = await this.http.get(`/child/tasks/${uid}`);
+    console.log(uid, 'UID');
+    const result = await this.http.get(`/manager/tasks-by-collaborator/${uid}`);
     return result.data;
   }
 }

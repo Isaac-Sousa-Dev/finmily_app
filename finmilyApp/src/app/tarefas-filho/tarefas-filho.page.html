@@ -7,7 +7,7 @@
       <img  (click)="navegarParaMenu()" src="assets/images/perfil_icon.png" alt="Icon Right">
     </div>
     <div class="mesAtual">
-      <h3 class="text-month"> Tarefas ( {{child.name}} ) </h3>
+      <h3 class="text-month"> Tarefas ( {{child.nickname}} ) </h3>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
 
   <ion-content>
     <ion-list>
-      @for (task of tasksByChild; track $index) {
+      @for (task of tasksByChild?.tasksToday; track $index) {
         <ion-item-sliding>
           <ion-item-options side="start">
             <ion-item-option color="warning">
@@ -72,10 +72,10 @@
               <div style="display: flex; align-items: center; gap: 10px; margin-top: 7px; justify-content: space-between;">
                 <div style="display: flex; gap: 6px;">
                   <ion-icon name="rocket-outline"></ion-icon>
-                  <ion-label>{{ task.title }}</ion-label>
+                  <ion-label>{{ task.title | truncate:15 }}</ion-label>
                 </div>
                 <div style="display: flex; gap: 5px;">
-                  <ion-badge  [color]="task.status == 'Pendente' ? 'warning' : 'success'">{{ task.status }}</ion-badge>
+                  <ion-badge  [color]="task.status == 'pending' ? 'warning' : 'success'">{{ task.status == 'pending' ? 'Pendente' : 'Feita' }}</ion-badge>
                   <ion-badge color="tertiary">{{ task.cost | currency:'BRL':'symbol' }}</ion-badge>
                 </div>
               </div>

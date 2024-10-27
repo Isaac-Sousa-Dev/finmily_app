@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TarefasFilhoPageRoutingModule } from './tarefas-filho-routing.module';
 
 import { TarefasFilhoPage } from './tarefas-filho.page';
+import { TruncatePipe } from 'src/pipes/truncate/truncate.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TarefasFilhoPageRoutingModule
+    TarefasFilhoPageRoutingModule,
+    TruncatePipe
   ],
   declarations: [TarefasFilhoPage]
 })

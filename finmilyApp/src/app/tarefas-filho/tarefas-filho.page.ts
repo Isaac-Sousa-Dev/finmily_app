@@ -23,11 +23,11 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
 
   tarefasService = new TarefasService();
   paymentService = new PaymentService(); 
-  childService = new ChildService();
 
   tasksByChild: any;
   child: any = {};
   totalPaymentByDay: number = 0;
+  childId: any;
   
   constructor(
     private router: Router, 
@@ -38,16 +38,17 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() { 
-
     this.route.paramMap.subscribe(params => {
-      const childId = params.get('childId');
-      this.tasksByChild = this.taskService.GetTasksByChild(childId);
-      
-      // this.tasksByChild = this.tarefasService.getTaskByChild(childId);
-
-      // this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild);
-      // this.child = this.childService.getChildById(childId);
+      this.childId = params.get('childId');
+      this.getTasks(this.childId);
     });
+  }
+
+
+  async getTasks(childId: any) {
+    this.tasksByChild = await this.taskService.GetTasksByChild(childId);
+    this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild.tasksToday);
+    this.child = this.tasksByChild.collaborator;
   }
 
   async presentModal() {
@@ -86,18 +87,32 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   }
 
 
-  // filterTasksByStatus(event: any) {
-  //   this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
-  //   let value = event.target.value;
-  //   if(value == 'feitas') {
-  //     this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Feita');
-  //   } else if(value == 'pendentes') {
-  //     this.tasksByChild = this.tasksByChild.filter(task => task.status == 'Pendente');
-  //   } else if(value == 'hoje') {
-  //     this.tasksByChild = this.tarefasService.getTaskByChild(this.child.id);
-  //   }
-
-  // }
+  async filterTasksByStatus(event: any) {
+    const value = event.target.value;
+  
+    if (value === 'feitas') {
+      // Verifica se tasksCompleted existe e é uma lista
+      if (this.tasksByChild.tasksCompleted && Array.isArray(this.tasksByChild.tasksCompleted)) {
+        this.tasksByChild.tasksToday = this.tasksByChild.tasksCompleted;
+        console.log(this.tasksByChild.tasksToday, 'Tarefas feitas');
+      } else {
+        console.warn('tasksCompleted não está disponível ou não é uma lista.');
+      }
+    } else if (value === 'pendentes') {
+      // Verifica se tasksPending existe e é uma lista
+      if (this.tasksByChild.tasksPending && Array.isArray(this.tasksByChild.tasksPending)) {
+        this.tasksByChild.tasksToday = this.tasksByChild.tasksPending;
+        console.log(this.tasksByChild.tasksToday, 'Tarefas pendentes');
+      } else {
+        console.warn('tasksPending não está disponível ou não é uma lista.');
+      }
+    } else if (value === 'hoje') {
+      this.getTasks(this.childId);
+    } else {
+      console.warn('Opção de filtro inválida:', value);
+    }
+  }
+  
 
   onIonInfinite(ev: any) {
     setTimeout(() => {
