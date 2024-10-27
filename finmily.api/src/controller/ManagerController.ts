@@ -85,7 +85,7 @@ export class ManagerController extends BaseNotification {
             where: { 
                 // openByUserUid: userAuth.uid,
                 openByUserUid: userAuthUid,
-                status: 'pending'
+                // status: 'pending'
             },
             select: ['uid', 'title', 'description', 'cost', 'daysOfWeek', 'status', 'everyDay'],
             relations: ['user']
