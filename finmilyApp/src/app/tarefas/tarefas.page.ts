@@ -8,80 +8,78 @@ import { TaskService } from 'src/services/task.service';
 import { SpinnerService } from 'src/services/spinner.service';
 import { HttpService } from 'src/services/http.service';
 
+interface Task {
+  title: string;
+  description: string;
+  cost: number;
+  user: {
+    nickname: string;
+  };
+  daysOfWeek: string | null;
+  everyDay: boolean;  
+  // Adicione outros campos relevantes aqui
+}
+
 @Component({
   selector: 'app-tarefas',
   templateUrl: './tarefas.page.html',
   styleUrls: ['./tarefas.page.scss'],
 })
 export class TarefasPage implements OnInit {
-
-  paymentService = new PaymentService(); 
-
   data: any;
-  allTasks: any = []; 
-  totalPaymentByMonth: number = 0;
+  allTasks: Task[] = [];
+  totalPaymentByMonth = 0;
+
+  paymentService = new PaymentService();
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private location: Location,
-    private TaskService: TaskService,
-  ) { }
+    private taskService: TaskService,
+    // private paymentService: PaymentService
+  ) {}
 
   ngOnInit() {
-    this.GetTasksOpenByManager();
+    this.getTasksOpenByManager();
   }
 
-  async GetTasksOpenByManager(){
-    this.data = await this.TaskService.GetTasksOpenByManager();
-    this.allTasks = this.data.tasks;
-    this.allTasks.forEach((task: any) => {
-      if(task.daysOfWeek != null) {
+  async getTasksOpenByManager() {
+    try {
+      const response = await this.taskService.GetTasksOpenByManager();
+      this.allTasks = response.tasks.map((task: Task) => ({
+        ...task,
+        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+      }));
+      this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
+    } catch (error) {
+      console.error('Erro ao carregar tarefas:', error);
+    }
+  }
 
-        switch (task.daysOfWeek) {
-          case '0':
-            task.daysOfWeek = 'Dom';
-            break;
-          case '1':
-            task.daysOfWeek = 'Seg';
-            break;
-          case '2':
-            task.daysOfWeek = 'Ter';
-            break;
-          case '3':
-            task.daysOfWeek = 'Qua';
-            break;
-          case '4':
-            task.daysOfWeek = 'Qui';
-            break;
-          case '5':
-            task.daysOfWeek = 'Sex';
-            break;
-          case '6':
-            task.daysOfWeek = 'Sáb';
-            break;
-          default:
-            break;
-        }
-
-        task.daysOfWeek = task.daysOfWeek.split(',');
-      }
+  private formatDaysOfWeek(daysOfWeek: any) {
+    let arrayDaysFormatted: any = [];
+    daysOfWeek = daysOfWeek.split(',');
+    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    daysOfWeek.map((day: any) => {
+      day = day.trim();
+      // day = dayNames[day];
+      arrayDaysFormatted.push(dayNames[day]);
     });
-    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
+
+    return arrayDaysFormatted;
   }
-
-
 
   navegarParaMenu() {
-    this.router.navigate(['/tabs/tabPerfil']); 
+    this.router.navigate(['/tabs/tabPerfil']);
   }
 
   goBack() {
     this.location.back();
   }
 
-  onIonInfinite(ev: any) {
+  onIonInfinite(event: InfiniteScrollCustomEvent) {
     setTimeout(() => {
-      (ev as InfiniteScrollCustomEvent).target.complete();
+      event.target.complete();
     }, 500);
   }
 }

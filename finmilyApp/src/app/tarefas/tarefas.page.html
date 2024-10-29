@@ -27,18 +27,10 @@
           </div>
     
           <div class="body-container">
-
             <div style="font-size: 13px;">
               <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
               <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon>Arraste para a esquerda para saber o responsável</div>
-            </div> 
-
-            <div class="task-list-container">
-
-              
-
-            </div>
-            
+            </div>       
           </div>
     
         </div>
@@ -76,7 +68,7 @@
                   <ion-badge color="light">{{ day }}</ion-badge>
                 }
 
-                @if(task.daysOfWeek == null && task.everyDay == true) {
+                @if(task.daysOfWeek?.length == 0 && task.everyDay == true) {
                   <ion-badge color="light">Todo dia</ion-badge>
                 }
               </div>
