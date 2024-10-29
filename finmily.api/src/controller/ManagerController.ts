@@ -110,24 +110,43 @@ export class ManagerController extends BaseNotification {
 
         const collaborator = await this.userRepository.findOne({ where: { uid: userUid }, select: ['uid', 'nickname', 'balance'] });
 
-        // Defina o intervalo de tempo para o dia atual
         const currentDate = new Date();
         const startOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
         const endOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59);
 
+        const dayOfWeek = currentDate.getDay();
+        console.log(dayOfWeek, 'Dia da semana');
+
         const allTasksByCollaborator = await this.taskRespository.find({
             where: { 
                 userUid: userUid,
-                createdAt: Between(startOfDay, endOfDay)
+                // createdAt: Between(startOfDay, endOfDay),
+                // daysOfWeek: dayOfWeek.toString()
             },
-            select: ['uid', 'title', 'description', 'cost', 'status']
+            select: ['uid', 'title', 'description', 'cost', 'status', 'daysOfWeek']
         });
 
+        console.log(allTasksByCollaborator, 'Tarefas do colaborador');
+
+        let allTasks = allTasksByCollaborator;
         let tasksPending: Array<any> = [];
         let tasksCompleted: Array<any> = [];
-        let taskToday = allTasksByCollaborator;
+        let taskToday: Array<any> = [];
 
-        allTasksByCollaborator.forEach((task) => {
+        console.log(allTasks, 'Todas as tarefas');
+
+        allTasks.forEach(task => {
+            console.log(task, 'Task');
+
+            let daysOfWeek: any = task.daysOfWeek;
+            daysOfWeek = task.daysOfWeek.split(',');
+
+            console.log(daysOfWeek, 'Dias da semana');
+
+            // if(task.daysOfWeek.includes(dayOfWeek.toString())) {
+            //     taskToday.push(task);
+            // }
+
             if(task.status === 'pending') {
                 tasksPending.push(task);
             } else if(task.status === 'completed') {
@@ -135,11 +154,25 @@ export class ManagerController extends BaseNotification {
             }
         })
 
+        // allTasksByCollaborator.forEach((task) => {
+
+        //     if(task.daysOfWeek.includes(dayOfWeek.toString())) {
+        //         taskToday.push(task);
+        //     }
+
+        //     if(task.status === 'pending') {
+        //         tasksPending.push(task);
+        //     } else if(task.status === 'completed') {
+        //         tasksCompleted.push(task);
+        //     }
+        // })
+
         let dataForReturn = {
             'collaborator': collaborator,
             'tasksPending': tasksPending,
             'tasksCompleted': tasksCompleted,
-            'tasksToday': taskToday
+            'tasksToday': taskToday,
+            'allTasks': allTasks    
         }
 
         return {
