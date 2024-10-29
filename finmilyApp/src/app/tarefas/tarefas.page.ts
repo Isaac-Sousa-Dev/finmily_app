@@ -36,6 +36,33 @@ export class TarefasPage implements OnInit {
     this.allTasks = this.data.tasks;
     this.allTasks.forEach((task: any) => {
       if(task.daysOfWeek != null) {
+
+        switch (task.daysOfWeek) {
+          case '0':
+            task.daysOfWeek = 'Dom';
+            break;
+          case '1':
+            task.daysOfWeek = 'Seg';
+            break;
+          case '2':
+            task.daysOfWeek = 'Ter';
+            break;
+          case '3':
+            task.daysOfWeek = 'Qua';
+            break;
+          case '4':
+            task.daysOfWeek = 'Qui';
+            break;
+          case '5':
+            task.daysOfWeek = 'Sex';
+            break;
+          case '6':
+            task.daysOfWeek = 'Sáb';
+            break;
+          default:
+            break;
+        }
+
         task.daysOfWeek = task.daysOfWeek.split(',');
       }
     });
