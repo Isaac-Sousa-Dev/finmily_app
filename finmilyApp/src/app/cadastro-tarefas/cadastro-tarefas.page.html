@@ -18,20 +18,21 @@
     <div class="form">
       <div>
         <ion-label>Filho</ion-label>
-        <ion-select label="Selecione o filho">
-          <ion-select-option value="luiza">Luiza</ion-select-option>
-          <ion-select-option value="andre">André</ion-select-option>
+        <ion-select [(ngModel)]="formData.user" label="Selecione o filho">
+          @for (child of childrens; track $index) {
+            <ion-select-option [value]="child.uid">{{child.nickname}}</ion-select-option>
+          }
         </ion-select>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Titulo</ion-label>
-        <input type="text" placeholder="Titulo"/>
+        <input type="text" [(ngModel)]="formData.title" placeholder="Titulo"/>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Descrição</ion-label>
-        <textarea type="text" rows="3" placeholder="Descrição"></textarea>
+        <textarea type="text" rows="3" [(ngModel)]="formData.description" placeholder="Descrição"></textarea>
       </div>
 
       <ion-radio-group [(ngModel)]="tipoTarefa">
@@ -45,10 +46,10 @@
       </ion-radio-group>
 
       <div style="margin-top: 5px;"> 
-        @if(tipoTarefa == 'felicidade') {
-          <input *ngIf="tipoTarefa == 'felicidade'" type="text" placeholder="Felicidade (%)"/>
+        @if(tipoTarefa == 'pontos') {
+          <input type="text" placeholder="Felicidade (%)"/>
         } @else {
-          <input type="text" placeholder="Valor (R$)"/>
+          <input type="text" [(ngModel)]="formData.cost" placeholder="Valor (R$)"/>
         }
       </div>
 
@@ -65,14 +66,14 @@
 
       @if(diaFrequencia == 'diaSemana') {
         <ion-item>
-          <ion-select placeholder="Selecione os dias" [multiple]="true">
-            <ion-select-option value="domingo">Domingo</ion-select-option>
-            <ion-select-option value="segunda">Segunda</ion-select-option>
-            <ion-select-option value="terca">Terça</ion-select-option>
-            <ion-select-option value="quarta">Quarta</ion-select-option>
-            <ion-select-option value="quinta">Quinta</ion-select-option>
-            <ion-select-option value="sexta">Sexta</ion-select-option>
-            <ion-select-option value="sabado">Sábado</ion-select-option>
+          <ion-select placeholder="Selecione os dias" [multiple]="true" [(ngModel)]="formData.daysOfWeek">
+            <ion-select-option value="0">Domingo</ion-select-option>
+            <ion-select-option value="1">Segunda</ion-select-option>
+            <ion-select-option value="2">Terça</ion-select-option>
+            <ion-select-option value="3">Quarta</ion-select-option>
+            <ion-select-option value="4">Quinta</ion-select-option>
+            <ion-select-option value="5">Sexta</ion-select-option>
+            <ion-select-option value="6">Sábado</ion-select-option>
           </ion-select>
         </ion-item>
       } @else {
@@ -88,10 +89,14 @@
       }
   
 
-      <ion-button [routerLink]="['/tabs/tabHome']" expand="block" color="primary" style="margin-top: 40px;">Salvar</ion-button>
+      <ion-button expand="block" color="primary" style="margin-top: 40px;" (click)="saveTask($event)" id="open-toast" expand="block">Salvar</ion-button>
 
     </div>
 
   </div>
+
+  <ion-toast trigger="open-toast" message="Tarefa cadastrada com sucesso !" position="top"
+  positionAnchor="top" [duration]="5000" color="success" icon="checkmark-circle-outline"></ion-toast>
+
 
 </ion-content>

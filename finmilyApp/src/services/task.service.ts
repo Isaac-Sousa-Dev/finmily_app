@@ -17,8 +17,12 @@ export class TaskService {
   }
 
   async GetTasksByChild(uid: string | null) {
-    console.log(uid, 'UID');
     const result = await this.http.get(`/manager/tasks-by-collaborator/${uid}`);
     return result.data;
+  }
+
+  async SaveTask(taskData: any) {
+    const result = await this.http.post(`/task`, taskData);
+    return result;
   }
 }

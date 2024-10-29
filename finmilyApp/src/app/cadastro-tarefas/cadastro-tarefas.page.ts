@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { every } from 'rxjs';
+import { ChildrenService } from 'src/services/children.service';
+import { TaskService } from 'src/services/task.service';
 
 @Component({
   selector: 'app-cadastro-tarefas',
@@ -9,16 +12,60 @@ import { Router } from '@angular/router';
 })
 export class CadastroTarefasPage implements OnInit {
 
-  diaFrequencia: string = 'diaSemana';
-  tipoTarefa: string = 'pontos';
+  formData = {
+    user: '',
+    title: '',
+    description: '',
+    cost: '',
+    daysOfWeek: '',
+    status: 'pending',
+    deleted: false,
+    active: true,
+    happiness: 0,
+    everyDay: false,
+  }
 
-  constructor(private router: Router, private location: Location) { }
+  diaFrequencia: string = 'diaSemana';
+  tipoTarefa: string = 'dinheiro';
+  childrens: any = [];
+
+  constructor(
+    private router: Router, 
+    private location: Location,
+    private childService: ChildrenService,
+    private taskService: TaskService
+  ) { }
 
   ngOnInit() {
+    this.getChildrensByManager();
   }
 
   navegarParaMenu() {
     this.router.navigate(['/tabs/tabPerfil']);
+  }
+
+  async getChildrensByManager() {
+    this.childrens = await this.childService.getAllChildrensByParent(); 
+    console.log('Filhos', this.childrens);
+  }
+
+  async saveTask(event: any) {
+    const taskData = { ...this.formData };
+
+    if(this.diaFrequencia === 'diaSemana') {
+      taskData.everyDay = false;
+    } else {
+      taskData.everyDay = true;
+    }
+
+    // Convertendo o array daysOfWeek para uma string separada por vírgulas
+    if (Array.isArray(taskData.daysOfWeek)) {
+      taskData.daysOfWeek = taskData.daysOfWeek.join(', ');
+    }
+
+    const result = await this.taskService.SaveTask(taskData);
+
+    this.router.navigate(['/tabs/tabTarefas']);
   }
 
   goBack() {

@@ -82,7 +82,6 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   }
 
   goBack() {
-    // this.router.navigate(['/tabs/tabFilhos']);
     this.location.back();
   }
 
@@ -91,25 +90,15 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
     const value = event.target.value;
   
     if (value === 'feitas') {
-      // Verifica se tasksCompleted existe e é uma lista
       if (this.tasksByChild.tasksCompleted && Array.isArray(this.tasksByChild.tasksCompleted)) {
         this.tasksByChild.tasksToday = this.tasksByChild.tasksCompleted;
-        console.log(this.tasksByChild.tasksToday, 'Tarefas feitas');
-      } else {
-        console.warn('tasksCompleted não está disponível ou não é uma lista.');
       }
     } else if (value === 'pendentes') {
-      // Verifica se tasksPending existe e é uma lista
       if (this.tasksByChild.tasksPending && Array.isArray(this.tasksByChild.tasksPending)) {
         this.tasksByChild.tasksToday = this.tasksByChild.tasksPending;
-        console.log(this.tasksByChild.tasksToday, 'Tarefas pendentes');
-      } else {
-        console.warn('tasksPending não está disponível ou não é uma lista.');
       }
     } else if (value === 'hoje') {
       this.getTasks(this.childId);
-    } else {
-      console.warn('Opção de filtro inválida:', value);
     }
   }
   

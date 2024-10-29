@@ -38,6 +38,8 @@ export class TaskController extends BaseNotification {
             openByUserUid: "2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7"
         })
 
+        console.log(task, 'Minha tarefa');
+
         if(this.valid()) {
             let taskCreated = await this.taskRepository.save(task);
             return {message: "Tarefa cadastrada com sucesso", task: taskCreated};

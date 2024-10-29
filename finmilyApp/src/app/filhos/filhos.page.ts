@@ -30,7 +30,6 @@ export class FilhosPage implements OnInit {
 
   async ngOnInit() {
     this.getChildrensByManager();
-    // this.GetTasksOpenByManager();
   }
 
 
