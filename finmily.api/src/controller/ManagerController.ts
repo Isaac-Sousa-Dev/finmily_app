@@ -133,8 +133,6 @@ export class ManagerController extends BaseNotification {
         let tasksCompleted: Array<any> = [];
         let taskToday: Array<any> = [];
 
-        console.log(allTasks, 'Todas as tarefas');
-
         allTasks.forEach(task => {
             console.log(task, 'Task');
 
@@ -143,29 +141,16 @@ export class ManagerController extends BaseNotification {
 
             console.log(daysOfWeek, 'Dias da semana');
 
-            // if(task.daysOfWeek.includes(dayOfWeek.toString())) {
-            //     taskToday.push(task);
-            // }
+            if(daysOfWeek.includes(dayOfWeek.toString())) {
+                taskToday.push(task);
+            }
 
             if(task.status === 'pending') {
                 tasksPending.push(task);
             } else if(task.status === 'completed') {
                 tasksCompleted.push(task);
             }
-        })
-
-        // allTasksByCollaborator.forEach((task) => {
-
-        //     if(task.daysOfWeek.includes(dayOfWeek.toString())) {
-        //         taskToday.push(task);
-        //     }
-
-        //     if(task.status === 'pending') {
-        //         tasksPending.push(task);
-        //     } else if(task.status === 'completed') {
-        //         tasksCompleted.push(task);
-        //     }
-        // })
+        });
 
         let dataForReturn = {
             'collaborator': collaborator,
