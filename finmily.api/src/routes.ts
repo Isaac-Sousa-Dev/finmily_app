@@ -30,6 +30,6 @@ export const Routes = [
     { method: "get", route: "/task/:id", controller: TaskController, action: "one" }, 
     { method: "post", route: "/task", controller: TaskController, action: "save" }, 
     { method: "post", route: "/task/update", controller: TaskController, action: "update" }, 
-    { method: "delete", route: "/task/:id", controller: TaskController, action: "remove" },
+    { method: "delete", route: "/task/:uid", controller: TaskController, action: "remove" },
     { method: "get", route: "/my-tasks", controller: TaskController, action: "myTasks" },
 ]

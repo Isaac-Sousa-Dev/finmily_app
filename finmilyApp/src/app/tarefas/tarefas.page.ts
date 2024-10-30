@@ -69,7 +69,7 @@ export class TarefasPage implements OnInit {
   }
 
 
-  async confirmDelete(task: Task) {
+  async confirmDelete(task: Task, slidingItem: any) {
     const alert = await this.alertController.create({
       header: 'Excluir Tarefa',
       message: `Tem certeza que deseja excluir a tarefa "${task.title}"?`,
@@ -81,16 +81,20 @@ export class TarefasPage implements OnInit {
         {
           text: 'Excluir',
           role: 'confirm',
-          handler: () => this.deleteTask(task),
+          handler: () => {
+            this.deleteTask(task);
+            slidingItem.close();
+          } 
         },
       ],
     });
-
     await alert.present();
   }
 
   deleteTask(task: Task) {
-    console.log('Tarefa a ser deletada:', task);
+    this.taskService.deleteTask(task.uid).then(() => {
+      this.getTasksOpenByManager();
+    })
   }
 
   navegarParaMenu() {

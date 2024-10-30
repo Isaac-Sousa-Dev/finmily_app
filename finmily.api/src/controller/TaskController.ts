@@ -83,4 +83,25 @@ export class TaskController extends BaseNotification {
         const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } }) // Buscar tareafas de um colaborador
         return tasks;
     }
+
+    async remove(request: Request) {
+        // let userAuth = request.userAuth;
+        // console.log(userAuth, 'Meu userAuth');
+
+        let userAuth = {
+            role: "manager",
+        }
+        let { uid } = request.params;
+        if(userAuth.role !== "manager") return {error: "Você não tem permissão para remover tarefas"};
+        this.isRequired(uid, "Informe o uid da tarefa");
+
+        let taskRemoved = await this.taskRepository.findOne({
+            where: {
+                uid
+            }
+        });
+
+        await this.taskRepository.remove(taskRemoved);
+        return {message: "Tarefa removida com sucesso", taskRemoved};
+    }
 }
