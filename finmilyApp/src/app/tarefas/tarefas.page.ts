@@ -1,14 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TarefasService } from '../services/tarefas.service';
 import { PaymentService } from '../services/payment.service';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TaskService } from 'src/services/task.service';
-import { SpinnerService } from 'src/services/spinner.service';
-import { HttpService } from 'src/services/http.service';
 
 interface Task {
+  uid: string;
   title: string;
   description: string;
   cost: number;
@@ -17,7 +15,6 @@ interface Task {
   };
   daysOfWeek: string | null;
   everyDay: boolean;  
-  // Adicione outros campos relevantes aqui
 }
 
 @Component({
@@ -30,13 +27,16 @@ export class TarefasPage implements OnInit {
   allTasks: Task[] = [];
   totalPaymentByMonth = 0;
 
+  taskForDeleted = '';
+  selectedTask: Task | null = null;
+
   paymentService = new PaymentService();
 
   constructor(
     private router: Router,
     private location: Location,
     private taskService: TaskService,
-    // private paymentService: PaymentService
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -62,11 +62,35 @@ export class TarefasPage implements OnInit {
     const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     daysOfWeek.map((day: any) => {
       day = day.trim();
-      // day = dayNames[day];
       arrayDaysFormatted.push(dayNames[day]);
     });
 
     return arrayDaysFormatted;
+  }
+
+
+  async confirmDelete(task: Task) {
+    const alert = await this.alertController.create({
+      header: 'Excluir Tarefa',
+      message: `Tem certeza que deseja excluir a tarefa "${task.title}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Excluir',
+          role: 'confirm',
+          handler: () => this.deleteTask(task),
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  deleteTask(task: Task) {
+    console.log('Tarefa a ser deletada:', task);
   }
 
   navegarParaMenu() {

@@ -78,7 +78,15 @@
     
                         ion-item-sliding {
         
-                            ion-item-options {
+                            ion-item-options {  
+
+                                ion-button {
+                                    color: white;
+                                    font-weight: bold;
+                                    border-radius: 10px;
+                                    margin-right: 20px;
+                                    width: 70px;
+                                }   
         
                                 ion-item-option {
                                     color: white;

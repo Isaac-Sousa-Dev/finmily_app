@@ -25,4 +25,9 @@ export class TaskService {
     const result = await this.http.post(`/task`, taskData);
     return result;
   }
+
+  async deleteTask(uid: string) {
+    const result = await this.http.delete(`/task/${uid}`);
+    return result;
+  }
 }

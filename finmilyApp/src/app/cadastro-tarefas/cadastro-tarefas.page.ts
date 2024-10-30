@@ -40,6 +40,21 @@ export class CadastroTarefasPage implements OnInit {
     this.getChildrensByManager();
   }
 
+  ngOnDestroy() {
+    this.formData = {
+      user: '',
+      title: '',
+      description: '',
+      cost: '',
+      daysOfWeek: '',
+      status: 'pending',
+      deleted: false,
+      active: true,
+      happiness: 0,
+      everyDay: false,
+    }
+  }
+
   navegarParaMenu() {
     this.router.navigate(['/tabs/tabPerfil']);
   }
@@ -63,7 +78,7 @@ export class CadastroTarefasPage implements OnInit {
       taskData.daysOfWeek = taskData.daysOfWeek.join(', ');
     }
 
-    const result = await this.taskService.SaveTask(taskData);
+    await this.taskService.SaveTask(taskData);
 
     this.router.navigate(['/tabs/tabTarefas']);
   }
