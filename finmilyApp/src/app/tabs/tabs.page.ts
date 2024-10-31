@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 
 @Component({
   selector: 'app-tabs',
@@ -16,10 +17,16 @@ export class TabsPage {
     private modalController: ModalController
   ) {}
 
-  openModalCreateChild() {
-    // this.modalController.create({
-    //   component: 
-    // })
+  openModalCreateChild(ionFab: any) {
+    ionFab.close();
+    this.modalController.create({
+      component: CreateChildModalComponent,
+      cssClass: 'create-child-modal',
+      initialBreakpoint: 0.75,
+      breakpoints: [0.75, 0.75, 0.75, 0.75]
+    }).then(modal => {
+      modal.present();
+    })
     console.log('openModalCreateChild');
   }
 
