@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
-import { HerdComponent } from '../components/herd/herd.component';
 
 @NgModule({
   imports: [

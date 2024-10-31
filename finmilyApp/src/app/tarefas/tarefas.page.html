@@ -45,15 +45,18 @@
     <ion-list>
       @for (task of allTasks; track $index) {
 
+        
+
         <ion-item-sliding #slidingItem>
           <ion-item-options side="start">
             <ion-item-option color="warning">
               <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
             </ion-item-option>
 
-            <ion-item-option id="open-modal-{{ $index }}" (click)="confirmDelete(task, slidingItem)" color="danger" expand="block">
+            <ion-item-option (click)="confirmDelete(task, slidingItem)" color="danger" expand="block">
               <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
             </ion-item-option>
+
           </ion-item-options>
 
           <ion-item color="primary">
@@ -94,4 +97,5 @@
       <!-- <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais tarefas...">
       </ion-infinite-scroll-content> -->
     </ion-infinite-scroll>
+
   </ion-content>

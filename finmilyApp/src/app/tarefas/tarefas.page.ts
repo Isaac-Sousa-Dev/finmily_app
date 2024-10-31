@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentService } from '../services/payment.service';
-import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TaskService } from 'src/services/task.service';
 
@@ -36,11 +36,23 @@ export class TarefasPage implements OnInit {
     private router: Router,
     private location: Location,
     private taskService: TaskService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
     this.getTasksOpenByManager();
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Tarefa removida com sucesso!',
+      duration: 5000,
+      color: 'success',
+      position: 'top',
+      icon: 'checkmark-circle-outline',
+    });
+    await toast.present();
   }
 
   async getTasksOpenByManager() {
@@ -84,6 +96,7 @@ export class TarefasPage implements OnInit {
           handler: () => {
             this.deleteTask(task);
             slidingItem.close();
+            this.presentToast();
           } 
         },
       ],

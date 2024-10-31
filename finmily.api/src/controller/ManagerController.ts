@@ -134,22 +134,22 @@ export class ManagerController extends BaseNotification {
         let taskToday: Array<any> = [];
 
         allTasks.forEach(task => {
-            console.log(task, 'Task');
-
             let daysOfWeek: any = task.daysOfWeek;
-            daysOfWeek = task.daysOfWeek.split(',');
-
-            console.log(daysOfWeek, 'Dias da semana');
-
-            if(daysOfWeek.includes(dayOfWeek.toString())) {
-                taskToday.push(task);
+            if(daysOfWeek != null) {
+                daysOfWeek = task.daysOfWeek.split(',');
+                console.log(daysOfWeek, 'Dias da semana');
+    
+                if(daysOfWeek.includes(dayOfWeek.toString())) {
+                    taskToday.push(task);
+                }
+    
+                if(task.status === 'pending') {
+                    tasksPending.push(task);
+                } else if(task.status === 'completed') {
+                    tasksCompleted.push(task);
+                }
             }
 
-            if(task.status === 'pending') {
-                tasksPending.push(task);
-            } else if(task.status === 'completed') {
-                tasksCompleted.push(task);
-            }
         });
 
         let dataForReturn = {
