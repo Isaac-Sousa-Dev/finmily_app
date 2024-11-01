@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { every } from 'rxjs';
 import { ChildrenService } from 'src/services/children.service';
 import { TaskService } from 'src/services/task.service';
 

@@ -11,12 +11,13 @@ import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [AppComponent, CreateChildModalComponent], 
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR', useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

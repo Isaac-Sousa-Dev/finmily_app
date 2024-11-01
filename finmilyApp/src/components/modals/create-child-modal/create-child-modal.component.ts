@@ -7,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateChildModalComponent  implements OnInit {
 
+  formData = {
+    nickname: '',
+    age: '',
+    phone: '',
+    password: '',
+  }
+
   constructor() { }
 
   ngOnInit() {}
 
+  async saveChild() {
+    console.log(this.formData);
+  }
 }

@@ -9,25 +9,25 @@
 
       <div style="margin-top: 25px;"> 
         <ion-label>Nickname</ion-label>
-        <input type="text" placeholder="Digite o nickname"/>
+        <input type="text" [(ngModel)]="formData.nickname" placeholder="Digite o nickname"/>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Idade</ion-label>
-        <input type="text" placeholder="Digite a idade"/>
+        <input type="text" [(ngModel)]="formData.age" placeholder="Digite a idade"/>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Telefone</ion-label>
-        <input type="text" placeholder="Digite o telefone"/>
+        <input type="text" [(ngModel)]="formData.phone" placeholder="Digite o telefone"/>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Senha</ion-label>
-        <input type="password" placeholder="Digite a senha"/>
+        <input type="password" [(ngModel)]="formData.password" placeholder="Digite a senha"/>
       </div>
 
-      <ion-button expand="block" color="primary" style="margin-top: 40px;" id="open-toast" expand="block">Salvar</ion-button>
+      <ion-button color="primary" style="margin-top: 40px;" (click)="saveChild()" expand="block">Salvar</ion-button>
 
     </div>
 
