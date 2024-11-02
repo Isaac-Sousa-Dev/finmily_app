@@ -32,13 +32,13 @@
             <div class="cards-filhos">
 
               @for (child of childrens; track $index) {
-                <ion-card style="border: 1px solid #ccc;" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]">
+                <ion-card style="border: 1px solid #ccc;">
                   <header style="display: flex; justify-content: space-between; align-items: center; color: var(--ion-color-primary);">
                     <div>{{ child.nickname }}</div> 
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                    <ion-icon name="arrow-forward-outline" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]"></ion-icon>
                   </header>
                   <div style="margin-top: 20px; display: flex; align-items: center; gap: 7px;">
-                    <div style="justify-content: center; display: flex;">
+                    <div style="justify-content: center; display: flex;" (click)="editChild(child.uid)">
                       <ion-icon name="create-outline" style="font-size: 28px; color: var(--ion-color-warning);"></ion-icon>
                     </div>
                     <div style="justify-content: center; display: flex;">

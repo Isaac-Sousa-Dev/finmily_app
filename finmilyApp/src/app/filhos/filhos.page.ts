@@ -38,10 +38,13 @@ export class FilhosPage implements OnInit {
     this.GetTasksOpenByManager();
   }
 
-
   async GetTasksOpenByManager(){
     this.allTasks = await this.TaskService.GetTasksOpenByManager();
     this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks.tasks);
+  }
+
+  async editChild(child: any) {
+    console.log(child);
   }
 
   navegarParaMenu() {
