@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChildrenService } from 'src/services/children.service';
 
 @Component({
   selector: 'app-create-child-modal',
@@ -12,13 +13,17 @@ export class CreateChildModalComponent  implements OnInit {
     age: '',
     phone: '',
     password: '',
+    role: 'collaborator'
   }
 
-  constructor() { }
+  constructor(
+    private childrenService: ChildrenService
+  ) { }
 
   ngOnInit() {}
 
   async saveChild() {
+    await this.childrenService.saveChild(this.formData);
     console.log(this.formData);
   }
 }

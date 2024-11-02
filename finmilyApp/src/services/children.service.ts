@@ -16,4 +16,9 @@ export class ChildrenService {
     const result = await this.http.get(`/manager/childrens`);
     return result.data;
   }
+
+  async saveChild(data: any) {
+    const result = await this.http.post(`/collaborator/register`, data);
+    return result.data;
+  }
 }

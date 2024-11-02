@@ -10,6 +10,7 @@ export class CollaboratorController extends BaseNotification {
 
     async save(request: Request) {
 
+        console.log(request);
         let userAuth = request.userAuth;
         if(userAuth.role !== "manager") return {error: "Você não tem permissão para cadastrar colaboradores"};
         

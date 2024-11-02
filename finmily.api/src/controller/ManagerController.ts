@@ -45,6 +45,7 @@ export class ManagerController extends BaseNotification {
 
         // let userAuth = request.userAuth;
 
+        //TODO: Mudar para o usuário autenticado
         const userAuthUid = '2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7';
 
         let currentDate = new Date();   
@@ -78,6 +79,7 @@ export class ManagerController extends BaseNotification {
     async tasks(request: Request) {
         // let userAuth = request.userAuth;
 
+        //TODO: Mudar para o usuário autenticado    
         const userAuthUid = '2c7e8ffc-b2ee-4d3e-89c2-779fef33a5d7'; 
 
 
