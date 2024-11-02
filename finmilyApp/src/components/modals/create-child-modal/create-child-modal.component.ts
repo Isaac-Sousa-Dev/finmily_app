@@ -17,13 +17,12 @@ export class CreateChildModalComponent  implements OnInit {
   }
 
   constructor(
-    private childrenService: ChildrenService
+    private childrenService: ChildrenService,
   ) { }
 
   ngOnInit() {}
 
   async saveChild() {
     await this.childrenService.saveChild(this.formData);
-    console.log(this.formData);
   }
 }

@@ -32,21 +32,17 @@
             <div class="cards-filhos">
 
               @for (child of childrens; track $index) {
-                <ion-card color="primary" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]">
-                  <header>
+                <ion-card style="border: 1px solid #ccc;" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]">
+                  <header style="display: flex; justify-content: space-between; align-items: center; color: var(--ion-color-primary);">
                     <div>{{ child.nickname }}</div> 
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
                   </header>
-                  <div>
-                    <div style="font-size: 13px; margin-top: 2px; display: flex; align-items: center;">
-                      <div style="font-size: 14px; color: white; padding: 2px; text-align: center; border-radius: 3px;">
-                        Saldo
-                      </div>
-                      <div style="margin-left: 5px; color: #76f56b; padding: 2px; border-radius: 3px; font-weight: bold;"> 
-                        {{ child.balance | currency:'BRL':'symbol' }}  
-                      </div>
+                  <div style="margin-top: 20px; display: flex; align-items: center; gap: 7px;">
+                    <div style="justify-content: center; display: flex;">
+                      <ion-icon name="create-outline" style="font-size: 28px; color: var(--ion-color-warning);"></ion-icon>
                     </div>
-                    <div class="arrow-detalhes" style="border-radius: 20px; width: 50px; float: right;">
-                      <ion-icon name="arrow-forward-outline"></ion-icon>
+                    <div style="justify-content: center; display: flex;">
+                      <ion-icon name="trash-outline" style="font-size: 26px; color: var(--ion-color-danger);"></ion-icon>
                     </div>
                   </div>
                 </ion-card>
