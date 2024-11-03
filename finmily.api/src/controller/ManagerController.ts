@@ -186,23 +186,5 @@ export class ManagerController extends BaseNotification {
             'data': allChildrensByManager
         }
     }
-
     
-    // async getChild(request: Request) {
-    //     let { userUid } = request.params;
-
-    //     const child = await this.userRepository.findOne(
-    //         { 
-    //             where: { 
-    //                 uid: userUid 
-    //             }, 
-    //             select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance'] 
-    //         }
-    //     );
-
-    //     return {
-    //         'message': 'Dados carregados com sucesso',
-    //         'data': child
-    //     }
-    // }
 }

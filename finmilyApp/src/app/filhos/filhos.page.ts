@@ -98,7 +98,7 @@ export class FilhosPage implements OnInit {
   }
 
   async deleteChild(child: any) {
-    console.log(child, 'Meu Filho para deletar');
+    const response = await this.childService.deleteChild(child.uid);
   }
 
   navegarParaMenu() {

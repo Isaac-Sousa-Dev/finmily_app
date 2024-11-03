@@ -21,4 +21,9 @@ export class ChildrenService {
     const result = await this.http.post(`/collaborator/register`, data);
     return result.data;
   }
+
+  async deleteChild(uid: string) {
+    const result = await this.http.delete(`/collaborator/${uid}`);
+    return result; 
+  }
 }
