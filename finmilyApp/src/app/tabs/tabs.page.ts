@@ -22,8 +22,8 @@ export class TabsPage {
     this.modalController.create({
       component: CreateChildModalComponent,
       cssClass: 'create-child-modal',
-      initialBreakpoint: 0.75,
-      breakpoints: [0.75, 0.75, 0.75, 0.75]
+      initialBreakpoint: 0.63,
+      breakpoints: [0.63, 0.63, 0.63, 0.63]
     }).then(modal => {
       modal.present();
     })

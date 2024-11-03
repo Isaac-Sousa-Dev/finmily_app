@@ -12,7 +12,7 @@ export class CreateChildModalComponent  implements OnInit {
     nickname: '',
     age: '',
     phone: '',
-    password: '',
+    password: 'finmily123',
     role: 'collaborator'
   }
 
