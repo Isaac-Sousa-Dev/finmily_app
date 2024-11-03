@@ -38,7 +38,7 @@
                     <ion-icon name="arrow-forward-outline" [routerLink]="['/tabs/tabTarefasFilho/'+child.uid]"></ion-icon>
                   </header>
                   <div style="margin-top: 20px; display: flex; align-items: center; gap: 7px;">
-                    <div style="justify-content: center; display: flex;" (click)="editChild(child.uid)">
+                    <div style="justify-content: center; display: flex;" (click)="openModalEditChild(child)">
                       <ion-icon name="create-outline" style="font-size: 28px; color: var(--ion-color-warning);"></ion-icon>
                     </div>
                     <div style="justify-content: center; display: flex;">
