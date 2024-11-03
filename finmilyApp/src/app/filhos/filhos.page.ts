@@ -98,7 +98,7 @@ export class FilhosPage implements OnInit {
   }
 
   async deleteChild(child: any) {
-    console.log(child, 'Filho a ser deletado');
+    console.log(child, 'Meu Filho para deletar');
   }
 
   navegarParaMenu() {
