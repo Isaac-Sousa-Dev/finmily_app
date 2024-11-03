@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChildrenService } from 'src/services/children.service';
 
 @Component({
@@ -8,11 +8,13 @@ import { ChildrenService } from 'src/services/children.service';
 })
 export class EditChildModalComponent  implements OnInit {
 
+  @Input() child: any;
+
   formData = {
-    nickname: 'Teste',
-    age: '12',
-    phone: '55555555',
-    password: 'teste',
+    nickname: '',
+    age: '',
+    phone: '',
+    password: '',
     role: 'collaborator'
   }
 
@@ -20,7 +22,16 @@ export class EditChildModalComponent  implements OnInit {
     private childrenService: ChildrenService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.child, 'Meu filho');
+    this.formData = {
+      nickname: this.child.nickname,
+      age: this.child.age,
+      phone: this.child.phoneNumber,
+      password: '',
+      role: this.child.role
+    }
+  }
 
   async saveChild() {
     await this.childrenService.saveChild(this.formData);

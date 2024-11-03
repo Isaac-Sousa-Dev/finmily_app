@@ -52,7 +52,10 @@ export class FilhosPage implements OnInit {
       component: EditChildModalComponent,
       cssClass: 'create-child-modal',
       initialBreakpoint: 0.75,
-      breakpoints: [0.75, 0.75, 0.75, 0.75]
+      breakpoints: [0.75, 0.75, 0.75, 0.75],
+      componentProps: {
+        child: child  // Passa o objeto 'child' para o modal
+      }
     }).then(modal => {
       modal.present();
     })

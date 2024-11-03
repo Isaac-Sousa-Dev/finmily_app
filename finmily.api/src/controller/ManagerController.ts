@@ -177,7 +177,7 @@ export class ManagerController extends BaseNotification {
         const allChildrensByManager = await this.userRepository.find(
             { 
                 where: { managerUid: userAuthUid },
-                select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance'],
+                select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance', 'age'],
             }
         );
 
@@ -186,4 +186,23 @@ export class ManagerController extends BaseNotification {
             'data': allChildrensByManager
         }
     }
+
+    
+    // async getChild(request: Request) {
+    //     let { userUid } = request.params;
+
+    //     const child = await this.userRepository.findOne(
+    //         { 
+    //             where: { 
+    //                 uid: userUid 
+    //             }, 
+    //             select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance'] 
+    //         }
+    //     );
+
+    //     return {
+    //         'message': 'Dados carregados com sucesso',
+    //         'data': child
+    //     }
+    // }
 }
