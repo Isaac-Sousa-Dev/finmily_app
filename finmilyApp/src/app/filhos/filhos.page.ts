@@ -5,7 +5,7 @@ import { TarefasService } from '../services/tarefas.service';
 import { Location } from '@angular/common';
 import { ChildrenService } from 'src/services/children.service';
 import { TaskService } from 'src/services/task.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 import { EditChildModalComponent } from 'src/components/modals/edit-child-modal/edit-child-modal.component';
 
@@ -28,7 +28,9 @@ export class FilhosPage implements OnInit {
     private location: Location,
     private childService: ChildrenService,
     private TaskService: TaskService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private toastController: ToastController
   ) { }
 
 
@@ -36,6 +38,16 @@ export class FilhosPage implements OnInit {
     this.getChildrensByManager();
   }
 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Filho removido com sucesso!',
+      duration: 5000,
+      color: 'success',
+      position: 'top',
+      icon: 'checkmark-circle-outline',
+    });
+    await toast.present();
+  }
 
   async getChildrensByManager() {
     this.childrens = await this.childService.getAllChildrensByParent(); 
@@ -54,12 +66,39 @@ export class FilhosPage implements OnInit {
       initialBreakpoint: 0.63,
       breakpoints: [0.63, 0.63, 0.63, 0.63],
       componentProps: {
-        child: child  // Passa o objeto 'child' para o modal
+        child: child
       }
     }).then(modal => {
       modal.present();
     })
     console.log('openModalCreateChild');
+  }
+
+
+  async confirmDelete(child: any) {
+    const alert = await this.alertController.create({
+      header: 'Excluir Filho',
+      message: `Tem certeza que deseja excluir o filho "${child.nickname}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Excluir',
+          role: 'confirm',
+          handler: () => {
+            this.deleteChild(child);
+            this.presentToast();
+          } 
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async deleteChild(child: any) {
+    console.log(child, 'Filho a ser deletado');
   }
 
   navegarParaMenu() {
