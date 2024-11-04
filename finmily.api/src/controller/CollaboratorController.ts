@@ -1,4 +1,5 @@
 import { AppDataSource } from "../data-source";
+import { Task } from "../entity/Task";
 import { User } from "../entity/User";
 import { BaseNotification } from "../notification/BaseNotification";
 import { Request } from "express";
@@ -7,6 +8,7 @@ import * as md5 from "md5";
 export class CollaboratorController extends BaseNotification {
 
     private userRepository = AppDataSource.getRepository(User);
+    private taskRepository = AppDataSource.getRepository(Task);
 
     async save(request: Request) {
 
@@ -51,6 +53,12 @@ export class CollaboratorController extends BaseNotification {
     async remove(request: Request) {
         let { uid } = request.params;
         let child = await this.userRepository.find({ where: { uid } });
+        let tasksByCollaborator = await this.taskRepository.find({ where: { userUid: uid } });
+
+        tasksByCollaborator.forEach(async task => {
+            await this.taskRepository.update(task.uid, { deleted: true });
+        })
+
         if(child) {
             await this.userRepository.update(uid, { deleted: true });
             return {success: "Usuário deletado com sucesso"};

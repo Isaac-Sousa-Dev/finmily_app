@@ -26,10 +26,6 @@ export class TabsPage {
       breakpoints: [0.63, 0.63, 0.63, 0.63]
     });
   
-    modal.onDidDismiss().then(() => {
-      console.log('fechando modal');
-    });
-  
     await modal.present();
   }
 

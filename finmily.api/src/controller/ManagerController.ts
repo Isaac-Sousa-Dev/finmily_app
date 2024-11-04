@@ -87,6 +87,7 @@ export class ManagerController extends BaseNotification {
             where: { 
                 // openByUserUid: userAuth.uid,
                 openByUserUid: userAuthUid,
+                deleted: false,
                 // status: 'pending'
             },
             select: ['uid', 'title', 'description', 'cost', 'daysOfWeek', 'status', 'everyDay'],
@@ -122,6 +123,7 @@ export class ManagerController extends BaseNotification {
         const allTasksByCollaborator = await this.taskRespository.find({
             where: { 
                 userUid: userUid,
+                deleted: false,
                 // createdAt: Between(startOfDay, endOfDay),
                 // daysOfWeek: dayOfWeek.toString()
             },
