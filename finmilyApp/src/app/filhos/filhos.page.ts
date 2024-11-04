@@ -35,8 +35,8 @@ export class FilhosPage implements OnInit {
 
 
   async ngOnInit() {
-     // Inscreva-se para escutar a criação de novos filhos
-     this.childService.childrenUpdated$.subscribe(() => {
+    // Inscreva-se para escutar a criação de novos filhos
+    this.childService.childrenUpdated$.subscribe(() => {
       this.getChildrensByManager(); // Atualize os dados
     });
   }
@@ -79,8 +79,8 @@ export class FilhosPage implements OnInit {
 
   async confirmDelete(child: any) {
     const alert = await this.alertController.create({
-      header: 'Excluir Filho',
-      message: `Tem certeza que deseja excluir o filho "${child.nickname}"?`,
+      header: 'Excluir Pessoa',
+      message: `Tem certeza que deseja excluir essa pessoa "${child.nickname}"?`,
       buttons: [
         {
           text: 'Cancelar',
@@ -103,7 +103,7 @@ export class FilhosPage implements OnInit {
     this.childService.notifyChildrenUpdated();
     
     setTimeout(() => {
-      this.presentToast('Filho deletado com sucesso!');
+      this.presentToast('Pessoa deletada com sucesso!');
       this.TaskService.notifyTaskUpdated();
     }, 300);
   }

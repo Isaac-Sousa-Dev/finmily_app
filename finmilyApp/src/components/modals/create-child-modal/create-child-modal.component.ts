@@ -29,7 +29,7 @@ export class CreateChildModalComponent  implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Filho cadastrado com sucesso!',
+      message: 'Pessoa cadastrado com sucesso!',
       duration: 5000,
       color: 'success',
       position: 'top',

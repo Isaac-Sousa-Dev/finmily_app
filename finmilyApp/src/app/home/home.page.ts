@@ -24,10 +24,8 @@ export class HomePage implements OnInit {
   }
 
   async loadData(): Promise<void> {
-    const result = await this.HomeService.GetAll();
-    if(result.success) {
-      this.data = result.data.data;
-    }
+    const result = await this.HomeService.GetData();
+    this.data = result.data;
     console.log(this.data, 'Meu resultado');
   }
 

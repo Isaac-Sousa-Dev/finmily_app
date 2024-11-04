@@ -35,8 +35,8 @@ export class TabsPage {
     const modal = await this.modalController.create({
       component: CreateTaskModalComponent,
       cssClass: 'create-child-modal',
-      initialBreakpoint: 0.99,
-      breakpoints: [0.99, 0.99, 0.99, 0.99]
+      initialBreakpoint: 0.95,
+      breakpoints: [0.95, 0.95, 0.95, 0.95]
     });
   
     await modal.present();

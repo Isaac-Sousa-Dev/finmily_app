@@ -37,7 +37,7 @@ export class EditChildModalComponent  implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Filho atualizado com sucesso!',
+      message: 'Pessoa atualizado com sucesso!',
       duration: 5000,
       color: 'success',
       position: 'top',

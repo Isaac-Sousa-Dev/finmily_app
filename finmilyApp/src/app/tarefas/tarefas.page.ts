@@ -117,14 +117,13 @@ export class TarefasPage implements OnInit {
     })
   }
 
-  async openModalEditTask(task: Task, slidingItem: any) {
-    slidingItem.close();
-    console.log('Task', task);
-    this.modalController.create({
+  async openModalEditTask(task: any, slidingItem: any) {
+    // slidingItem.close();
+    await this.modalController.create({
       component: EditTaskModalComponent,
       cssClass: 'create-child-modal',
-      initialBreakpoint: 0.99,
-      breakpoints: [0.99, 0.99, 0.99, 0.99],
+      initialBreakpoint: 0.95,
+      breakpoints: [0.95, 0.95, 0.95, 0.95],
       componentProps: {
         task: task
       }

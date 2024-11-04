@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ChildrenService } from 'src/services/children.service';
 import { TaskService } from 'src/services/task.service';
@@ -10,16 +10,14 @@ import { TaskService } from 'src/services/task.service';
 })
 export class EditTaskModalComponent  implements OnInit {
 
-  formData = {
+  @Input() task: any;
+
+  formData: any = {
     user: '',
     title: '',
     description: '',
     cost: '',
-    daysOfWeek: '',
-    status: 'pending',
-    deleted: false,
-    active: true,
-    happiness: 0,
+    daysOfWeek: [],
     everyDay: false,
   }
 
@@ -36,6 +34,14 @@ export class EditTaskModalComponent  implements OnInit {
 
   ngOnInit() {
     this.getChildrensByManager();
+    this.formData = {
+      title: this.task.title,
+      description: this.task.description,
+      cost: this.task.cost,
+      daysOfWeek: this.task.daysOfWeek,
+      user: this.task.user
+    }
+    console.log('Tarefa', this.task);
   }
 
   async presentToast() {

@@ -63,7 +63,14 @@ export class ManagerController extends BaseNotification {
 
 
         // const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuth.uid } });
-        const allCollaborators = await this.userRepository.find({ where: { managerUid: userAuthUid } });
+        const allCollaborators = await this.userRepository.find(
+            { 
+                where: { 
+                    managerUid: userAuthUid,
+                    deleted: false
+                } 
+            }
+        );
         let dataForReturn = {
             'tasksQuantity': allTasksByManager.length,
             'collaboratorsQuantity': allCollaborators.length,
@@ -91,7 +98,7 @@ export class ManagerController extends BaseNotification {
             },
             select: ['uid', 'title', 'description', 'cost', 'daysOfWeek', 'status', 'everyDay'],
             relations: ['user']
-        })
+        });
         
         let dataForReturn = {
             'totalPayable': 100,

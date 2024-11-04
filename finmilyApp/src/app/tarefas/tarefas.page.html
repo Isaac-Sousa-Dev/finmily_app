@@ -45,12 +45,10 @@
     <ion-list>
       @for (task of allTasks; track $index) {
 
-        
-
         <ion-item-sliding #slidingItem>
           <ion-item-options side="start">
-            <ion-item-option color="warning">
-              <ion-icon name="create-outline" style="font-size: 20px;" (click)="openModalEditTask(task, slidingItem)"></ion-icon>
+            <ion-item-option color="warning" (click)="openModalEditTask(task, slidingItem)">
+              <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
             </ion-item-option>
 
             <ion-item-option (click)="confirmDelete(task, slidingItem)" color="danger" expand="block">
