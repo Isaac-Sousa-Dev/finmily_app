@@ -14,11 +14,12 @@ import { CreateChildModalComponent } from 'src/components/modals/create-child-mo
 import { FormsModule } from '@angular/forms';
 import { EditChildModalComponent } from 'src/components/modals/edit-child-modal/edit-child-modal.component';
 import { CreateTaskModalComponent } from 'src/components/modals/create-task-modal/create-task-modal.component';
+import { EditTaskModalComponent } from 'src/components/modals/edit-task-modal/edit-task-modal.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
-  declarations: [AppComponent, CreateChildModalComponent, EditChildModalComponent, CreateTaskModalComponent], 
+  declarations: [AppComponent, CreateChildModalComponent, EditChildModalComponent, CreateTaskModalComponent, EditTaskModalComponent], 
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR', useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

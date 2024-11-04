@@ -1,3 +1,90 @@
-<p>
-  edit-task-modal works!
-</p>
+<div>
+
+  <div class="header-modal">
+    Editar Tarefa
+  </div>
+
+  <div class="container">
+
+    <div class="form">
+      <div>
+        <ion-label>Filho</ion-label>
+        <ion-select [(ngModel)]="formData.user" label="Selecione o filho">
+          @for (child of childrens; track $index) {
+            <ion-select-option [value]="child.uid">{{child.nickname}}</ion-select-option>
+          }
+        </ion-select>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Titulo</ion-label>
+        <input type="text" [(ngModel)]="formData.title" placeholder="Titulo"/>
+      </div>
+
+      <div style="margin-top: 25px;"> 
+        <ion-label>Descrição</ion-label>
+        <textarea type="text" rows="3" [(ngModel)]="formData.description" placeholder="Descrição"></textarea>
+      </div>
+
+      <ion-radio-group [(ngModel)]="tipoTarefa">
+        <div class="div-tipo">
+          <ion-icon name="podium-outline"></ion-icon><ion-radio value="pontos">Pontos</ion-radio>
+        </div>
+
+        <div class="div-tipo"> 
+          <ion-icon name="cash-outline"></ion-icon><ion-radio value="dinheiro">Dinheiro</ion-radio>
+        </div>
+      </ion-radio-group>
+
+      <div style="margin-top: 5px;"> 
+        @if(tipoTarefa == 'pontos') {
+          <input type="text" placeholder="Felicidade (%)"/>
+        } @else {
+          <input type="text" [(ngModel)]="formData.cost" placeholder="Valor (R$)"/>
+        }
+      </div>
+
+      <ion-radio-group [(ngModel)]="diaFrequencia">
+        <div class="div-tipo">
+          <ion-radio value="diaSemana">Dia na semana</ion-radio>
+        </div>
+
+        <div class="div-tipo"> 
+          <ion-radio value="todoDia">Todo dia</ion-radio>
+        </div>
+      </ion-radio-group>
+
+
+      @if(diaFrequencia == 'diaSemana') {
+        <ion-item>
+          <ion-select placeholder="Selecione os dias" [multiple]="true" [(ngModel)]="formData.daysOfWeek">
+            <ion-select-option value="0">Domingo</ion-select-option>
+            <ion-select-option value="1">Segunda</ion-select-option>
+            <ion-select-option value="2">Terça</ion-select-option>
+            <ion-select-option value="3">Quarta</ion-select-option>
+            <ion-select-option value="4">Quinta</ion-select-option>
+            <ion-select-option value="5">Sexta</ion-select-option>
+            <ion-select-option value="6">Sábado</ion-select-option>
+          </ion-select>
+        </ion-item>
+      } @else {
+        <div style="margin-top: 10px;">
+          <ion-chip color="primary">Domingo</ion-chip>
+          <ion-chip color="primary">Segunda</ion-chip>
+          <ion-chip color="primary">Terça</ion-chip>
+          <ion-chip color="primary">Quarta</ion-chip>
+          <ion-chip color="primary">Quinta</ion-chip>
+          <ion-chip color="primary">Sexta</ion-chip>
+          <ion-chip color="primary">Sábado</ion-chip>
+        </div>
+      }
+
+    </div>
+
+  </div>
+
+  <div style="padding: 5px 24px; position: fixed; bottom: 0; height: 100px; width: 100%;"> 
+    <ion-button expand="block" color="primary" (click)="saveTask($event)">Atualizar</ion-button>
+  </div>
+
+</div>

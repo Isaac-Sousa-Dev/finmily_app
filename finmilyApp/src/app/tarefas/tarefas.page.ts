@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentService } from '../services/payment.service';
-import { AlertController, InfiniteScrollCustomEvent, ToastController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, ModalController, ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TaskService } from 'src/services/task.service';
+import { EditTaskModalComponent } from 'src/components/modals/edit-task-modal/edit-task-modal.component';
 
 interface Task {
   uid: string;
@@ -37,7 +38,8 @@ export class TarefasPage implements OnInit {
     private location: Location,
     private taskService: TaskService,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -113,6 +115,22 @@ export class TarefasPage implements OnInit {
     this.taskService.deleteTask(task.uid).then(() => {
       this.getTasksOpenByManager();
     })
+  }
+
+  async openModalEditTask(task: Task, slidingItem: any) {
+    slidingItem.close();
+    console.log('Task', task);
+    this.modalController.create({
+      component: EditTaskModalComponent,
+      cssClass: 'create-child-modal',
+      initialBreakpoint: 0.99,
+      breakpoints: [0.99, 0.99, 0.99, 0.99],
+      componentProps: {
+        task: task
+      }
+    }).then(modal => {
+      modal.present();
+    });
   }
 
   navegarParaMenu() {
