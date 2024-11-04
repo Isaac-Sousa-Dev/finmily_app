@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
+import { CreateTaskModalComponent } from 'src/components/modals/create-task-modal/create-task-modal.component';
 
 @Component({
   selector: 'app-tabs',
@@ -24,6 +25,18 @@ export class TabsPage {
       cssClass: 'create-child-modal',
       initialBreakpoint: 0.63,
       breakpoints: [0.63, 0.63, 0.63, 0.63]
+    });
+  
+    await modal.present();
+  }
+
+  async openModalCreateTask(ionFab: any) {
+    ionFab.close();
+    const modal = await this.modalController.create({
+      component: CreateTaskModalComponent,
+      cssClass: 'create-child-modal',
+      initialBreakpoint: 0.99,
+      breakpoints: [0.99, 0.99, 0.99, 0.99]
     });
   
     await modal.present();
