@@ -29,7 +29,6 @@ export class ManagerController extends BaseNotification {
             password,
             phoneNumber,
             role,
-
         })
 
         if(this.valid()) {

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SpinnerService } from './spinner.service';
-import { HttpService } from './http.service';
-import { IResultHttp } from 'src/interfaces/IResultHttp';
 import { ApiService } from './api.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +8,13 @@ import { ApiService } from './api.service';
 export class TaskService {
 
   constructor( public http: ApiService ) { }
+
+  private taskUpdatedSource = new BehaviorSubject<void | null>(null);
+  taskUpdated$ = this.taskUpdatedSource.asObservable();
+
+  notifyTaskUpdated() {
+    this.taskUpdatedSource.next();
+  } 
 
   async GetTasksOpenByManager() {
     const result = await this.http.get(`/manager/tasks`);

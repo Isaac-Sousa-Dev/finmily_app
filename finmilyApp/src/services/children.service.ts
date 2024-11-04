@@ -24,8 +24,13 @@ export class ChildrenService {
     return result.data;
   }
 
-  async saveChild(data: any) {
-    const result = await this.http.post(`/collaborator/register`, data);
+  async saveChild(child: any) {
+    const result = await this.http.post(`/collaborator/register`, child);
+    return result;
+  }
+
+  async updateChild(child: any) {
+    const result = await this.http.post(`/collaborator/update/${child.uid}`, child);
     return result;
   }
 

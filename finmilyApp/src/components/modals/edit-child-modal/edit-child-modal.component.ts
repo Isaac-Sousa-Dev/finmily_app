@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ChildrenService } from 'src/services/children.service';
 
 @Component({
@@ -11,30 +12,45 @@ export class EditChildModalComponent  implements OnInit {
   @Input() child: any;
 
   formData = {
+    uid: '',
     nickname: '',
     age: '',
-    phone: '',
-    password: '',
+    phoneNumber: '',
     role: 'collaborator'
   }
 
   constructor(
     private childrenService: ChildrenService,
+    private toastController: ToastController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    console.log(this.child, 'Meu filho');
     this.formData = {
+      uid: this.child.uid,
       nickname: this.child.nickname,
       age: this.child.age,
-      phone: this.child.phoneNumber,
-      password: '',
+      phoneNumber: this.child.phoneNumber,
       role: this.child.role
     }
   }
 
-  async saveChild() {
-    await this.childrenService.saveChild(this.formData);
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Filho atualizado com sucesso!',
+      duration: 5000,
+      color: 'success',
+      position: 'top',
+      icon: 'checkmark-circle-outline',
+    });
+    await toast.present();
+  }
+
+  async editChild() {
+    await this.childrenService.updateChild(this.formData);
+    this.presentToast();
+    this.childrenService.notifyChildrenUpdated();
+    this.modalController.dismiss();
   }
 
 }

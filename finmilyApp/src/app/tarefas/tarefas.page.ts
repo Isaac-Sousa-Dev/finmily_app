@@ -41,7 +41,12 @@ export class TarefasPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getTasksOpenByManager();
+    // this.getTasksOpenByManager();
+
+    // Inscreva-se para escutar a criação de novas tarefas
+    this.taskService.taskUpdated$.subscribe(() => {
+      this.getTasksOpenByManager(); // Atualize os dados
+    });
   }
 
   async presentToast() {

@@ -101,7 +101,11 @@ export class FilhosPage implements OnInit {
   async deleteChild(child: any) {
     await this.childService.deleteChild(child.uid);
     this.childService.notifyChildrenUpdated();
-    this.presentToast('Filho deletado com sucesso!');
+    
+    setTimeout(() => {
+      this.presentToast('Filho deletado com sucesso!');
+      this.TaskService.notifyTaskUpdated();
+    }, 300);
   }
 
   navegarParaMenu() {

@@ -21,7 +21,7 @@ export class CollaboratorController extends BaseNotification {
         
         if(userAuth.role !== "manager") return {error: "Você não tem permissão para cadastrar colaboradores"};
         
-        let { nickname, password, role } = request.body;
+        let { nickname, password, role, age, phoneNumber } = request.body;
 
         const existNickname = await this.userRepository.findOne({ where: { nickname } })
         if(existNickname) this.AddNotification("Já existe um usuário com este apelido");
@@ -37,6 +37,8 @@ export class CollaboratorController extends BaseNotification {
             nickname,
             password,
             role,
+            age,
+            phoneNumber,
             managerUid: userAuth.uid
         })
 
@@ -65,6 +67,24 @@ export class CollaboratorController extends BaseNotification {
         } else {
             return {error: "Usuário não encontrado"};
         }
+    }
+
+
+    async update(request: Request) {
+        let { uid } = request.params;
+        let { nickname, role, age, phoneNumber } = request.body;
+
+        const user = await this.userRepository.findOne({ where: { uid } });
+        if(!user) return {error: "Usuário não encontrado"};
+
+        user.nickname = nickname;
+        // user.password = md5(password);
+        user.role = role;
+        user.age = age;
+        user.phoneNumber = phoneNumber;
+
+        await this.userRepository.save(user);
+        return {message: "Usuário atualizado com sucesso", user};
     }
 
 }

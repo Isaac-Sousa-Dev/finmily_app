@@ -21,7 +21,7 @@ export const Routes = [
     { method: "get", route: "/collaborator", controller: CollaboratorController, action: "all" }, 
     { method: "get", route: "/collaborator/:id", controller: CollaboratorController, action: "one" }, 
     { method: "post", route: "/collaborator/register", controller: CollaboratorController, action: "save" }, 
-    { method: "post", route: "/collaborator/update", controller: CollaboratorController, action: "update" }, 
+    { method: "post", route: "/collaborator/update/:uid", controller: CollaboratorController, action: "update" }, 
     { method: "delete", route: "/collaborator/:uid", controller: CollaboratorController, action: "remove" },
 
 

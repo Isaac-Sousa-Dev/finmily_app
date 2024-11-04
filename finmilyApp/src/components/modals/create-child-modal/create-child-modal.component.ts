@@ -14,7 +14,7 @@ export class CreateChildModalComponent  implements OnInit {
   formData = {
     nickname: '',
     age: '',
-    phone: '',
+    phoneNumber: '',
     password: 'finmily123',
     role: 'collaborator'
   }
