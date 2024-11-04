@@ -176,7 +176,7 @@ export class ManagerController extends BaseNotification {
 
         const allChildrensByManager = await this.userRepository.find(
             { 
-                where: { managerUid: userAuthUid },
+                where: { managerUid: userAuthUid, deleted: false },
                 select: ['uid', 'nickname', 'phoneNumber', 'role', 'balance', 'age'],
             }
         );
@@ -186,5 +186,5 @@ export class ManagerController extends BaseNotification {
             'data': allChildrensByManager
         }
     }
-    
+
 }

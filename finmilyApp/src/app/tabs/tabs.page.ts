@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
@@ -17,17 +17,20 @@ export class TabsPage {
     private modalController: ModalController
   ) {}
 
-  openModalCreateChild(ionFab: any) {
+  async openModalCreateChild(ionFab: any) {
     ionFab.close();
-    this.modalController.create({
+    const modal = await this.modalController.create({
       component: CreateChildModalComponent,
       cssClass: 'create-child-modal',
       initialBreakpoint: 0.63,
       breakpoints: [0.63, 0.63, 0.63, 0.63]
-    }).then(modal => {
-      modal.present();
-    })
-    console.log('openModalCreateChild');
+    });
+  
+    modal.onDidDismiss().then(() => {
+      console.log('fechando modal');
+    });
+  
+    await modal.present();
   }
 
   goToCadastroTarefas() {

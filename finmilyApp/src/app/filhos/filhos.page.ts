@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentService } from '../services/payment.service';
 import { TarefasService } from '../services/tarefas.service';
@@ -35,12 +35,15 @@ export class FilhosPage implements OnInit {
 
 
   async ngOnInit() {
-    this.getChildrensByManager();
+     // Inscreva-se para escutar a criação de novos filhos
+     this.childService.childrenUpdated$.subscribe(() => {
+      this.getChildrensByManager(); // Atualize os dados
+    });
   }
 
-  async presentToast() {
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Filho removido com sucesso!',
+      message: message,
       duration: 5000,
       color: 'success',
       position: 'top',
@@ -70,8 +73,7 @@ export class FilhosPage implements OnInit {
       }
     }).then(modal => {
       modal.present();
-    })
-    console.log('openModalCreateChild');
+    });
   }
 
 
@@ -89,7 +91,6 @@ export class FilhosPage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.deleteChild(child);
-            this.presentToast();
           } 
         },
       ],
@@ -98,7 +99,9 @@ export class FilhosPage implements OnInit {
   }
 
   async deleteChild(child: any) {
-    const response = await this.childService.deleteChild(child.uid);
+    await this.childService.deleteChild(child.uid);
+    this.childService.notifyChildrenUpdated();
+    this.presentToast('Filho deletado com sucesso!');
   }
 
   navegarParaMenu() {

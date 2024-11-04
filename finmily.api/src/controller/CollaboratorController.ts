@@ -51,10 +51,9 @@ export class CollaboratorController extends BaseNotification {
     async remove(request: Request) {
         let { uid } = request.params;
         let child = await this.userRepository.find({ where: { uid } });
-        console.log(child, 'Meu child');
         if(child) {
-            await this.userRepository.remove(child);
-            return {success: "Usuário removido com sucesso"};
+            await this.userRepository.update(uid, { deleted: true });
+            return {success: "Usuário deletado com sucesso"};
         } else {
             return {error: "Usuário não encontrado"};
         }
