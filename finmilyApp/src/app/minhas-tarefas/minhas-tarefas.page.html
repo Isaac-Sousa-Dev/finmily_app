@@ -28,8 +28,7 @@
   
         <div class="body-container">
           <div style="font-size: 13px;">
-            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para editar ou excluir</span></div>
-            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon>Arraste para a esquerda para saber o responsável</div>
+            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para concluir a tarefa</span></div>
           </div>       
         </div>
   
@@ -46,15 +45,17 @@
     @for (task of allTasks; track $index) {
 
       <ion-item-sliding #slidingItem>
+        
         <ion-item-options side="start">
-          <ion-item-option color="warning" (click)="openModalEditTask(task, slidingItem)">
-            <ion-icon name="create-outline" style="font-size: 20px;"></ion-icon>
-          </ion-item-option>
-
-          <ion-item-option (click)="confirmDelete(task, slidingItem)" color="danger" expand="block">
-            <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
-          </ion-item-option>
-
+          @if(task.status == 'pending') {
+            <ion-item-option color="success" (click)="openModalEditTask(task, slidingItem)">
+              <ion-icon name="checkmark-outline" style="font-size: 30px;"></ion-icon>
+            </ion-item-option>
+          } @else {
+            <ion-item-option color="danger" (click)="openModalEditTask(task, slidingItem)">
+              <ion-icon name="close-circle-outline" style="font-size: 30px;"></ion-icon>
+            </ion-item-option>
+          }
         </ion-item-options>
 
         <ion-item color="primary">
@@ -70,23 +71,13 @@
             </div>
 
             <div style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
-              @for (day of task.daysOfWeek; track $index) {
-                <ion-badge color="light">{{ day }}</ion-badge>
-              }
-
-              @if(task.daysOfWeek?.length == 0 && task.everyDay == true) {
-                <ion-badge color="light">Todo dia</ion-badge>
-              }
+                <ion-badge color="warning">Pendente</ion-badge>
             </div>
           </div>   
           
 
         </ion-item>
 
-    
-        <ion-item-options>
-          <ion-item-option class="responsavel" color="light">{{ task.user.nickname }}</ion-item-option>
-        </ion-item-options>
       </ion-item-sliding>
     }
 

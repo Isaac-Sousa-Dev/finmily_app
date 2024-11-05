@@ -16,6 +16,7 @@ interface Task {
   };
   daysOfWeek: string | null;
   everyDay: boolean;  
+  status: string;
 }
 @Component({
   selector: 'app-minhas-tarefas',
