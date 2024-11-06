@@ -75,13 +75,35 @@ export class MinhasTarefasPage implements OnInit {
   async getMyTasks() {
     try {
       const response = await this.taskService.MyTasks();
-      this.allTasks = response.tasks;
+      this.tasksFiltered = response.taskToday.map((task: Task) => ({
+        ...task,
+        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+      }));
+      this.allTasks = response.tasks.map((task: Task) => ({
+        ...task,
+        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+      }));
       this.tasksToday = response.taskToday;
-      this.tasksFiltered = this.tasksToday;
       this.totalBalance = response.userInfo.balance;
     } catch (error) {
       console.error('Erro ao carregar tarefas:', error);
     }
+  }
+
+
+  private formatDaysOfWeek(daysOfWeek: any) {
+    
+    let arrayDaysFormatted: any = [];
+    daysOfWeek = daysOfWeek.split(',');
+    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    daysOfWeek.map((day: any) => {
+      day = day.trim();
+      arrayDaysFormatted.push(dayNames[day]);
+    });
+
+    console.log('daysOfWeek', arrayDaysFormatted);
+
+    return arrayDaysFormatted;
   }
 
 

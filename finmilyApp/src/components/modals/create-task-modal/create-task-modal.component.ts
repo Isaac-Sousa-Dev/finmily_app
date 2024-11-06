@@ -80,7 +80,7 @@ export class CreateTaskModalComponent  implements OnInit {
 
     // Convertendo o array daysOfWeek para uma string separada por vírgulas
     if (Array.isArray(taskData.daysOfWeek)) {
-      taskData.daysOfWeek = taskData.daysOfWeek.join(', ');
+      taskData.daysOfWeek = taskData.daysOfWeek.join(',');
     }
 
     await this.taskService.SaveTask(taskData);

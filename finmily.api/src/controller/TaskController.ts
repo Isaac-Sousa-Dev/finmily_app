@@ -92,15 +92,17 @@ export class TaskController extends BaseNotification {
         const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } })
 
         const currentDate = new Date();
-        const dayOfWeek = currentDate.getDay();
+        let dayOfWeek = currentDate.getDay();
         let allTasks = tasks;
         let taskToday: Array<any> = [];
 
         allTasks.forEach(task => {
-            console.log(task, 'Minha tarefa');
             let daysOfWeek: any = task.daysOfWeek;
             if(daysOfWeek != null) {
                 daysOfWeek = task.daysOfWeek.split(',');
+
+                console.log(daysOfWeek, 'Meus dias da semana');
+                console.log(dayOfWeek, 'Meu dia da semana');
     
                 if(daysOfWeek.includes(dayOfWeek.toString())) {
                     taskToday.push(task);

@@ -55,7 +55,7 @@
 
       <ion-item-sliding #slidingItem>
         
-        <ion-item-options side="start">
+        <ion-item-options *ngIf="taskStatus == 'hoje'" side="start">
           @if(task.status == 'pending') {
             <ion-item-option color="success" (click)="completeTask(task)">
               <ion-icon name="checkmark-outline" style="font-size: 30px;"></ion-icon>
@@ -79,9 +79,20 @@
               </div>
             </div>
 
-            <div style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
+            <div *ngIf="taskStatus == 'hoje'" style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
                 <ion-badge color="warning">Pendente</ion-badge>
             </div>
+
+            <div *ngIf="taskStatus == 'todas'" style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
+              @for (day of task.daysOfWeek; track $index) {
+                <ion-badge color="light">{{ day }}</ion-badge>
+              }
+
+              @if(task.daysOfWeek?.length == 0 && task.everyDay == true) {
+                <ion-badge color="light">Todo dia</ion-badge>
+              }
+            </div>
+
           </div>   
           
 
