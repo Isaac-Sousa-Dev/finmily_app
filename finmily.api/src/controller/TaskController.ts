@@ -4,6 +4,7 @@ import { BaseNotification } from "../notification/BaseNotification";
 import { Request } from "express";
 import { User } from "../entity/User";
 import { open } from "fs";
+import { userInfo } from "os";
 
 export class TaskController extends BaseNotification {
 
@@ -79,9 +80,40 @@ export class TaskController extends BaseNotification {
     }
 
     async myTasks(request: Request) {
-        let userAuth = request.userAuth; 
-        const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } }) // Buscar tareafas de um colaborador
-        return tasks;
+        // let userAuth = request.userAuth; 
+
+        let userAuth = {
+            uid: "ff67aa8f-9459-4b61-8c94-572302561559"
+        }
+
+        const user = await AppDataSource.getRepository(User).findOne({ where: { uid: userAuth.uid } });
+        console.log(user, 'Meu user');
+
+        const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } })
+
+        const currentDate = new Date();
+        const dayOfWeek = currentDate.getDay();
+        let allTasks = tasks;
+        let taskToday: Array<any> = [];
+
+        allTasks.forEach(task => {
+            console.log(task, 'Minha tarefa');
+            let daysOfWeek: any = task.daysOfWeek;
+            if(daysOfWeek != null) {
+                daysOfWeek = task.daysOfWeek.split(',');
+    
+                if(daysOfWeek.includes(dayOfWeek.toString())) {
+                    taskToday.push(task);
+                }
+            }
+        });
+
+        const response = {
+            userInfo: user,
+            tasks: tasks,
+            taskToday: taskToday
+        }
+        return response;
     }
 
     async remove(request: Request) {

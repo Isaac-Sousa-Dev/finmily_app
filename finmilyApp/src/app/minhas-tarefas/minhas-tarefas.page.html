@@ -22,7 +22,7 @@
           </div>  
           
           <div class="div-total-pagar">
-            {{ totalPaymentByMonth | currency:'BRL':'symbol' }}
+            {{ totalBalance | currency:'BRL':'symbol' }}
           </div>
         </div>
   
@@ -30,7 +30,16 @@
           <div style="font-size: 13px;">
             <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para concluir a tarefa</span></div>
           </div>       
+          <ion-segment (click)="filterTasksByStatus($event)" color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
+            <ion-segment-button value="hoje">
+              <ion-label style="font-size: 13px;">Hoje</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="todas">
+              <ion-label style="font-size: 13px;" >Todas</ion-label>
+            </ion-segment-button>
+          </ion-segment>
         </div>
+
   
       </div>
     </div>
@@ -42,17 +51,17 @@
   
 
   <ion-list>
-    @for (task of allTasks; track $index) {
+    @for (task of tasksFiltered; track $index) {
 
       <ion-item-sliding #slidingItem>
         
         <ion-item-options side="start">
           @if(task.status == 'pending') {
-            <ion-item-option color="success" (click)="openModalEditTask(task, slidingItem)">
+            <ion-item-option color="success" (click)="completeTask(task)">
               <ion-icon name="checkmark-outline" style="font-size: 30px;"></ion-icon>
             </ion-item-option>
           } @else {
-            <ion-item-option color="danger" (click)="openModalEditTask(task, slidingItem)">
+            <ion-item-option color="danger" (click)="undoTask(task)">
               <ion-icon name="close-circle-outline" style="font-size: 30px;"></ion-icon>
             </ion-item-option>
           }

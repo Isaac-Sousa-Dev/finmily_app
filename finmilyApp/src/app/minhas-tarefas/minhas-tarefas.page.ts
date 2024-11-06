@@ -27,7 +27,10 @@ export class MinhasTarefasPage implements OnInit {
 
   data: any;
   allTasks: Task[] = [];
-  totalPaymentByMonth = 0;
+  tasksToday: Task[] = [];
+  totalBalance = 0;
+  taskStatus = 'hoje';
+  tasksFiltered: Task[] = [];
 
   taskForDeleted = '';
   selectedTask: Task | null = null;
@@ -44,12 +47,18 @@ export class MinhasTarefasPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getTasksOpenByManager();
-
     // Inscreva-se para escutar a criação de novas tarefas
     this.taskService.taskUpdated$.subscribe(() => {
-      this.getTasksOpenByManager(); // Atualize os dados
+      this.getMyTasks(); // Atualize os dados
     });
+  }
+
+  async undoTask(task: any){
+    console.log('Desfazendo Task', task);
+  }
+
+  async completeTask(task: any){
+    console.log('Completando Task', task);
   }
 
   async presentToast() {
@@ -63,75 +72,30 @@ export class MinhasTarefasPage implements OnInit {
     await toast.present();
   }
 
-  async getTasksOpenByManager() {
+  async getMyTasks() {
     try {
-      const response = await this.taskService.GetTasksOpenByManager();
-      this.allTasks = response.tasks.map((task: Task) => ({
-        ...task,
-        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
-      }));
-      this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
+      const response = await this.taskService.MyTasks();
+      this.allTasks = response.tasks;
+      this.tasksToday = response.taskToday;
+      this.tasksFiltered = this.tasksToday;
+      this.totalBalance = response.userInfo.balance;
     } catch (error) {
       console.error('Erro ao carregar tarefas:', error);
     }
   }
 
-  private formatDaysOfWeek(daysOfWeek: any) {
-    let arrayDaysFormatted: any = [];
-    daysOfWeek = daysOfWeek.split(',');
-    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    daysOfWeek.map((day: any) => {
-      day = day.trim();
-      arrayDaysFormatted.push(dayNames[day]);
-    });
 
-    return arrayDaysFormatted;
+  async filterTasksByStatus(event: any) {
+    const value = event.target.value;
+    this.taskStatus = value;
+
+    if (this.taskStatus === 'todas') {
+      this.tasksFiltered = this.allTasks;
+    } else if (this.taskStatus === 'hoje') {
+      this.tasksFiltered = this.tasksToday;
+    }
   }
 
-
-  async confirmDelete(task: Task, slidingItem: any) {
-    const alert = await this.alertController.create({
-      header: 'Excluir Tarefa',
-      message: `Tem certeza que deseja excluir a tarefa "${task.title}"?`,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Excluir',
-          role: 'confirm',
-          handler: () => {
-            this.deleteTask(task);
-            slidingItem.close();
-            this.presentToast();
-          } 
-        },
-      ],
-    });
-    await alert.present();
-  }
-
-  deleteTask(task: Task) {
-    this.taskService.deleteTask(task.uid).then(() => {
-      this.getTasksOpenByManager();
-    })
-  }
-
-  async openModalEditTask(task: any, slidingItem: any) {
-    // slidingItem.close();
-    await this.modalController.create({
-      component: EditTaskModalComponent,
-      cssClass: 'create-child-modal',
-      initialBreakpoint: 0.95,
-      breakpoints: [0.95, 0.95, 0.95, 0.95],
-      componentProps: {
-        task: task
-      }
-    }).then(modal => {
-      modal.present();
-    });
-  }
 
   navegarParaMenu() {
     this.router.navigate(['/tabs/tabPerfil']);

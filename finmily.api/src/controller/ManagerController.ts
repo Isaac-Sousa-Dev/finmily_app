@@ -124,7 +124,6 @@ export class ManagerController extends BaseNotification {
         const endOfDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59);
 
         const dayOfWeek = currentDate.getDay();
-        console.log(dayOfWeek, 'Dia da semana');
 
         const allTasksByCollaborator = await this.taskRespository.find({
             where: { 
@@ -136,8 +135,6 @@ export class ManagerController extends BaseNotification {
             select: ['uid', 'title', 'description', 'cost', 'status', 'daysOfWeek']
         });
 
-        console.log(allTasksByCollaborator, 'Tarefas do colaborador');
-
         let allTasks = allTasksByCollaborator;
         let tasksPending: Array<any> = [];
         let tasksCompleted: Array<any> = [];
@@ -147,7 +144,6 @@ export class ManagerController extends BaseNotification {
             let daysOfWeek: any = task.daysOfWeek;
             if(daysOfWeek != null) {
                 daysOfWeek = task.daysOfWeek.split(',');
-                console.log(daysOfWeek, 'Dias da semana');
     
                 if(daysOfWeek.includes(dayOfWeek.toString())) {
                     taskToday.push(task);
