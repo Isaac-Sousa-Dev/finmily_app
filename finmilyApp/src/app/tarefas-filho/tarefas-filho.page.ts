@@ -101,6 +101,15 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
       this.getTasks(this.childId);
     }
   }
+
+  async checkTask(task: any) {
+    try {
+      await this.taskService.CheckTask(task.uid);
+      this.getTasks(this.childId);
+    } catch (error) {
+      console.error('Erro ao marcar tarefa como feita:', error);
+    }
+  }
   
 
   onIonInfinite(ev: any) {

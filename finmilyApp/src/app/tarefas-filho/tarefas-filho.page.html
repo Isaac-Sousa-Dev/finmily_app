@@ -88,7 +88,7 @@
                 </div>
   
                 <div style="width: 20%; height: 100%;">
-                  <ion-checkbox labelPlacement="end"></ion-checkbox>
+                  <ion-checkbox [disabled]="task.status == 'pending'" (click)="checkTask(task)" labelPlacement="end"></ion-checkbox>
                 </div>
               </div>
             </div>               

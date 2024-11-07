@@ -26,6 +26,9 @@ export class Task extends BaseEntity {
     @Column({nullable: true})
     everyDay: boolean;
 
+    @Column({nullable: true})
+    checkedByManager: boolean;
+
     @Column({type: "varchar", length: 255, nullable: true})
     daysOfWeek: string;  
 

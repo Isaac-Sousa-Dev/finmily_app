@@ -118,7 +118,7 @@ export class TarefasPage implements OnInit {
   }
 
   async openModalEditTask(task: any, slidingItem: any) {
-    // slidingItem.close();
+    task.daysOfWeekReverted = this.revertDaysOfWeek(task.daysOfWeek);
     await this.modalController.create({
       component: EditTaskModalComponent,
       cssClass: 'create-child-modal',
@@ -130,6 +130,26 @@ export class TarefasPage implements OnInit {
     }).then(modal => {
       modal.present();
     });
+  }
+
+
+  private revertDaysOfWeek(daysOfWeek: any) {
+    let arrayDaysReverted: any = [];
+    const days: any = {
+      Dom: '0',
+      Seg: '1',
+      Ter: '2',
+      Qua: '3',
+      Qui: '4',
+      Sex: '5',
+      Sáb: '6'
+    }
+    daysOfWeek.map((day: any) => {
+      // day = day.trim();
+      arrayDaysReverted.push(days[day]);
+    });  
+
+    return arrayDaysReverted;
   }
 
   navegarParaMenu() {

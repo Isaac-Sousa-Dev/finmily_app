@@ -41,9 +41,7 @@ export class MinhasTarefasPage implements OnInit {
     private router: Router,
     private location: Location,
     private taskService: TaskService,
-    private alertController: AlertController,
     private toastController: ToastController,
-    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -53,17 +51,23 @@ export class MinhasTarefasPage implements OnInit {
     });
   }
 
-  async undoTask(task: any){
-    console.log('Desfazendo Task', task);
+  async undoTask(task: any, slidingItem: any) {
+    await this.taskService.undoTask(task.uid);
+    slidingItem.close();
+    this.getMyTasks();
+    this.presentToast("Tarefa desfeita com sucesso!");
   }
 
-  async completeTask(task: any){
-    console.log('Completando Task', task);
+  async completeTask(task: any, slidingItem: any) {
+    await this.taskService.completeTask(task.uid);
+    slidingItem.close();
+    this.getMyTasks();
+    this.presentToast("Tarefa concluída com sucesso!");
   }
 
-  async presentToast() {
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Tarefa removida com sucesso!',
+      message: message,
       duration: 5000,
       color: 'success',
       position: 'top',
@@ -77,13 +81,17 @@ export class MinhasTarefasPage implements OnInit {
       const response = await this.taskService.MyTasks();
       this.tasksFiltered = response.taskToday.map((task: Task) => ({
         ...task,
-        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+        status: task.status === 'completed' ? 'Feita' : 'Pendente'
       }));
       this.allTasks = response.tasks.map((task: Task) => ({
         ...task,
-        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : [],
+        status: task.status === 'completed' ? 'Feita' : 'Pendente'
       }));
-      this.tasksToday = response.taskToday;
+      this.tasksToday = response.taskToday.map((task: Task) => ({
+        ...task,
+        status: task.status === 'completed' ? 'Feita' : 'Pendente'  
+      }));
       this.totalBalance = response.userInfo.balance;
     } catch (error) {
       console.error('Erro ao carregar tarefas:', error);
@@ -100,8 +108,6 @@ export class MinhasTarefasPage implements OnInit {
       day = day.trim();
       arrayDaysFormatted.push(dayNames[day]);
     });
-
-    console.log('daysOfWeek', arrayDaysFormatted);
 
     return arrayDaysFormatted;
   }

@@ -33,6 +33,10 @@ export abstract class ApiService {
     const result = await this.http.post(`${this.urlBase}${url}`, data).toPromise();
   }
 
+  async put(url: string, data: any): Promise<any> {
+    const result = await this.http.put(`${this.urlBase}${url}`, data).toPromise();
+  }
+
   async delete(url: string): Promise<any> {
     const result = await this.http.delete(`${this.urlBase}${url}`).toPromise();
   } 

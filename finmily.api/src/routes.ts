@@ -30,6 +30,9 @@ export const Routes = [
     { method: "get", route: "/task/:id", controller: TaskController, action: "one" }, 
     { method: "post", route: "/task", controller: TaskController, action: "save" }, 
     { method: "post", route: "/task/update", controller: TaskController, action: "update" }, 
+    { method: "put", route: "/task/complete/:uid", controller: TaskController, action: "complete" },
+    { method: "put", route: "/task/undo/:uid", controller: TaskController, action: "undo" },
+    { method: "put", route: "/task/checked/:uid", controller: TaskController, action: "checkedByManager" },
     { method: "delete", route: "/task/:uid", controller: TaskController, action: "remove" },
     { method: "get", route: "/my-tasks", controller: TaskController, action: "myTasks" },
 ]

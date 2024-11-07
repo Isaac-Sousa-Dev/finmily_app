@@ -7,11 +7,12 @@
   <div class="container">
 
     <div class="form">
+
       <div>
         <ion-label>Filho</ion-label>
         <ion-select [(ngModel)]="formData.user" label="Selecione o filho">
           @for (child of childrens; track $index) {
-            <ion-select-option [value]="child.uid">{{child.nickname}}</ion-select-option>
+            <ion-select-option *ngIf="formData.user.uid != child.uid" [value]="child.uid">{{child.nickname}}</ion-select-option>
           }
         </ion-select>
       </div>
@@ -27,9 +28,9 @@
       </div>
 
       <ion-radio-group [(ngModel)]="tipoTarefa">
-        <div class="div-tipo">
+        <!-- <div class="div-tipo">
           <ion-icon name="podium-outline"></ion-icon><ion-radio value="pontos">Pontos</ion-radio>
-        </div>
+        </div> -->
 
         <div class="div-tipo"> 
           <ion-icon name="cash-outline"></ion-icon><ion-radio value="dinheiro">Dinheiro</ion-radio>
@@ -46,18 +47,17 @@
 
       <ion-radio-group [(ngModel)]="diaFrequencia">
         <div class="div-tipo">
-          <ion-radio value="diaSemana">Dia na semana</ion-radio>
+          <ion-radio value="diaSemana">Dia(s) na semana</ion-radio>
         </div>
 
-        <div class="div-tipo"> 
+        <!-- <div class="div-tipo"> 
           <ion-radio value="todoDia">Todo dia</ion-radio>
-        </div>
+        </div> -->
       </ion-radio-group>
-
 
       @if(diaFrequencia == 'diaSemana') {
         <ion-item>
-          <ion-select placeholder="Selecione os dias" [multiple]="true" [(ngModel)]="formData.daysOfWeek">
+          <ion-select placeholder="Selecione os dias" [multiple]="true" [(ngModel)]="formData.daysOfWeekReverted">
             <ion-select-option value="0">Domingo</ion-select-option>
             <ion-select-option value="1">Segunda</ion-select-option>
             <ion-select-option value="2">Terça</ion-select-option>

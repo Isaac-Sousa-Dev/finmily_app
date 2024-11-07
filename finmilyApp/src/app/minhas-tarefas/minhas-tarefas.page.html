@@ -56,12 +56,12 @@
       <ion-item-sliding #slidingItem>
         
         <ion-item-options *ngIf="taskStatus == 'hoje'" side="start">
-          @if(task.status == 'pending') {
-            <ion-item-option color="success" (click)="completeTask(task)">
+          @if(task.status == 'Pendente') {
+            <ion-item-option color="success" (click)="completeTask(task, slidingItem)">
               <ion-icon name="checkmark-outline" style="font-size: 30px;"></ion-icon>
             </ion-item-option>
           } @else {
-            <ion-item-option color="danger" (click)="undoTask(task)">
+            <ion-item-option color="danger" (click)="undoTask(task, slidingItem)">
               <ion-icon name="close-circle-outline" style="font-size: 30px;"></ion-icon>
             </ion-item-option>
           }
@@ -80,7 +80,11 @@
             </div>
 
             <div *ngIf="taskStatus == 'hoje'" style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">
-                <ion-badge color="warning">Pendente</ion-badge>
+              @if(task.status == 'Pendente') {
+                <ion-badge color="warning">{{task.status}}</ion-badge>
+              } @else {
+                <ion-badge color="success">{{task.status}}</ion-badge>
+              }
             </div>
 
             <div *ngIf="taskStatus == 'todas'" style="width: 100%; height: 100%; margin-top: 10px; display: flex; gap: 4px; margin-bottom: 7px;">

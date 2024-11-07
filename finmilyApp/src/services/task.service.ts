@@ -40,4 +40,19 @@ export class TaskService {
     const result = await this.http.get(`/my-tasks`);
     return result;
   }
+
+  async completeTask(uid: string) {
+    const result = await this.http.put(`/task/complete/${uid}`, uid);
+    return result;
+  }
+
+  async undoTask(uid: string) {
+    const result = await this.http.put(`/task/undo/${uid}`, uid);
+    return result;
+  }
+
+  async CheckTask(uid: string) {
+    const result = await this.http.put(`/task/checked/${uid}`, uid);
+    return result;
+  }
 }

@@ -18,6 +18,7 @@ export class EditTaskModalComponent  implements OnInit {
     description: '',
     cost: '',
     daysOfWeek: [],
+    daysOfWeekReverted: [],
     everyDay: false,
   }
 
@@ -39,9 +40,9 @@ export class EditTaskModalComponent  implements OnInit {
       description: this.task.description,
       cost: this.task.cost,
       daysOfWeek: this.task.daysOfWeek,
-      user: this.task.user
+      daysOfWeekReverted: this.task.daysOfWeekReverted,
+      user: this.task.user.uid
     }
-    console.log('Tarefa', this.task);
   }
 
   async presentToast() {

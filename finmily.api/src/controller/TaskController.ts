@@ -5,6 +5,7 @@ import { Request } from "express";
 import { User } from "../entity/User";
 import { open } from "fs";
 import { userInfo } from "os";
+import { Tree } from "typeorm";
 
 export class TaskController extends BaseNotification {
 
@@ -87,7 +88,6 @@ export class TaskController extends BaseNotification {
         }
 
         const user = await AppDataSource.getRepository(User).findOne({ where: { uid: userAuth.uid } });
-        console.log(user, 'Meu user');
 
         const tasks = await this.taskRepository.find({ where: { userUid: userAuth.uid } })
 
@@ -100,9 +100,6 @@ export class TaskController extends BaseNotification {
             let daysOfWeek: any = task.daysOfWeek;
             if(daysOfWeek != null) {
                 daysOfWeek = task.daysOfWeek.split(',');
-
-                console.log(daysOfWeek, 'Meus dias da semana');
-                console.log(dayOfWeek, 'Meu dia da semana');
     
                 if(daysOfWeek.includes(dayOfWeek.toString())) {
                     taskToday.push(task);
@@ -137,5 +134,77 @@ export class TaskController extends BaseNotification {
 
         await this.taskRepository.remove(taskRemoved);
         return {message: "Tarefa removida com sucesso", taskRemoved};
+    }
+
+
+    async complete(request: Request) {
+        const { uid } = request.params;
+
+        const task = await this.taskRepository.findOne({where: {uid}});
+        // const user = await AppDataSource.getRepository(User).findOne({where: {uid: task.userUid}});
+
+        // let currentBalance = Number(user.balance); // Converte balance para número
+        // let cost = Number(task.cost); // Converte cost para número, caso seja string;
+
+        // await AppDataSource.getRepository(User).update({uid: task.userUid}, {balance: currentBalance + cost});
+
+        if(task.status === "completed") {
+            return {error: "Tarefa já concluída"};
+        } else {
+            task.status = "completed";
+            await this.taskRepository.save(task);
+            return {message: "Tarefa concluída com sucesso", task};
+        }
+
+    }
+
+
+    async undo(request: Request) {
+        const { uid } = request.params;
+
+        const task = await this.taskRepository.findOne({where: {uid}});
+        // const user = await AppDataSource.getRepository(User).findOne({where: {uid: task.userUid}});
+
+        // let currentBalance = Number(user.balance); // Converte balance para número
+        // let cost = Number(task.cost); // Converte cost para número, caso seja string;
+
+        // await AppDataSource.getRepository(User).update({uid: task.userUid}, {balance: currentBalance - cost});
+
+        if(task.status === "pending") {
+            return {error: "Tarefa já concluída"};
+        } else {
+            task.status = "pending";
+            await this.taskRepository.save(task);
+            return {message: "Tarefa desfeita com sucesso", task};
+        }
+
+    }
+
+    async checkedByManager(request: Request) {
+        // let userAuth = request.userAuth;
+        let { uid } = request.params;
+
+        let userAuth = {
+            role: "manager",
+        }
+
+        if(userAuth.role !== "manager") return {error: "Você não tem permissão para marcar tarefas como concluídas"};
+
+        const task = await this.taskRepository.findOne({where: {uid}});
+        const user = await AppDataSource.getRepository(User).findOne({where: {uid: task.userUid}});
+
+        let currentBalance = Number(user.balance); // Converte balance para número
+        let cost = Number(task.cost); // Converte cost para número, caso seja string;
+
+        await AppDataSource.getRepository(User).update({uid: task.userUid}, {balance: currentBalance + cost});
+
+        if(task.checkedByManager === true) {
+            return {error: "Tarefa já foi checada"};
+        } else {
+            task.checkedByManager = true;
+            await this.taskRepository.save(task);
+            return {message: "Tarefa checada com sucesso", task};
+        }
+
     }
 }
