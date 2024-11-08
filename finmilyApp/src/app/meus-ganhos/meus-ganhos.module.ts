@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MeusGanhosPageRoutingModule } from './meus-ganhos-routing.module';
 
 import { MeusGanhosPage } from './meus-ganhos.page';
+import { TruncatePipe } from 'src/pipes/truncate/truncate.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MeusGanhosPageRoutingModule
+    MeusGanhosPageRoutingModule,
+    TruncatePipe,
   ],
   declarations: [MeusGanhosPage]
 })

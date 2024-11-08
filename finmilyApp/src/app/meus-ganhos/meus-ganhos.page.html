@@ -1,13 +1,81 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>meusGanhos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="contentScreen">
+  
+  <div class="herdComponent" >
+    <div style="display: flex; align-items: center;">
+      <ion-icon name="arrow-back-outline" style="font-size: 30px;" (click)="goBack()"></ion-icon>
+      <ion-icon name="home" [routerLink]="['/tabs/tabHome']" style="font-size: 30px; margin-left: 20px;"></ion-icon>
+      <img  (click)="navegarParaMenu()" src="assets/images/perfil_icon.png" alt="Icon Right">
+    </div>
+    <div class="mesAtual">
+      <h3 class="text-month"> Meus Ganhos </h3>
+    </div>
+  
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title size="large">meusGanhos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <div class="conteudo-principal">
+      <div class="dash">
+    
+        <div class="header-container">
+          <div class="text-total-pagar">
+            Total a receber no mês
+          </div>  
+          
+          <div class="div-total-pagar">
+            {{ totalBalance | currency:'BRL':'symbol' }}
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    
+  </div>
+<!-- </div> -->
+<ion-content>
+
+  
+
+  <ion-list>
+    @for (task of tasksFiltered; track $index) {
+
+      <ion-item-sliding #slidingItem>
+        
+        <ion-item-options *ngIf="taskStatus == 'hoje'" side="start">
+          @if(task.status == 'Pendente') {
+            <ion-item-option color="success" (click)="completeTask(task, slidingItem)">
+              <ion-icon name="checkmark-outline" style="font-size: 30px;"></ion-icon>
+            </ion-item-option>
+          } @else {
+            <ion-item-option color="danger" (click)="undoTask(task, slidingItem)">
+              <ion-icon name="close-circle-outline" style="font-size: 30px;"></ion-icon>
+            </ion-item-option>
+          }
+        </ion-item-options>
+
+        <ion-item color="primary">
+          <div style="width: 100%;">
+            <div style="display: flex; align-items: center; gap: 10px; justify-content: space-between;">
+              <div style="display: flex; gap: 6px;">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <ion-label>Fevereiro</ion-label>
+              </div>
+              <div style="display: flex; gap: 5px;">
+                <ion-badge color="tertiary">{{ task.cost | currency:'BRL':'symbol' }}</ion-badge>
+              </div>
+            </div>
+
+          </div>   
+          
+
+        </ion-item>
+
+      </ion-item-sliding>
+    }
+
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
+    <!-- <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais tarefas...">
+    </ion-infinite-scroll-content> -->
+  </ion-infinite-scroll>
+
 </ion-content>

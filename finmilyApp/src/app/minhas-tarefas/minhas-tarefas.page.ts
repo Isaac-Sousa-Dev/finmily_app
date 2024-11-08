@@ -19,6 +19,7 @@ interface Task {
   status: string;
 }
 @Component({
+  standalone: false,
   selector: 'app-minhas-tarefas',
   templateUrl: './minhas-tarefas.page.html',
   styleUrls: ['./minhas-tarefas.page.scss'],

@@ -132,7 +132,7 @@ export class ManagerController extends BaseNotification {
                 // createdAt: Between(startOfDay, endOfDay),
                 // daysOfWeek: dayOfWeek.toString()
             },
-            select: ['uid', 'title', 'description', 'cost', 'status', 'daysOfWeek']
+            select: ['uid', 'title', 'description', 'cost', 'status', 'daysOfWeek', 'checkedByManager']
         });
 
         let allTasks = allTasksByCollaborator;
