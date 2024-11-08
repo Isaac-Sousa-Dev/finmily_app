@@ -28,7 +28,7 @@
   
         <div class="body-container">
           <div style="font-size: 13px;">
-            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para concluir a tarefa</span></div>
+            <div style="display: flex; align-items: center; gap: 3px;"><ion-icon name="information-circle"></ion-icon><span>Arraste para a direita para concluir ou desfazer a tarefa</span></div>
           </div>       
           <ion-segment (click)="filterTasksByStatus($event)" color="tertiary" value="hoje" style="font-size: 10px; margin-top: 10px; margin-bottom: 5px;">
             <ion-segment-button value="hoje">
@@ -46,9 +46,7 @@
     
   </div>
 <!-- </div> -->
-<ion-content>
-
-  
+<div class="content">
 
   <ion-list>
     @for (task of tasksFiltered; track $index) {
@@ -106,9 +104,5 @@
     }
 
   </ion-list>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
-    <!-- <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais tarefas...">
-    </ion-infinite-scroll-content> -->
-  </ion-infinite-scroll>
 
-</ion-content>
+</div>

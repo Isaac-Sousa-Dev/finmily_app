@@ -25,15 +25,23 @@
             {{ totalBalance | currency:'BRL':'symbol' }}
           </div>
         </div>
+
+        <div class="header-container">
+          <div class="text-total-pagar">
+            Total acumulado
+          </div>  
+          
+          <div class="div-total-pagar">
+            {{ totalAcumulated | currency:'BRL':'symbol' }}
+          </div>
+        </div>
   
       </div>
     </div>
     
   </div>
-<!-- </div> -->
-<ion-content>
 
-  
+<div class="content">
 
   <ion-list>
     @for (report of reports; track $index) {
@@ -59,9 +67,5 @@
     }
 
   </ion-list>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
-    <!-- <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais tarefas...">
-    </ion-infinite-scroll-content> -->
-  </ion-infinite-scroll>
 
-</ion-content>
+</div>

@@ -38,6 +38,7 @@ export class MeusGanhosPage implements OnInit {
   selectedTask: Task | null = null;
 
   reports: any[] = [];
+  totalAcumulated = 0;
 
   paymentService = new PaymentService();
 
@@ -61,6 +62,13 @@ export class MeusGanhosPage implements OnInit {
       // TODO: Substituir pelo id do usuário autenticado
       const response = await this.reportService.getMonthlyReport('ff67aa8f-9459-4b61-8c94-572302561559');
       this.reports = response.report;
+
+      this.reports.forEach((report: any) => {
+        let balance = parseFloat(report.balance);
+        this.totalAcumulated += balance;
+      });
+
+      this.totalBalance = response.user[0].balance;
     } catch (error) {
       console.error('Erro ao carregar tarefas:', error);
     }

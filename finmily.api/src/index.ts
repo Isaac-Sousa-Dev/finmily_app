@@ -15,6 +15,7 @@ import { BalanceHistory } from "./entity/BalanceHistory";
 // create express app
 const app = express()
 app.use(bodyParser.json())
+// TODO: Habilitar o middleware de autenticação
 // app.use(auth)
 
 app.use(cors());

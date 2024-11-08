@@ -148,18 +148,18 @@
 
 
 
-ion-content {
-    --background: var(--ion-color-light-tint);
-    --padding-end: 25px;
-    --padding-start: 25px;
-    --padding-bottom: 90px;
-    height: 440px;
+.content {
+    padding: 0px 25px;
+    padding-bottom: 90px;
+    height: 30px;
+    margin-top: 28px;
 
     ion-list {
         display: flex;
         flex-direction: column;
         gap: 10px;
         margin-top: 10px;
+        border: none;
         --background: var(--ion-color-light-tint);
     
         ion-item-sliding {
