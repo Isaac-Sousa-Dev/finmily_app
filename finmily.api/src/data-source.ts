@@ -3,6 +3,7 @@ import { DataSource } from "typeorm"
 import { User } from "./entity/User"
 import { Behavior } from "./entity/Behavior"
 import { Task } from "./entity/Task"
+import { BalanceHistory } from "./entity/BalanceHistory"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -17,6 +18,7 @@ export const AppDataSource = new DataSource({
         User,
         Task,
         Behavior,
+        BalanceHistory
     ],
     migrations: [],
     subscribers: [],

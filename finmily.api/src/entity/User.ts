@@ -1,6 +1,7 @@
 import { Entity, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { BaseEntity } from "./BaseEntity";
 import { Task } from "./Task";
+import { BalanceHistory } from "./BalanceHistory";
 
 @Entity({name: "user"})
 export class User extends BaseEntity {
@@ -31,5 +32,9 @@ export class User extends BaseEntity {
 
     @OneToMany(() => Task, task => task.user)
     tasks: Task[];
+
+    // Relacionamento One-to-Many com BalanceHistory
+    @OneToMany(() => BalanceHistory, (balanceHistory) => balanceHistory.user)
+    balanceHistories: BalanceHistory[];
     
 }

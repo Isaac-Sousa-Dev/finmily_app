@@ -1,5 +1,6 @@
 import { CollaboratorController } from "./controller/CollaboratorController"
 import { ManagerController } from "./controller/ManagerController"
+import { ReportController } from "./controller/ReportController"
 import { TaskController } from "./controller/TaskController"
 import { UserController } from "./controller/UserController"
 
@@ -35,4 +36,9 @@ export const Routes = [
     { method: "put", route: "/task/checked/:uid", controller: TaskController, action: "checkedByManager" },
     { method: "delete", route: "/task/:uid", controller: TaskController, action: "remove" },
     { method: "get", route: "/my-tasks", controller: TaskController, action: "myTasks" },
+
+
+    // Routes for reports
+    { method: "get", route: "/report/:userUid", controller: ReportController, action: "getMonthlyReport" }, 
+    
 ]
