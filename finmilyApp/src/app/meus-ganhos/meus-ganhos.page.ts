@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TaskService } from 'src/services/task.service';
 import { InfiniteScrollCustomEvent, ToastController } from '@ionic/angular';
+import { ReportService } from 'src/services/report.service';
 
 interface Task {
   uid: string;
@@ -36,92 +37,32 @@ export class MeusGanhosPage implements OnInit {
   taskForDeleted = '';
   selectedTask: Task | null = null;
 
+  reports: any[] = [];
+
   paymentService = new PaymentService();
 
   constructor(
     private router: Router,
     private location: Location,
-    private taskService: TaskService,
-    private toastController: ToastController,
+    private reportService: ReportService
   ) {}
 
   ngOnInit() {
     // Inscreva-se para escutar a criação de novas tarefas
-    this.taskService.taskUpdated$.subscribe(() => {
-      this.getMyTasks(); // Atualize os dados
+    this.reportService.reportUpdated$.subscribe(() => {
+      this.getMonthlyReport(); // Atualize os dados
     });
   }
 
-  async undoTask(task: any, slidingItem: any) {
-    await this.taskService.undoTask(task.uid);
-    slidingItem.close();
-    this.getMyTasks();
-    this.presentToast("Tarefa desfeita com sucesso!");
-  }
 
-  async completeTask(task: any, slidingItem: any) {
-    await this.taskService.completeTask(task.uid);
-    slidingItem.close();
-    this.getMyTasks();
-    this.presentToast("Tarefa concluída com sucesso!");
-  }
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 5000,
-      color: 'success',
-      position: 'top',
-      icon: 'checkmark-circle-outline',
-    });
-    await toast.present();
-  }
-
-  async getMyTasks() {
+  async getMonthlyReport() {
     try {
-      const response = await this.taskService.MyTasks();
-      this.tasksFiltered = response.taskToday.map((task: Task) => ({
-        ...task,
-        status: task.status === 'completed' ? 'Feita' : 'Pendente'
-      }));
-      this.allTasks = response.tasks.map((task: Task) => ({
-        ...task,
-        daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : [],
-        status: task.status === 'completed' ? 'Feita' : 'Pendente'
-      }));
-      this.tasksToday = response.taskToday.map((task: Task) => ({
-        ...task,
-        status: task.status === 'completed' ? 'Feita' : 'Pendente'  
-      }));
-      this.totalBalance = response.userInfo.balance;
+      // TODO: Substituir pelo id do usuário autenticado
+      const response = await this.reportService.getMonthlyReport('ff67aa8f-9459-4b61-8c94-572302561559');
+      this.reports = response.report;
     } catch (error) {
       console.error('Erro ao carregar tarefas:', error);
-    }
-  }
-
-
-  private formatDaysOfWeek(daysOfWeek: any) {
-    
-    let arrayDaysFormatted: any = [];
-    daysOfWeek = daysOfWeek.split(',');
-    const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    daysOfWeek.map((day: any) => {
-      day = day.trim();
-      arrayDaysFormatted.push(dayNames[day]);
-    });
-
-    return arrayDaysFormatted;
-  }
-
-
-  async filterTasksByStatus(event: any) {
-    const value = event.target.value;
-    this.taskStatus = value;
-
-    if (this.taskStatus === 'todas') {
-      this.tasksFiltered = this.allTasks;
-    } else if (this.taskStatus === 'hoje') {
-      this.tasksFiltered = this.tasksToday;
     }
   }
 
