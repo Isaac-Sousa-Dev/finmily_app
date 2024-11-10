@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 import { CreateTaskModalComponent } from 'src/components/modals/create-task-modal/create-task-modal.component';
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'app-tabs',
@@ -11,7 +12,7 @@ import { CreateTaskModalComponent } from 'src/components/modals/create-task-moda
 })
 export class TabsPage {
 
-  perfil: string | null = localStorage.getItem('finmily:perfil');
+  perfil: string | null = localStorage.getItem(Constants.KeyStore.perfil);
 
   constructor(
     private router: Router,

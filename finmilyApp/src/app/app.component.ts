@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,6 @@ export class AppComponent {
   constructor() {
     // manager
     // collaborator
-    //localStorage.setItem('finmily:perfl', 'manager');
+    localStorage.setItem(Constants.KeyStore.perfil, 'manager');
   }
 }
