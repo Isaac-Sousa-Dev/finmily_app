@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ChildrenService } from 'src/services/children.service';
 import { TaskService } from 'src/services/task.service';
+import Inputmask from 'inputmask';
 
 @Component({
   selector: 'app-create-task-modal',
@@ -9,6 +10,8 @@ import { TaskService } from 'src/services/task.service';
   styleUrls: ['./create-task-modal.component.scss'],
 })
 export class CreateTaskModalComponent  implements OnInit {
+
+  @ViewChild('inputMoney', { static: false }) inputMoney!: ElementRef;
 
   formData = {
     user: '',
@@ -31,11 +34,18 @@ export class CreateTaskModalComponent  implements OnInit {
     private childrenService: ChildrenService,
     private taskService: TaskService,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) { }
 
   ngOnInit() {
     this.getChildrensByManager();
+  }
+
+  ionViewDidEnter() {
+    const im = new Inputmask('currency', { prefix: 'R$ ', rightAlign: false });
+    if (this.inputMoney) {
+      im.mask(this.inputMoney.nativeElement);
+    }
   }
 
   async presentToast() {

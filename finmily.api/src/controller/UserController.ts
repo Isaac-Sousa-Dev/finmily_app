@@ -44,7 +44,7 @@ export class UserController extends BaseNotification {
                 }, config.secretKey)
             }
         } else {
-            return {status: 404, message: 'Usuário ou senha inválidos'};
+            return response.status(401).json({message: "Usuário ou senha inválidos"});
         }
 
 

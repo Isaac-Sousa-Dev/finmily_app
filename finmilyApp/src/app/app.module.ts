@@ -20,7 +20,13 @@ registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [AppComponent, CreateChildModalComponent, EditChildModalComponent, CreateTaskModalComponent, EditTaskModalComponent], 
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    HttpClientModule, 
+    FormsModule,
+  ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR', useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

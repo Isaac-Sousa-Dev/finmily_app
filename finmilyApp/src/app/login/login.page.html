@@ -9,16 +9,16 @@
     <div class="form">
       <div>
         <ion-label>Nickname</ion-label>
-        <input placeholder="Nickname"/>
+        <input placeholder="Nickname" [(ngModel)]="userForm.nickname" />
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Senha</ion-label>
-        <input type="password" placeholder="Senha"/>
+        <input type="password" placeholder="Senha" [(ngModel)]="userForm.password" />
       </div>
 
 
-      <ion-button (click)="goMainPage()" expand="block" color="primary" style="margin-top: 50px;">Entrar</ion-button>
+      <ion-button (click)="login()" expand="block" color="primary" style="margin-top: 50px;">Entrar</ion-button>
 
       <div style="margin-top: 20px; font-size: 15px; text-align: center;">
         <a href="/forgot-password" style="font-size: 13px; color: black; text-decoration: none;">Esqueceu a senha?</a>
