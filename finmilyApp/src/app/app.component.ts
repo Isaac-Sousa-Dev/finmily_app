@@ -10,6 +10,6 @@ export class AppComponent {
   constructor() {
     // manager
     // collaborator
-    localStorage.setItem('finmily:perfl', 'manager');
+    //localStorage.setItem('finmily:perfl', 'manager');
   }
 }

@@ -11,12 +11,14 @@ import { CreateTaskModalComponent } from 'src/components/modals/create-task-moda
 })
 export class TabsPage {
 
-  perfil: string | null = localStorage.getItem('finmily:perfl');
+  perfil: string | null = localStorage.getItem('finmily:perfil');
 
   constructor(
     private router: Router,
     private modalController: ModalController
-  ) {}
+  ) {
+    console.log('Perfil MMEMEMEM:', this.perfil);
+  }
 
   async openModalCreateChild(ionFab: any) {
     ionFab.close();

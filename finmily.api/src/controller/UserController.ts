@@ -32,17 +32,23 @@ export class UserController extends BaseNotification {
                 uid: user.uid,
                 nickname: user.nickname,
                 role: user.role
-            }
+            };
 
+            const token = sign(
+                {
+                    ..._payload,
+                    tm: new Date().getTime()
+                },
+                config.secretKey
+            );
+
+            // Retorne apenas dados sem referências a `req` ou `res`
             return {
                 status: 200,
                 message: "Usuário autenticado com sucesso",
                 userAuth: _payload,
-                token: sign({
-                    ..._payload,
-                    tm: new Date().getTime()
-                }, config.secretKey)
-            }
+                token: token
+            };
         } else {
             return response.status(401).json({message: "Usuário ou senha inválidos"});
         }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UserService } from 'src/services/user.service';
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,6 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  perfil: string | null = localStorage.getItem('finmily:perfl');
 
   userForm: any = {}
 
@@ -21,7 +20,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('Perfil:', this.perfil);
+    // console.log('Perfil:', this.perfil);
   }
 
   async presentToast(message: string, color: string) {
@@ -36,15 +35,23 @@ export class LoginPage implements OnInit {
   }
 
   goMainPage() {
-    if(this.perfil === 'manager') {
+    let perfil = localStorage.getItem(Constants.KeyStore.perfil);
+    console.log('Perfil Tesssss:', perfil);
+    if(perfil == "manager") {
+      console.log('IGUAL', perfil);
       this.router.navigate(['/tabs/tabHome']);
     } else {
+      console.log('DIFERENTE', perfil);
       this.router.navigate(['/tabs/tabMinhasTarefas']);
     }
   }
 
   async login(): Promise<void> {
     let response = await this.userService.login(this.userForm.nickname, this.userForm.password);
+    console.log('Response:', response);
+    this.userService.saveDataLoginInfo(response.userAuth, response.token, response.userAuth.role);
+    this.presentToast('Login efetuado com sucesso', 'success'); 
+    this.goMainPage();
     if(response.status === 401) {
       this.presentToast('Usuário ou senha inválidos', 'danger');
     }

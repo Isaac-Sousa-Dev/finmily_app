@@ -31,13 +31,16 @@ export abstract class ApiService {
 
   async post(url: string, data: any): Promise<any> {
     const result = await this.http.post(`${this.urlBase}${url}`, data).toPromise();
+    return result;
   }
 
   async put(url: string, data: any): Promise<any> {
     const result = await this.http.put(`${this.urlBase}${url}`, data).toPromise();
+    return result;
   }
 
   async delete(url: string): Promise<any> {
     const result = await this.http.delete(`${this.urlBase}${url}`).toPromise();
+    return result;
   } 
 }

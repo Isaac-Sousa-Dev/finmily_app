@@ -22,16 +22,26 @@ app.use(cors());
 
 // register express routes from defined application routes
 Routes.forEach(route => {
-    (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-        const result = (new (route.controller as any))[route.action](req, res, next)
-        if (result instanceof Promise) {
-            result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
+    (app as any)[route.method](route.route, async (req: Request, res: Response, next: Function) => {
+        try {
+            const result = await (new (route.controller as any))[route.action](req, res, next);
+            
+            if (result !== null && result !== undefined) {
+                console.log("Route result:", JSON.stringify(result, null, 2)); // Log detalhado para verificar referências circulares
 
-        } else if (result !== null && result !== undefined) {
-            res.json(result)
+                // Certifique-se de que 'result' é serializável
+                res.json(result);
+            } else {
+                res.status(204).send(); // Sem conteúdo
+            }
+        } catch (error) {
+            console.error("Error handling route:", error);
+            if (!res.headersSent) {
+                res.status(500).json({ message: "Internal Server Error" });
+            }
         }
-    })
-})
+    });
+});
 
 
 // Função que define a tarefa a ser executada diariamente
