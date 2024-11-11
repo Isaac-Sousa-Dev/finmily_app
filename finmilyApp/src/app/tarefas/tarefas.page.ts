@@ -56,6 +56,8 @@ export class TarefasPage implements OnInit {
       daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
     }));
 
+    this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks);
+
     console.log(this.allTaskMock, 'Minhas tarefas mock');  
   }
 

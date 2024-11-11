@@ -10,6 +10,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { ModalController } from '@ionic/angular';
 import { SimpleModalPage } from '../simple-modal/simple-modal.page';
 import { TaskService } from 'src/services/task.service';
+import { TasksByChildPage } from 'src/mocks/TasksByChildPage';
 
 @Component({
   selector: 'app-tarefas-filho',
@@ -28,6 +29,9 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   child: any = {};
   totalPaymentByDay: number = 0;
   childId: any;
+
+
+  tasksByChildMock = new TasksByChildPage().data;
   
   constructor(
     private router: Router, 
@@ -40,16 +44,29 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
   ngOnInit() { 
     this.route.paramMap.subscribe(params => {
       this.childId = params.get('childId');
-      this.getTasks(this.childId);
+      // this.getTasks(this.childId);
+      this.getTasksMock(this.childId);
     });
   }
 
+  getTasksMock(childId: any) {
 
-  async getTasks(childId: any) {
-    this.tasksByChild = await this.taskService.GetTasksByChild(childId);
+    this.tasksByChildMock.data.forEach((task: any) => {
+      if(task.collaborator.uid == childId) {
+        this.tasksByChild = task;
+      }
+    });
+
+    console.log(this.tasksByChild, 'Tarefas do filho');
     this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild.tasksToday);
     this.child = this.tasksByChild.collaborator;
   }
+
+  // async getTasks(childId: any) {
+  //   this.tasksByChild = await this.taskService.GetTasksByChild(childId);
+  //   this.totalPaymentByDay = this.getTotalPaymentByDay(this.tasksByChild.tasksToday);
+  //   this.child = this.tasksByChild.collaborator;
+  // }
 
   async presentModal() {
     const modal = await this.modalCtrl.create({
@@ -98,14 +115,14 @@ export class TarefasFilhoPage implements OnInit, OnDestroy {
         this.tasksByChild.tasksToday = this.tasksByChild.tasksPending;
       }
     } else if (value === 'hoje') {
-      this.getTasks(this.childId);
+      this.getTasksMock(this.childId);
     }
   }
 
   async checkTask(task: any) {
     try {
       await this.taskService.CheckTask(task.uid);
-      this.getTasks(this.childId);
+      this.getTasksMock(this.childId);
     } catch (error) {
       console.error('Erro ao marcar tarefa como feita:', error);
     }

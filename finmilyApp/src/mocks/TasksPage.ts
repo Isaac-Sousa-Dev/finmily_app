@@ -30,7 +30,7 @@ export class TasksPage {
                     },
                     {
                         "uid": "569443f8-f9b5-404d-92ef-00467fbd3494",
-                        "title": "Tarefa teste 2",
+                        "title": "Lavar a louça",
                         "description": "evfvubfuwuiwe",
                         "cost": 5,
                         "everyDay": null,
@@ -54,7 +54,7 @@ export class TasksPage {
                     },
                     {
                         "uid": "610c5ca9-918f-40a9-9813-661a3c600b3f",
-                        "title": "Tarefa Tetse",
+                        "title": "Varrer a casa",
                         "description": "Vyveyvyewvfuwe",
                         "cost": 12,
                         "everyDay": null,
@@ -78,7 +78,7 @@ export class TasksPage {
                     },
                     {
                         "uid": "f26fe487-cc78-4115-8f5b-e0cb4857c45e",
-                        "title": "Tarefa para Bela",
+                        "title": "Limpar o banheiro",
                         "description": "veyfvyevuye",
                         "cost": 11,
                         "everyDay": null,

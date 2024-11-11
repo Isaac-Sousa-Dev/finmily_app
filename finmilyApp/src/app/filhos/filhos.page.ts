@@ -9,6 +9,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 import { EditChildModalComponent } from 'src/components/modals/edit-child-modal/edit-child-modal.component';
 import { ChildrensPageMock } from 'src/mocks/ChildrensPage';
+import { TasksPage } from 'src/mocks/TasksPage';
 
 @Component({
   selector: 'app-filhos',
@@ -26,6 +27,7 @@ export class FilhosPage implements OnInit {
 
 
   childrensMock = new ChildrensPageMock().data;
+  allTasksMock = new TasksPage().data;
 
   constructor(
     private router: Router, 
@@ -45,6 +47,7 @@ export class FilhosPage implements OnInit {
     // });
 
     this.childrens = this.childrensMock.data;
+    this.GetTasksOpenByManagerMock();
   }
 
   async presentToast(message: string) {
@@ -58,15 +61,21 @@ export class FilhosPage implements OnInit {
     await toast.present();
   }
 
-  async getChildrensByManager() {
-    this.childrens = await this.childService.getAllChildrensByParent(); 
-    this.GetTasksOpenByManager();
-  }
+  // async getChildrensByManager() {
+  //   this.childrens = await this.childService.getAllChildrensByParent(); 
+  //   this.GetTasksOpenByManager();
+  // }
 
-  async GetTasksOpenByManager(){
-    this.allTasks = await this.TaskService.GetTasksOpenByManager();
+  // async GetTasksOpenByManager(){
+  //   this.allTasks = await this.TaskService.GetTasksOpenByManager();
+  //   this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks.tasks);
+  // }
+
+  async GetTasksOpenByManagerMock(){
+    this.allTasks = this.allTasksMock.data;
     this.totalPaymentByMonth = this.paymentService.getTotalPaymentByMonth(this.allTasks.tasks);
   }
+
 
   async openModalEditChild(child: any) {
     this.modalController.create({
