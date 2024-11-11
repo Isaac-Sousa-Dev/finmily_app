@@ -40,7 +40,8 @@
         @if(tipoTarefa == 'pontos') {
           <input type="text" placeholder="Felicidade (%)"/>
         } @else {
-          <input type="text" [(ngModel)]="formData.cost" class="input-money" placeholder="Valor (R$)" #inputMoney />
+          <!-- <input type="text" [(ngModel)]="formData.cost" class="input-money" placeholder="Valor (R$)" #inputMoney /> -->
+          <input type="text" [(ngModel)]="formData.cost" class="input-money" placeholder="Valor (R$)" />
         }
       </div>
 

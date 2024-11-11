@@ -40,22 +40,28 @@ export class LoginPage implements OnInit {
 
 
   async login(): Promise<void> {
+    if(!this.userForm.nickname || !this.userForm.password) {
+      this.presentToast('Preencha todos os campos', 'danger');
+      return;
+    }
+    
     let response = await this.userService.login(this.userForm.nickname, this.userForm.password);
 
     this.userService.userProfile$.subscribe((profile) => {
       this.userProfile = profile;
     })
 
-    if(this.userProfile == 'manager') {
-      this.router.navigate(['/tabs/tabHome']);
-    } else {
-      this.router.navigate(['/tabs/tabMinhasTarefas']);
-    }
-
-    this.authService.redirectToPageBasedOnProfile();
-    this.presentToast('Login efetuado com sucesso', 'success'); 
     if(response.status === 401) {
       this.presentToast('Usuário ou senha inválidos', 'danger');
+    } else {
+      this.authService.redirectToPageBasedOnProfile();
+      this.presentToast('Login efetuado com sucesso', 'success'); 
+      this.userService.notifyUserUpdated();
+      if(this.userProfile == 'manager') {
+        this.router.navigate(['/tabs/tabHome']);
+      } else {
+        this.router.navigate(['/tabs/tabMinhasTarefas']);
+      }
     }
   }
 

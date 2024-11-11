@@ -15,6 +15,9 @@ export class UserService {
   private userSubject: BehaviorSubject<string | null>;
   public user$: Observable<string | null>;
 
+  private userUpdateSource = new BehaviorSubject<void | null>(null);
+  userUpdated$ = this.userUpdateSource.asObservable();
+
   constructor(
     public http: ApiService
   ) { 
@@ -27,6 +30,10 @@ export class UserService {
     this.userSubject = new BehaviorSubject<string | null>(savedUser ? JSON.parse(savedUser) : null);
     this.user$ = this.userSubject.asObservable();
   }
+
+  notifyUserUpdated() {
+    this.userUpdateSource.next();
+  } 
 
   async login(nickname: string, password: string) {
     try {
