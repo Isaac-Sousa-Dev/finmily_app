@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 import { CreateTaskModalComponent } from 'src/components/modals/create-task-modal/create-task-modal.component';
+import { AuthService } from 'src/services/auth.service';
+import { UserService } from 'src/services/user.service';
 import { Constants } from 'src/shared/constants';
 
 @Component({
@@ -10,15 +12,26 @@ import { Constants } from 'src/shared/constants';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
 
-  perfil: string | null = localStorage.getItem(Constants.KeyStore.perfil);
-
+  userProfile: string | null = null;
+ 
   constructor(
     private router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private userService: UserService
   ) {
-    console.log('Perfil MMEMEMEM:', this.perfil);
+    
+  }
+
+  ngOnInit(): void {
+    // Assina o perfil do usuário
+    this.userService.userProfile$.subscribe(profile => {
+      this.userProfile = profile;
+      // Faça verificações com o perfil, se necessário
+    });
+
+    console.log('PROFILE:', this.userProfile);
   }
 
   async openModalCreateChild(ionFab: any) {

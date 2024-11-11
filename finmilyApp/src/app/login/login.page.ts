@@ -50,8 +50,7 @@ export class LoginPage implements OnInit {
 
   async login(): Promise<void> {
     let response = await this.userService.login(this.userForm.nickname, this.userForm.password);
-    console.log('Response:', response);
-    this.userService.saveDataLoginInfo(response.userAuth, response.token, response.userAuth.role);
+    // this.userService.saveDataLoginInfo(response.userAuth, response.token, response.userAuth.role);
     this.authService.redirectToPageBasedOnProfile();
     this.presentToast('Login efetuado com sucesso', 'success'); 
     if(response.status === 401) {

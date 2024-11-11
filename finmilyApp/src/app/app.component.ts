@@ -11,6 +11,6 @@ export class AppComponent {
   constructor() {
     // manager
     // collaborator
-    localStorage.setItem(Constants.KeyStore.perfil, 'manager');
+    // localStorage.setItem(Constants.KeyStore.perfil, 'manager');
   }
 }

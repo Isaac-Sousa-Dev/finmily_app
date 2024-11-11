@@ -11,19 +11,22 @@ import { Constants } from 'src/shared/constants';
 export abstract class ApiService {
 
   urlBase: string = 'http://localhost:3000';
-  userToken: string = localStorage.getItem(Constants.KeyStore.token) || '';
+  // userToken: string = '';
 
   constructor(
     private http: HttpClient,
     private alertSrv: AlertService,
-    private spinnerSrv: SpinnerService
-  ) { }
+    private spinnerSrv: SpinnerService,
+  ) { 
+    // console.log(this.userToken, 'Token');
+  }
 
   createHeader() {
-    return {
+    const token = localStorage.getItem(Constants.KeyStore.token);
+    return{
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.userToken}`,
+        'Authorization': `Bearer ${token}`,
       }
     }
   }
@@ -31,7 +34,6 @@ export abstract class ApiService {
   async get(url: string): Promise<any> {
     try {
       await this.spinnerSrv.Show();
-
       const result = await lastValueFrom(this.http.get(`${this.urlBase}${url}`, this.createHeader()));
       this.spinnerSrv.Hide();
       return result;
