@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/services/auth.service';
 import { UserService } from 'src/services/user.service';
 import { Constants } from 'src/shared/constants';
 
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     public userService: UserService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authService:  AuthService
   ) { }
 
   ngOnInit() {
@@ -50,8 +52,8 @@ export class LoginPage implements OnInit {
     let response = await this.userService.login(this.userForm.nickname, this.userForm.password);
     console.log('Response:', response);
     this.userService.saveDataLoginInfo(response.userAuth, response.token, response.userAuth.role);
+    this.authService.redirectToPageBasedOnProfile();
     this.presentToast('Login efetuado com sucesso', 'success'); 
-    this.goMainPage();
     if(response.status === 401) {
       this.presentToast('Usuário ou senha inválidos', 'danger');
     }
