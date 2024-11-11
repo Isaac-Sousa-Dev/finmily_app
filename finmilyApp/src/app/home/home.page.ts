@@ -1,5 +1,6 @@
 import { Component, inject, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HomePageMock } from 'src/mocks/HomePage';
 import { HomeService } from 'src/services/home.service';
 
 @Injectable()
@@ -12,6 +13,8 @@ export class HomePage implements OnInit {
 
   data: any = '';
 
+  dataMock = new HomePageMock().data;
+
   constructor(
     private router: Router,
     private HomeService: HomeService,
@@ -21,6 +24,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    // this.data = this.dataMock;
+    // console.log(this.dataMock, 'Meu resultado mock');
   }
 
   async loadData(): Promise<void> {

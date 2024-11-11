@@ -1,14 +1,14 @@
 type IHomePageMock = {
     tasksQuantity: number;
-    investQuantity: number;
+    collaboratorsQuantity: number;
     behaviorsQuantity: number;
 }
 
 export class HomePageMock {
 
     data: IHomePageMock = {
-        tasksQuantity: 10,
-        investQuantity: 50,
+        tasksQuantity: 3,
+        collaboratorsQuantity: 2,
         behaviorsQuantity: 3
     }
 }
