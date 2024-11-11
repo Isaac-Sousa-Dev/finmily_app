@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { Constants } from 'src/shared/constants';
 
-const perfil: string | null = localStorage.getItem('finmily:perfil');
+const perfil: string | null = localStorage.getItem(Constants.KeyStore.perfil);
 
 const routes: Routes = [
   {

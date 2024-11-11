@@ -11,6 +11,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         }
     }
 
+    console.log('Token:', token);
+
     let publicRoutes = <Array<String>>config.publicRoutes;
     let isPublicRoute: boolean = false;
 

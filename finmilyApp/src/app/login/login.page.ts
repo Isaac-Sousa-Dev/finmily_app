@@ -34,15 +34,15 @@ export class LoginPage implements OnInit {
     await toast.present();
   }
 
-  goMainPage() {
+  async goMainPage() {
     let perfil = localStorage.getItem(Constants.KeyStore.perfil);
     console.log('Perfil Tesssss:', perfil);
-    if(perfil == "manager") {
+    if(perfil == 'manager') {
       console.log('IGUAL', perfil);
-      this.router.navigate(['/tabs/tabHome']);
+      await this.router.navigate(['/tabs/tabHome']);
     } else {
       console.log('DIFERENTE', perfil);
-      this.router.navigate(['/tabs/tabMinhasTarefas']);
+      await this.router.navigate(['/tabs/tabMinhasTarefas']);
     }
   }
 

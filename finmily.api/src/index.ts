@@ -16,9 +16,9 @@ import { BalanceHistory } from "./entity/BalanceHistory";
 const app = express()
 app.use(bodyParser.json())
 // TODO: Habilitar o middleware de autenticação
-// app.use(auth)
-
 app.use(cors());
+app.use(auth)
+
 
 // register express routes from defined application routes
 Routes.forEach(route => {

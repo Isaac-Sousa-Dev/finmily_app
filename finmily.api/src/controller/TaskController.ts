@@ -13,10 +13,7 @@ export class TaskController extends BaseNotification {
 
     async save(request: Request) {
 
-        // let userAuth = request.userAuth;
-        let userAuth = {
-            role: "manager",
-        }
+        let userAuth = request.userAuth;
         
         if(userAuth.role !== "manager") return {error: "Você não tem permissão para cadastrar tarefas"};
 
@@ -81,11 +78,8 @@ export class TaskController extends BaseNotification {
     }
 
     async myTasks(request: Request) {
-        // let userAuth = request.userAuth; 
 
-        let userAuth = {
-            uid: "ff67aa8f-9459-4b61-8c94-572302561559"
-        }
+        let userAuth = request.userAuth; 
 
         const user = await AppDataSource.getRepository(User).findOne({ where: { uid: userAuth.uid } });
 
