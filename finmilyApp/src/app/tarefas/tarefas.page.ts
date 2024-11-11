@@ -5,6 +5,7 @@ import { AlertController, InfiniteScrollCustomEvent, ModalController, ToastContr
 import { Location } from '@angular/common';
 import { TaskService } from 'src/services/task.service';
 import { EditTaskModalComponent } from 'src/components/modals/edit-task-modal/edit-task-modal.component';
+import { TasksPage } from 'src/mocks/TasksPage';
 
 interface Task {
   uid: string;
@@ -33,6 +34,8 @@ export class TarefasPage implements OnInit {
 
   paymentService = new PaymentService();
 
+  allTaskMock = new TasksPage().data;
+
   constructor(
     private router: Router,
     private location: Location,
@@ -43,12 +46,17 @@ export class TarefasPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getTasksOpenByManager();
-
     // Inscreva-se para escutar a criação de novas tarefas
-    this.taskService.taskUpdated$.subscribe(() => {
-      this.getTasksOpenByManager(); // Atualize os dados
-    });
+    // this.taskService.taskUpdated$.subscribe(() => {
+    //   this.getTasksOpenByManager(); // Atualize os dados
+    // });
+
+    this.allTasks = this.allTaskMock.data.tasks.map((task: any) => ({
+      ...task,
+      daysOfWeek: task.daysOfWeek ? this.formatDaysOfWeek(task.daysOfWeek) : []
+    }));
+
+    console.log(this.allTaskMock, 'Minhas tarefas mock');  
   }
 
   async presentToast() {

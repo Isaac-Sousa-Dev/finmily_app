@@ -23,9 +23,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadData();
-    // this.data = this.dataMock;
-    // console.log(this.dataMock, 'Meu resultado mock');
+    // this.loadData();
+    this.data = this.dataMock;
+    console.log(this.dataMock, 'Meu resultado mock');
   }
 
   async loadData(): Promise<void> {

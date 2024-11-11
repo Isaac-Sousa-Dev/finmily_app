@@ -8,6 +8,7 @@ import { TaskService } from 'src/services/task.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { CreateChildModalComponent } from 'src/components/modals/create-child-modal/create-child-modal.component';
 import { EditChildModalComponent } from 'src/components/modals/edit-child-modal/edit-child-modal.component';
+import { ChildrensPageMock } from 'src/mocks/ChildrensPage';
 
 @Component({
   selector: 'app-filhos',
@@ -23,6 +24,9 @@ export class FilhosPage implements OnInit {
   childrens: any;
   totalPaymentByMonth: number = 0;
 
+
+  childrensMock = new ChildrensPageMock().data;
+
   constructor(
     private router: Router, 
     private location: Location,
@@ -36,9 +40,11 @@ export class FilhosPage implements OnInit {
 
   async ngOnInit() {
     // Inscreva-se para escutar a criação de novos filhos
-    this.childService.childrenUpdated$.subscribe(() => {
-      this.getChildrensByManager(); // Atualize os dados
-    });
+    // this.childService.childrenUpdated$.subscribe(() => {
+    //   this.getChildrensByManager(); // Atualize os dados
+    // });
+
+    this.childrens = this.childrensMock.data;
   }
 
   async presentToast(message: string) {
