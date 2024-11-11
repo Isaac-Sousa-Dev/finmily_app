@@ -42,7 +42,7 @@ export class TaskService {
   }
 
   async completeTask(uid: string) {
-    const result = await this.http.put(`/task/complete/${uid}`, uid);
+    const result = await this.http.post(`/task/complete/${uid}`,{uid});
     return result;
   }
 
@@ -52,7 +52,7 @@ export class TaskService {
   }
 
   async CheckTask(uid: string) {
-    const result = await this.http.put(`/task/checked/${uid}`, uid);
+    const result = await this.http.put(`/task/checked/${uid}`, {uid});
     return result;
   }
 }
