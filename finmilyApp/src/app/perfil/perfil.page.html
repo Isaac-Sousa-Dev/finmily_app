@@ -25,21 +25,16 @@
 
       <div style="margin-top: 25px;"> 
         <ion-label>Nickname</ion-label>
-        <input type="text" placeholder="Nickname" value="isaacsousa0"/>
-      </div>
-
-      <div style="margin-top: 25px;"> 
-        <ion-label>E-mail</ion-label>
-        <input type="text" placeholder="E-mail" value="isaac.sousa@gmail.com"/>
+        <input type="text" placeholder="Nickname" [(ngModel)]="userLogged.nickname"/>
       </div>
 
       <div style="margin-top: 25px;"> 
         <ion-label>Celular</ion-label>
-        <input type="text" placeholder="Celular" value="(00) 00000-0000"/>
+        <input type="text" placeholder="Celular" [(ngModel)]="userLogged.phoneNumber"/>
       </div>
 
-      <ion-button [routerLink]="['/login']" expand="block" color="primary" style="margin-top: 40px;">Sair do app</ion-button>
-      <ion-button [routerLink]="['/register']" expand="block" color="danger" style="margin-top: 25px;">Desativar conta</ion-button>
+      <ion-button expand="block" color="primary" style="margin-top: 40px;" (click)="confirmDelete()">Sair do app</ion-button>
+      <!-- <ion-button [routerLink]="['/register']" expand="block" color="danger" style="margin-top: 25px;">Desativar conta</ion-button> -->
 
     </div>
 

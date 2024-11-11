@@ -12,17 +12,19 @@ import { Constants } from 'src/shared/constants';
 })
 export class LoginPage implements OnInit {
 
+
+  userProfile: string | null = null;
   userForm: any = {}
 
   constructor(
     private router: Router,
     public userService: UserService,
     private toastController: ToastController,
-    private authService:  AuthService
+    private authService:  AuthService,
   ) { }
 
   ngOnInit() {
-    // console.log('Perfil:', this.perfil);
+    
   }
 
   async presentToast(message: string, color: string) {
@@ -36,21 +38,20 @@ export class LoginPage implements OnInit {
     await toast.present();
   }
 
-  async goMainPage() {
-    let perfil = localStorage.getItem(Constants.KeyStore.perfil);
-    console.log('Perfil Tesssss:', perfil);
-    if(perfil == 'manager') {
-      console.log('IGUAL', perfil);
-      await this.router.navigate(['/tabs/tabHome']);
-    } else {
-      console.log('DIFERENTE', perfil);
-      await this.router.navigate(['/tabs/tabMinhasTarefas']);
-    }
-  }
 
   async login(): Promise<void> {
     let response = await this.userService.login(this.userForm.nickname, this.userForm.password);
-    // this.userService.saveDataLoginInfo(response.userAuth, response.token, response.userAuth.role);
+
+    this.userService.userProfile$.subscribe((profile) => {
+      this.userProfile = profile;
+    })
+
+    if(this.userProfile == 'manager') {
+      this.router.navigate(['/tabs/tabHome']);
+    } else {
+      this.router.navigate(['/tabs/tabMinhasTarefas']);
+    }
+
     this.authService.redirectToPageBasedOnProfile();
     this.presentToast('Login efetuado com sucesso', 'success'); 
     if(response.status === 401) {

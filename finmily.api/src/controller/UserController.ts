@@ -31,7 +31,8 @@ export class UserController extends BaseNotification {
             let _payload = {
                 uid: user.uid,
                 nickname: user.nickname,
-                role: user.role
+                role: user.role,
+                phoneNumber: user.phoneNumber,
             };
 
             const token = sign(

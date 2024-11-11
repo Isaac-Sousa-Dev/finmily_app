@@ -12,6 +12,9 @@ export class UserService {
   private userProfileSubject: BehaviorSubject<string | null>;
   public userProfile$: Observable<string | null>;
 
+  private userSubject: BehaviorSubject<string | null>;
+  public user$: Observable<string | null>;
+
   constructor(
     public http: ApiService
   ) { 
@@ -19,6 +22,10 @@ export class UserService {
     const savedProfile = localStorage.getItem(Constants.KeyStore.perfil);
     this.userProfileSubject = new BehaviorSubject<string | null>(savedProfile ? JSON.parse(savedProfile) : null);
     this.userProfile$ = this.userProfileSubject.asObservable();
+
+    const savedUser = localStorage.getItem(Constants.KeyStore.user);
+    this.userSubject = new BehaviorSubject<string | null>(savedUser ? JSON.parse(savedUser) : null);
+    this.user$ = this.userSubject.asObservable();
   }
 
   async login(nickname: string, password: string) {
@@ -26,8 +33,6 @@ export class UserService {
       const result = await this.http.post('/users/auth', { nickname, password });
       console.log('Result:', result);
       await this.saveDataLoginInfo(result.userAuth, result.token, result.userAuth.role);
-
-      // this.http.userToken = result.token;
 
       return result;
     } catch(error) {
